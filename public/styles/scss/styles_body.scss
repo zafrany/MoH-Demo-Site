@@ -1,0 +1,21 @@
+@use './styles';
+
+.content-container {
+    @include styles.flex(row, wrap);
+    width: 100%;
+    padding: .25rem 2.25rem 2.25rem;
+    
+    h2{
+        font-size: 19px;
+    }
+
+    .top-cards-flex {
+        @include styles.flex(row, nowrap);
+        .top-card-container {
+            border-radius: 0%;
+            box-shadow: 0 4px 10px 0px  rgba(238, 225, 225, 0.5);
+            
+        }
+    }
+    
+}
