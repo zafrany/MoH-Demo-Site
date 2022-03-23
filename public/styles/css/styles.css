@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  /*font-family: 'Assistant', sans-serif;*/
   direction: rtl;
 }
 
@@ -23,13 +24,23 @@ body {
   margin: 0;
 }
 
+.light-circle-color {
+  color: white;
+  background: #222b45;
+}
+
+.dark-circle-color {
+  background: white;
+  color: #222b45;
+}
+
 .light-color-theme {
-  color: #39475d;
+  color: #222b45;
   background: #f7f9fc;
 }
 
 .light-color-theme__box-color {
-  background: #fff;
+  background: #f7f9fc;
 }
 
 .dark-color-theme {
@@ -38,6 +49,7 @@ body {
 }
 
 .dark-color-theme__box-color {
+  color: white;
   background: #384f5f;
 }
 
@@ -50,11 +62,13 @@ body {
 }
 
 .header {
+  color: #39475d;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   width: 100%;
-  box-shadow: 0 4px 10px 0px rgba(238, 225, 225, 0.4);
+  box-shadow: 0px 14px 12px 0px rgba(0, 0, 0, 0.1);
+  z-index: 100;
 }
 .header .seperator {
   display: none;
@@ -159,28 +173,113 @@ body {
   }
 }
 .header .header-scrollbar {
+  background: #39475d;
   height: 57px;
   /*placeholder*/
   width: 100%;
-  background: #39475d;
 }
 
 .content-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding: 5px 10px;
   width: 100%;
-  padding: 0.25rem 2.25rem 2.25rem;
 }
 .content-container h2 {
+  margin-top: 0;
+  margin-right: 11.2px;
+  width: 100%;
   font-size: 19px;
 }
 .content-container .top-cards-flex {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  width: 100%;
 }
 .content-container .top-cards-flex .top-card-container {
-  border-radius: 0%;
-  box-shadow: 0 4px 10px 0px rgba(238, 225, 225, 0.5);
+  flex: 1;
+  min-width: 45%;
+  margin: 0.3rem;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.1);
 }
+@media (min-width: 760px) {
+  .content-container .top-cards-flex .top-card-container {
+    min-width: 10vw;
+    margin: 0.7rem;
+  }
+}
+.content-container .top-cards-flex .top-card-container .card-h3-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.content-container .top-cards-flex .top-card-container .card-h3-container h3 {
+  font-size: 14.4px;
+  margin: 0 0 8px 0;
+  padding-left: 10px;
+}
+.content-container .top-cards-flex .top-card-container .card-h3-container .circle {
+  margin-top: 2px;
+  padding: 2px;
+  font-size: 11px;
+  text-align: center;
+  width: 16.67px;
+  height: 16.67px;
+}
+.content-container .top-cards-flex .top-card-container .active-patients {
+  font-size: 14.4px;
+  margin-top: 10px;
+}
+.content-container .top-cards-flex .top-card-container .card-info {
+  font-size: 12px;
+}
+.content-container .top-cards-flex .top-card-container .card-info h4 {
+  display: inline-block;
+  font-size: 12px;
+}
+.content-container .top-cards-flex .top-card-container .circle {
+  font-weight: 700;
+  margin-left: 5px;
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+.content-container .top-cards-flex .top-card-container .bullet-list {
+  font-size: 12.8px;
+}
+.content-container .top-cards-flex .top-card-container .bullet-list .list-line:nth-of-type(1) .circle {
+  background: #e21d48;
+}
+.content-container .top-cards-flex .top-card-container .bullet-list .list-line:nth-of-type(2) .circle {
+  background: #e21d48;
+}
+.content-container .top-cards-flex .top-card-container .bullet-list .list-line:nth-of-type(3) {
+  padding-bottom: 10px;
+}
+.content-container .top-cards-flex .top-card-container .bullet-list .list-line:nth-of-type(3) .circle {
+  background: #e6b957;
+}
+.content-container .top-cards-flex .top-card-container .second-card-info {
+  font-size: 12.8px;
+}
+.content-container .top-cards-flex .top-card-container span {
+  padding-left: 8px;
+  font-size: 12.8px;
+}
+.content-container .top-cards-flex h4 {
+  font-size: 22.4px;
+  margin: 0 0 5px 0;
+}
+.content-container .top-cards-flex .top-card-container:nth-child(3) h4 {
+  margin-top: 5px;
+  display: inline-block;
+  font-size: 17.6px;
+  margin-bottom: 3px;
+}
+
+/*<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g data-name="info"><rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14a1 1 0 0 1-2 0v-5a1 1 0 0 1 2 0zm-1-7a1 1 0 1 1 1-1 1 1 0 0 1-1 1z"></path></g></g></svg>*/

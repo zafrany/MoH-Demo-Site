@@ -1,4 +1,4 @@
-$text-color-light-theme: #39475d;
+$text-color-light-theme: #222b45;
 @mixin flex($flex-direction, $flex-wrap) {
     display: flex;
     flex: {
@@ -9,6 +9,7 @@ $text-color-light-theme: #39475d;
 
 * {
   box-sizing: border-box;
+  /*font-family: 'Assistant', sans-serif;*/
   direction: rtl;
 }
 
@@ -30,13 +31,23 @@ body {
     margin: 0;
 }
 
+.light-circle-color {
+    color: white;
+    background: $text-color-light-theme;
+}
+
+.dark-circle-color {
+    background: white;
+    color: $text-color-light-theme;
+}
+
 .light-color-theme {
     color: $text-color-light-theme;
     background: #f7f9fc;
 }
 
 .light-color-theme__box-color {
-    background: #fff;
+    background: #f7f9fc;
 }
 
 .dark-color-theme {
@@ -45,11 +56,12 @@ body {
 }
 
 .dark-color-theme__box-color {
+    color: white;
     background: #384f5f;
 }
 
 .theme-button__light-color{
-    background: $text-color-light-theme;
+    background:#39475d;
 }
 
 .theme-button__dark-color {
@@ -57,16 +69,18 @@ body {
 }
 
 .header {
+    color: #39475d;
     @include flex(column, nowrap);
     width: 100%;
-    box-shadow: 0 4px 10px 0px  rgba(238, 225, 225, 0.4);
+    box-shadow: 0px 14px 12px 0px rgb(0 0 0 / 10%);
+    z-index: 100;
 
     .seperator {
         display: none;
     }
 
     .header__logo {
-        color: $text-color-light-theme;
+        color: #39475d;
         padding: 15px 32px 15px 0;
         width: 100%;
         @include flex(column, nowrap);
@@ -87,7 +101,7 @@ body {
                 height: 25px;
             
                 .rect{
-                    background: $text-color-light-theme;
+                    background: #39475d;
                     height: 2.4px;
                     width: 22.5px;
                     border-radius: 10px;
@@ -161,8 +175,8 @@ body {
     }
 
     .header-scrollbar {
+        background:#39475d;
         height: 57px; /*placeholder*/
         width: 100%;
-        background: $text-color-light-theme;
     }
 }

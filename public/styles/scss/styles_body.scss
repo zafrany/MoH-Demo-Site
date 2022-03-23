@@ -2,20 +2,121 @@
 
 .content-container {
     @include styles.flex(row, wrap);
+    padding: 5px 10px;
     width: 100%;
-    padding: .25rem 2.25rem 2.25rem;
-    
+
     h2{
+        margin-top: 0;
+        margin-right: 11.2px;
+        width: 100%;
         font-size: 19px;
     }
 
     .top-cards-flex {
-        @include styles.flex(row, nowrap);
+        @include styles.flex(row, wrap);;
+        width: 100%;
+
         .top-card-container {
-            border-radius: 0%;
-            box-shadow: 0 4px 10px 0px  rgba(238, 225, 225, 0.5);
-            
+            flex: 1;   
+            min-width: 45%;
+            margin: 0.3rem;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px 5px rgba(0,0,0,0.1);
+
+            @media (min-width: 760px) {
+                min-width: 10vw;
+                margin: 0.7rem;
+            }
+ 
+            .card-h3-container{
+                @include styles.flex(row, nowrap);
+                h3{
+                    font-size: 14.4px;  
+                    margin: 0 0 8px 0;
+                    padding-left: 10px;
+                }
+
+                .circle{
+                    margin-top: 2px;
+                    padding: 2px;
+                    font-size: 11px;
+                    text-align: center;
+                    width: 16.67px;
+                    height: 16.67px;
+                }
+            }
+
+            .active-patients {
+                font-size: 14.4px;
+                margin-top: 10px;
+            }
+
+            .card-info {
+                font-size: 12px;
+    
+                h4 {
+                    display: inline-block;
+                    font-size: 12px;
+                } 
+            }
+
+            .circle{
+                font-weight: 700;
+                margin-left: 5px;
+                display: inline-block;
+                width: 9px;
+                height: 9px;
+                border-radius: 50%;
+            }
+
+            .bullet-list{
+                font-size: 12.8px;
+                .list-line:nth-of-type(1) {
+                    .circle{
+                        background: rgb(226, 29, 72);
+                    }
+                }
+    
+                .list-line:nth-of-type(2) {
+                    .circle{
+                        background: rgb(226, 29, 72);
+                    }
+                }
+
+                .list-line:nth-of-type(3) {
+                    padding-bottom: 10px;
+                    .circle{
+                        background: rgb(230 185 87);
+                    }
+                }
+            }
+
+
+            .second-card-info{
+                font-size: 12.8px;
+            }
+
+            span {
+                padding-left: 8px;
+                font-size: 12.8px;
+            }
+        }
+
+        h4 {
+            font-size: 22.4px;
+            margin: 0 0 5px 0;
+        }
+
+        .top-card-container:nth-child(3) {
+            h4 {
+                margin-top: 5px;
+                display: inline-block;
+                font-size: 17.6px;
+                margin-bottom: 3px;
+            }
         }
     }
     
 }
+/*<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g data-name="info"><rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14a1 1 0 0 1-2 0v-5a1 1 0 0 1 2 0zm-1-7a1 1 0 1 1 1-1 1 1 0 0 1-1 1z"></path></g></g></svg>*/
