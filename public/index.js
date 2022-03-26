@@ -4,6 +4,7 @@ let flexColor = document.querySelector(".top-cards-flex");
 let boxColor = document.querySelectorAll(".top-card-container");
 let exlamationMark = document.querySelectorAll(".card-h3-container .circle");
 let secondRowflex = document.querySelector(".top-cards-flex-container");
+let circleArray = document.querySelectorAll(".light-circle-color");
 
 themeButton.addEventListener('click', ()=>{
     themeButton.children[0].classList.toggle("displayNone");
@@ -24,6 +25,18 @@ themeButton.addEventListener('click', ()=>{
         exlamationMark[i].classList.toggle("dark-circle-color");
     }
 })
+
+
+for(let i = 0; i < circleArray.length; i++){
+    let tooltipArray = document.querySelectorAll('.tooltip');
+    circleArray[i].addEventListener('mouseover', ()=>{
+        tooltipArray[i].classList.toggle("displayNone");
+    })
+    circleArray[i].addEventListener('mouseleave', ()=>{
+        tooltipArray[i].classList.toggle("displayNone");
+    })
+}
+
 
 let topMockData1 = [
     ["13,603", "1232", "3,818,065", "66,821", "7743-", "786"],

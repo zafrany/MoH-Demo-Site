@@ -103,7 +103,7 @@ body {
   height: 25px;
 }
 .header .header__logo .burger-and-logo .burger-button .rect {
-  background: #39475d;
+  background: #374f60;
   height: 2.4px;
   width: 22.5px;
   border-radius: 10px;
@@ -173,7 +173,7 @@ body {
   }
 }
 .header .header-scrollbar {
-  background: #39475d;
+  background: #374f60;
   height: 57px;
   /*placeholder*/
   width: 100%;
@@ -191,6 +191,20 @@ body {
   margin-right: 11.2px;
   width: 100%;
   font-size: 19px;
+}
+.content-container .tooltip {
+  position: absolute;
+  font-size: 0.8rem;
+  border-radius: 5px;
+  box-shadow: 0 10px 20px 10px rgba(0, 0, 0, 0.1607843137);
+  display: inline-block;
+  z-index: 100;
+  background: white;
+  padding: 0.6rem;
+  max-width: 12rem;
+  white-space: pre-line;
+  line-height: 1.25rem;
+  border: 1px solid #b3b3b5;
 }
 .content-container .top-cards-flex {
   display: flex;
@@ -309,7 +323,7 @@ body {
   padding: 0.5rem 0.5rem 0 0.5rem;
 }
 .content-container .top-cards-flex-container .top-card-container {
-  box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 3px 5px 5px 0px rgba(0, 0, 0, 0.1);
 }
 .content-container .top-cards-flex-container .top-card-container h4 {
   font-size: 22.4px;
