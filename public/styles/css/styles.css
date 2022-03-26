@@ -40,7 +40,7 @@ body {
 }
 
 .light-color-theme__box-color {
-  background: #f7f9fc;
+  background: white;
 }
 
 .dark-color-theme {
@@ -275,11 +275,46 @@ body {
   font-size: 22.4px;
   margin: 0 0 5px 0;
 }
-.content-container .top-cards-flex .top-card-container:nth-child(3) h4 {
+.content-container .top-cards-flex .vaccinated h4 {
   margin-top: 5px;
   display: inline-block;
   font-size: 17.6px;
   margin-bottom: 3px;
 }
-
-/*<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24"><g fill="currentColor"><g data-name="info"><rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14a1 1 0 0 1-2 0v-5a1 1 0 0 1 2 0zm-1-7a1 1 0 1 1 1-1 1 1 0 0 1-1 1z"></path></g></g></svg>*/
+.content-container .top-cards-flex .tests-statistics {
+  font-size: 12px;
+}
+.content-container .top-cards-flex .tests-statistics h4 {
+  padding-left: 8px;
+}
+.content-container .top-cards-flex .tests-statistics div {
+  padding-bottom: 8px;
+}
+.content-container .top-cards-flex .isolated div:nth-child(3) {
+  padding-top: 2rem;
+}
+.content-container .top-cards-flex-container {
+  box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 100%;
+  padding-bottom: 0.5rem;
+  margin: 11.2px;
+}
+.content-container .top-cards-flex-container h3 {
+  font-size: 16px;
+  margin-right: 19.2px;
+  margin-bottom: 0;
+}
+.content-container .top-cards-flex-container .top-cards-flex {
+  padding: 0.5rem 0.5rem 0 0.5rem;
+}
+.content-container .top-cards-flex-container .top-card-container {
+  box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1);
+}
+.content-container .top-cards-flex-container .top-card-container h4 {
+  font-size: 22.4px;
+  margin-bottom: 1rem;
+}
+.content-container .top-cards-flex-container .tested div:nth-child(3) {
+  padding-bottom: 10px;
+}
