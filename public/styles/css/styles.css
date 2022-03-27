@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  /*font-family: 'Assistant', sans-serif;*/
   direction: rtl;
 }
 
@@ -17,11 +16,23 @@ html {
 }
 
 body {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  display: flex;
   margin: 0;
+}
+
+.background-light {
+  background: #edf1f7;
+}
+
+.background-dark {
+  background: #49667a;
+}
+
+.text-color-light {
+  color: #222b45;
+}
+
+.text-color-dark {
+  color: #fff;
 }
 
 .light-circle-color {
@@ -34,22 +45,11 @@ body {
   color: #222b45;
 }
 
-.light-color-theme {
-  color: #222b45;
-  background: #f7f9fc;
-}
-
 .light-color-theme__box-color {
   background: white;
 }
 
-.dark-color-theme {
-  color: white;
-  background: #476276;
-}
-
 .dark-color-theme__box-color {
-  color: white;
   background: #384f5f;
 }
 
@@ -61,8 +61,38 @@ body {
   background: #d8d8d8;
 }
 
+.tooltip {
+  position: absolute;
+  font-size: 0.8rem;
+  border-radius: 5px;
+  box-shadow: 0 10px 20px 10px rgba(0, 0, 0, 0.1607843137);
+  display: inline-block;
+  z-index: 100;
+  padding: 0.6rem;
+  max-width: 12rem;
+  white-space: pre-line;
+  line-height: 1.25rem;
+  border: 1px solid #b3b3b5;
+}
+
+.topmost-h2 {
+  padding-top: 0px;
+  border-top: none;
+  margin-top: 0;
+}
+
+h2 {
+  padding-top: 15px;
+  margin-right: 11.2px;
+  width: 100%;
+  font-size: 19px;
+  border-top: 1px solid rgba(161, 170, 177, 0.4);
+}
+
 .header {
+  position: fixed;
   color: #39475d;
+  background: white;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -146,8 +176,7 @@ body {
   .header .header__logo .header__logo-title {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
+    flex-wrap: nowrap;
   }
   .header .header__logo .header__logo-title span {
     padding-right: 20px;
@@ -179,32 +208,69 @@ body {
   width: 100%;
 }
 
+.settelments-vacccination {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  border-radius: 10px;
+  margin: 11.2px;
+  padding: 1rem;
+  box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1);
+}
+
+.population-vaccination {
+  margin: 11.2px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  margin-bottom: 2px;
+}
+
+.circle {
+  margin-top: 2px;
+  padding: 2px;
+  font-size: 11px;
+  text-align: center;
+  width: 16.67px;
+  height: 16.67px;
+  border-radius: 50%;
+}
+
+.card-h3-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.card-h3-container h3 {
+  font-size: 0.9rem;
+  margin: 0 0 8px 0;
+  padding-left: 10px;
+}
+
 .content-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 5px 10px;
+  padding: 196px 5px 10px;
   width: 100%;
 }
-.content-container h2 {
-  margin-top: 0;
-  margin-right: 11.2px;
-  width: 100%;
-  font-size: 19px;
+@media (min-width: 650px) {
+  .content-container {
+    padding: 167px 5px 10px;
+  }
 }
-.content-container .tooltip {
-  position: absolute;
-  font-size: 0.8rem;
-  border-radius: 5px;
-  box-shadow: 0 10px 20px 10px rgba(0, 0, 0, 0.1607843137);
-  display: inline-block;
-  z-index: 100;
-  background: white;
-  padding: 0.6rem;
-  max-width: 12rem;
-  white-space: pre-line;
-  line-height: 1.25rem;
-  border: 1px solid #b3b3b5;
+@media (min-width: 980px) {
+  .content-container {
+    padding: 148px 5px 10px;
+  }
 }
 .content-container .top-cards-flex {
   display: flex;
@@ -218,31 +284,13 @@ body {
   margin: 0.3rem;
   padding: 1rem;
   border-radius: 10px;
-  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 3px 6px 14px 0 rgba(0, 0, 0, 0.1);
 }
 @media (min-width: 760px) {
   .content-container .top-cards-flex .top-card-container {
     min-width: 10vw;
     margin: 0.7rem;
   }
-}
-.content-container .top-cards-flex .top-card-container .card-h3-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-}
-.content-container .top-cards-flex .top-card-container .card-h3-container h3 {
-  font-size: 14.4px;
-  margin: 0 0 8px 0;
-  padding-left: 10px;
-}
-.content-container .top-cards-flex .top-card-container .card-h3-container .circle {
-  margin-top: 2px;
-  padding: 2px;
-  font-size: 11px;
-  text-align: center;
-  width: 16.67px;
-  height: 16.67px;
 }
 .content-container .top-cards-flex .top-card-container .active-patients {
   font-size: 14.4px;
@@ -255,7 +303,7 @@ body {
   display: inline-block;
   font-size: 12px;
 }
-.content-container .top-cards-flex .top-card-container .circle {
+.content-container .top-cards-flex .top-card-container .colored-circle {
   font-weight: 700;
   margin-left: 5px;
   display: inline-block;
@@ -266,16 +314,16 @@ body {
 .content-container .top-cards-flex .top-card-container .bullet-list {
   font-size: 12.8px;
 }
-.content-container .top-cards-flex .top-card-container .bullet-list .list-line:nth-of-type(1) .circle {
+.content-container .top-cards-flex .top-card-container .bullet-list .list-line:nth-of-type(1) .colored-circle {
   background: #e21d48;
 }
-.content-container .top-cards-flex .top-card-container .bullet-list .list-line:nth-of-type(2) .circle {
+.content-container .top-cards-flex .top-card-container .bullet-list .list-line:nth-of-type(2) .colored-circle {
   background: #e21d48;
 }
 .content-container .top-cards-flex .top-card-container .bullet-list .list-line:nth-of-type(3) {
   padding-bottom: 10px;
 }
-.content-container .top-cards-flex .top-card-container .bullet-list .list-line:nth-of-type(3) .circle {
+.content-container .top-cards-flex .top-card-container .bullet-list .list-line:nth-of-type(3) .colored-circle {
   background: #e6b957;
 }
 .content-container .top-cards-flex .top-card-container .second-card-info {
@@ -315,15 +363,16 @@ body {
   margin: 11.2px;
 }
 .content-container .top-cards-flex-container h3 {
-  font-size: 16px;
   margin-right: 19.2px;
-  margin-bottom: 0;
 }
 .content-container .top-cards-flex-container .top-cards-flex {
   padding: 0.5rem 0.5rem 0 0.5rem;
 }
 .content-container .top-cards-flex-container .top-card-container {
-  box-shadow: 3px 5px 5px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 15px -2px rgba(0, 2, 2, 0.2);
+}
+.content-container .top-cards-flex-container .top-card-container h3 {
+  margin-right: 0;
 }
 .content-container .top-cards-flex-container .top-card-container h4 {
   font-size: 22.4px;

@@ -5,9 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/css/styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;600;800&display=swap" rel="stylesheet">
     <title>MoH Covid-19 overview</title>
 </head>
 <body>
@@ -42,15 +39,16 @@
         <div class="header-scrollbar">
         </div>
     </div>
-    <div class="content-container light-color-theme">
-        <h2>מבט על</h2>
+    <div class="content-container background-light text-color-light">
+        <h2 class="topmost-h2">מבט על</h2>
         <div class="top-cards-flex">
-            <div class="top-card-container">
+            <div class="top-card-container light-color-theme__box-color">
                 <div class="card-h3-container">
                     <h3>מאומתים אתמול</h3>
                     <div class="circle light-circle-color">i</div>
                 </div>
-                <div class="tooltip displayNone">מספר המאומתים לנגיף COVID-19 שאותרו משעה 00:00 עד שעה 23:59 של יום אתמול.
+                <div class="tooltip light-color-theme__box-color displayNone">
+                    מספר המאומתים לנגיף COVID-19 שאותרו משעה 00:00 עד שעה 23:59 של יום אתמול.
 
                     סה"כ: מספר המאומתים מפרוץ המגיפה, כולל מי שהתגלו כמאומתים לנגיף שוב.
 
@@ -76,29 +74,29 @@
                     </span>
                 </div>
             </div>
-            <div class="top-card-container">
+            <div class="top-card-container light-color-theme__box-color">
                 <div class="card-h3-container">
                     <h3>חולים קשה</h3>
                     <div class="circle light-circle-color">i</div>
                 </div>
-                <div class="tooltip displayNone">מספר החולים במצב קשה וקריטי המאושפזים בבתי החולים.
+                <div class="tooltip light-color-theme__box-color displayNone">מספר החולים במצב קשה וקריטי המאושפזים בבתי החולים.
 
                     חולה קשה - מי שחולה במחלת נגיף COVID-19 ושהוגדר במצב קשה או קריטי על ידי מערכת הבריאות.
                 </div>
                 <h4 class="data"></h4>
                 <div class="bullet-list">
                     <div class="list-line">
-                        <div class="circle"></div>
+                        <div class="colored-circle"></div>
                         <span>מתוכם קריטי</span>
                         <b class="data"></b>
                     </div>                 
                     <div class="list-line">
-                        <div class="circle"></div>
+                        <div class="colored-circle"></div>
                         <span>מחוברים לאקמו </span>
                         <b class="data"></b>
                     </div>   
                     <div class="list-line">
-                        <div class="circle"></div>
+                        <div class="colored-circle"></div>
                         <span>מונשמים </span>
                         <b class="data"></b> 
                     </div>
@@ -112,12 +110,12 @@
                     <b class="data"></b>
                 </div>
             </div>
-            <div class="top-card-container vaccinated">
+            <div class="top-card-container vaccinated light-color-theme__box-color">
                 <div class="card-h3-container">
                     <h3>מתחסנים</h3>
                     <div class="circle light-circle-color">i</div>
                 </div>
-                <div class="tooltip displayNone">מספר מקבלי החיסון מפני נגיף COVID-19 מתחילת מבצע החיסונים לפי מספרי המנות.
+                <div class="tooltip light-color-theme__box-color displayNone">מספר מקבלי החיסון מפני נגיף COVID-19 מתחילת מבצע החיסונים לפי מספרי המנות.
                 </div>
                 <div>
                     <span>מנה 1</span>
@@ -136,22 +134,22 @@
                     <h4 class="data"></h4>  
                 </div>
             </div>
-            <div class="top-card-container">
+            <div class="top-card-container light-color-theme__box-color">
                 <div class="card-h3-container">
                     <h3>נפטרים מצטבר</h3>
                     <div class="circle light-circle-color">i</div>
                 </div>
-                <div class="tooltip displayNone">מספר הנפטרים המצטבר ממחלת הנגיף COVID-19 החל מפרוץ המגפה.
+                <div class="tooltip light-color-theme__box-color displayNone">מספר הנפטרים המצטבר ממחלת הנגיף COVID-19 החל מפרוץ המגפה.
                     נתוני הנפטרים מתעדכנים לאחר שנבדקו תעודות הפטירה לוידוא סיבת המוות ולכן ייתכנו עדכונים מאוחרים של מספר הנפטרים.
                 </div>
                 <h4 class="data"></h4>
             </div>
-            <div class="top-card-container tests-statistics">
+            <div class="top-card-container tests-statistics light-color-theme__box-color">
                 <div class="card-h3-container">
                     <h3>אחוז נבדקים חיוביים אתמול</h3>
                     <div class="circle light-circle-color">i</div>
                 </div>
-                <div class="tooltip displayNone">אחוז הנבדקים שנמצאו חיוביים לנגיף COVID-19 מתוך מספר נבדקים לגילוי הנגיף אתמול.
+                <div class="tooltip light-color-theme__box-color displayNone">אחוז הנבדקים שנמצאו חיוביים לנגיף COVID-19 מתוך מספר נבדקים לגילוי הנגיף אתמול.
 
                     נבדקים לגילוי הנגיף אתמול - מספר הנבדקים לאיתור ראשוני של הנגיף (ללא בדיקות נלוות לקביעת החלמה) בבדיקות  PCR או אנטיגן מפוקחות, שהתבצעו ותוצאותיהן התקבלו משעה 00:00 עד שעה 23:59 של יום אתמול.
                     
@@ -167,12 +165,12 @@
                     <span>כלל הבדיקות אתמול</span>
                 </div>
             </div>
-            <div class="top-card-container isolated">
+            <div class="top-card-container isolated light-color-theme__box-color">
                 <div class="card-h3-container">
                     <h3>מבודדים חדשים אתמול</h3>
                     <div class="circle light-circle-color">i</div>
                 </div>
-                <div class="tooltip displayNone">מספר הבידודים המדווחים משעה 00:00 עד שעה 23:59 של יום אתמול, מלבד החולים הפעילים. 
+                <div class="tooltip light-color-theme__box-color displayNone">מספר הבידודים המדווחים משעה 00:00 עד שעה 23:59 של יום אתמול, מלבד החולים הפעילים. 
 
                     סה"כ שוהים בבידוד - סך האנשים השוהים בבידוד נכון למועד העדכון האחרון, מלבד החולים הפעילים.
                 </div>
@@ -183,7 +181,7 @@
                 <h4 class="data"></h4>
             </div>
         </div>
-        <div class="top-cards-flex-container light-color-theme__box-color">
+        <div class="top-cards-flex-container light-color-theme__box-color"  >
             <h3>סיכום 7 ימים אחרונים</h3>
             <div class="top-cards-flex">
                 <div class="top-card-container">
@@ -191,7 +189,7 @@
                         <h3>מספר המאומתים</h3>
                         <div class="circle light-circle-color">i</div>
                     </div>
-                    <div class="tooltip displayNone">מספר המאומתים לנגיף COVID-19 שאותרו ב-7 הימים האחרונים (לא כולל את יום העדכון) והשינוי באחוזים לעומת 7 הימים הקודמים.
+                    <div class="tooltip light-color-theme__box-color displayNone">מספר המאומתים לנגיף COVID-19 שאותרו ב-7 הימים האחרונים (לא כולל את יום העדכון) והשינוי באחוזים לעומת 7 הימים הקודמים.
                     </div>
                     <h4 class="data"></h4>
                     <div class="card-info">
@@ -204,7 +202,7 @@
                         <h3>מספר חולים קשה</h3>
                         <div class="circle light-circle-color">i</div>
                     </div>
-                    <div class="tooltip displayNone">מספר החולים החדשים במצב קשה וקריטי במחלת נגיף COVID-19 ב-7 הימים האחרונים (לא כולל את יום העדכון) והשינוי באחוזים לעומת 7 הימים הקודמים.
+                    <div class="tooltip light-color-theme__box-color displayNone">מספר החולים החדשים במצב קשה וקריטי במחלת נגיף COVID-19 ב-7 הימים האחרונים (לא כולל את יום העדכון) והשינוי באחוזים לעומת 7 הימים הקודמים.
                     </div>
                     <h4 class="data"></h4>
                     <div class="card-info">
@@ -217,7 +215,7 @@
                         <h3>מספר נפטרים</h3>
                         <div class="circle light-circle-color">i</div>
                     </div>
-                    <div class="tooltip displayNone">מספר הנפטרים מנגיף COVID-19 ב-7 הימים האחרונים (לא כולל את יום העדכון) והשינוי באחוזים לעומת 7 הימים הקודמים.
+                    <div class="tooltip light-color-theme__box-color displayNone">מספר הנפטרים מנגיף COVID-19 ב-7 הימים האחרונים (לא כולל את יום העדכון) והשינוי באחוזים לעומת 7 הימים הקודמים.
                     </div>
                     <h4 class="data"></h4>
                     <div class="card-info">
@@ -230,7 +228,7 @@
                         <h3>מספר נבדקים</h3>
                         <div class="circle light-circle-color">i</div>
                     </div>
-                    <div class="tooltip displayNone">מספר הנבדקים בבדיקות לגילוי נגיף COVID-19 מסוג PCR או אנטיגן ב-7 הימים האחרונים (לא כולל את יום העדכון) והשינוי באחוזים לעומת 7 הימים הקודמים.
+                    <div class="tooltip light-color-theme__box-color displayNone">מספר הנבדקים בבדיקות לגילוי נגיף COVID-19 מסוג PCR או אנטיגן ב-7 הימים האחרונים (לא כולל את יום העדכון) והשינוי באחוזים לעומת 7 הימים הקודמים.
                         הנתון אינו כולל נבדקים בבדיקות נלוות לקביעת החלמה.
                         
                         נבדקים חיוביים - אחוז הנבדקים שנמצאו חיוביים לנגיף COVID-19 מתוך מספר הנבדקים לגילוי הנגיף ב 7 הימים האחרונים.
@@ -245,6 +243,19 @@
                         <span>נבדקים חיוביים</span>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="population-vaccination">
+            <h2>התחסנות האוכלוסיה</h2>
+            <div class="settelments-vacccination light-color-theme__box-color">
+                <div class="card-h3-container">
+                    <h3>התחסנות לפי ישובים</h3>
+                    <div class="circle light-circle-color">i</div>
+                </div>
+                <div class="dot background-dark"></div>
+                <div class="dot background-dark"></div>
+                <div class="dot background-dark"></div>
+                <div class="tooltip light-color-theme__box-color displayNone"></div>
             </div>
         </div>
     </div>

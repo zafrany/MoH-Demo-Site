@@ -1,0 +1,113 @@
+@use '../base' as *;
+.header {
+    position: fixed;
+    color: #39475d;
+    background: white;
+    @include flex(column, nowrap);
+    width: 100%;
+    box-shadow: 0px 14px 12px 0px rgb(0 0 0 / 10%);
+    z-index: 100;
+
+    .seperator {
+        display: none;
+    }
+
+    .header__logo {
+        color: #39475d;
+        padding: 15px 32px 15px 0;
+        width: 100%;
+        @include flex(column, nowrap);
+
+        .h1-container {
+            @include flex(row, wrap);
+                align-items: center;
+        }
+
+        .burger-and-logo {
+            @include flex(row, wrap);
+            align-items: center;
+            .burger-button {
+                justify-content: space-evenly;
+                align-content: center;
+                @include flex(column, nowrap);
+                width: 30px;
+                height: 25px;
+            
+                .rect{
+                    background: #374f60;
+                    height: 2.4px;
+                    width: 22.5px;
+                    border-radius: 10px;
+                }
+            }
+        }
+        
+        .header__logo-title {
+            @include flex(column, nowrap);
+            align-items: flex-start;
+            h1 {
+                padding-left: 20px;
+                font-size: 1.01rem;
+                font-weight: 700;
+                margin-bottom: 0;
+               
+            }
+    
+            span {
+                padding : 0;
+                font-size: 12px;
+                font-weight: 700;
+            }
+        }
+
+        .theme-button {
+            position: absolute;
+            left: 0;
+            display: flex;
+            margin-right: auto;
+            border-radius: 0 30px 30px 0;
+            padding: 0 6px;
+            align-items: center;
+            height: 44px;
+            width: 53px;
+        }
+
+        .logo__img {
+            padding: 0 20px 0 40px;
+            img {
+                height: 47px;
+            }
+        }
+
+        @media (min-width: 650px){
+            .header__logo-title {
+                @include flex(row,  nowrap);
+                span {
+                    padding-right: 20px;
+                }
+
+                h1{
+                    margin: 0 auto;
+                }
+            }
+
+            .seperator {
+                display: block;
+            }
+        }
+
+        @media (min-width: 980px) {
+            @include flex(row, wrap);
+            .header__logo-title {
+                @include flex(row, wrap);
+                align-items: center;
+            }
+        } 
+    }
+
+    .header-scrollbar {
+        background:#374f60;
+        height: 57px; /*placeholder*/
+        width: 100%;
+    }
+}
