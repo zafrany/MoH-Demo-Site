@@ -24,7 +24,7 @@ body {
 }
 
 .background-dark {
-  background: #49667a;
+  background: #49667a !important;
 }
 
 .text-color-light {
@@ -87,6 +87,14 @@ h2 {
   width: 100%;
   font-size: 19px;
   border-top: 1px solid rgba(161, 170, 177, 0.4);
+}
+
+.button-light-color {
+  background: #e6f1f4;
+}
+
+.button-dark-color {
+  background: #2a3b47;
 }
 
 .header {
@@ -210,13 +218,64 @@ h2 {
 
 .settelments-vacccination {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
-  width: 100%;
   border-radius: 10px;
   margin: 11.2px;
-  padding: 1rem;
   box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.settelments-vacccination .card-h3-container {
+  width: 50%;
+  margin-bottom: 8px;
+  padding-right: 1rem;
+  padding-top: 1rem;
+}
+.settelments-vacccination .tooltip {
+  top: 2.5rem;
+}
+
+.search-button {
+  position: relative;
+  font-family: sans-serif;
+  border: none;
+  text-align: right;
+  margin-right: 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.search-button:focus {
+  outline: 2px solid black;
+}
+
+.arrow-icon-rotated {
+  animation: rotation 0.5s forwards;
+}
+
+.arrow-icon-unrotated {
+  animation: counter-rotation 0.5s forwards;
+}
+
+.button-container {
+  width: 100%;
+}
+
+.search-button {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border: 1px solid rgba(161, 170, 177, 0.4);
+  min-width: 200px;
+  border-radius: 20px;
+  align-items: center;
+}
+
+.search-button__text {
+  padding: 0.35rem;
+  width: 85%;
 }
 
 .population-vaccination {
@@ -227,11 +286,124 @@ h2 {
   width: 100%;
 }
 
+.dots-flex {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  padding-left: 1.5rem;
+  width: 45%;
+}
+
 .dot {
   width: 3px;
   height: 3px;
   border-radius: 50%;
   margin-bottom: 2px;
+}
+
+.searchbox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 205px;
+  position: absolute;
+  top: 5.3rem;
+  right: 0.8rem;
+  border: 1px solid rgba(161, 170, 177, 0.4);
+  border-radius: 5px;
+  z-index: 101;
+}
+.searchbox .searchbox-top {
+  padding: 2px 2px 16px 2px;
+}
+.searchbox .input-light-theme input {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  text-indent: 1rem;
+  height: 2rem;
+  border: 2px solid rgba(161, 170, 177, 0.4);
+  border-radius: 5px;
+}
+.searchbox .input-light-theme input::placeholder {
+  color: #222b45;
+}
+.searchbox .input-dark-theme input {
+  min-width: 200px;
+  text-indent: 1rem;
+  margin-top: 2px;
+  height: 2rem;
+  border: 2px solid rgba(161, 170, 177, 0.4);
+  border-radius: 5px;
+}
+.searchbox .input-dark-theme input::placeholder {
+  color: #fff;
+}
+.searchbox button {
+  font-size: 1rem;
+  max-width: 102px;
+  height: 2rem;
+  padding: 0;
+  margin: 0;
+  border: none;
+  width: 50%;
+}
+.searchbox button:focus {
+  outline: 1px solid black;
+  border-left: 1px solid black;
+}
+
+.svg-arrow-color-light {
+  color: #308bf6;
+  padding-right: 5px;
+}
+
+.vaccination-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 1rem;
+  font-size: 1rem;
+  height: 36px;
+  flex-grow: 1;
+  flex-basis: 30px;
+  justify-content: space-around;
+}
+
+.vaccination-header__category-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  border: none;
+  background: none;
+  height: 36px;
+  align-items: center;
+}
+.vaccination-header__category-container:focus {
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+@keyframes counter-rotation {
+  from {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+.flip-triangle {
+  transform: scaleY(-1);
 }
 
 .circle {

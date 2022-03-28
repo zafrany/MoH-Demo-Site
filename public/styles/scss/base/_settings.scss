@@ -26,7 +26,7 @@
   }
 
   .background-dark {
-      background: #49667a;
+      background: #49667a !important;
   }
 
   .text-color-light {
@@ -89,4 +89,12 @@
         width: 100%;
         font-size: 19px;
         border-top: 1px solid rgba(161,170,177,.4);
+    }
+
+    .button-light-color {
+        background: #e6f1f4;
+    }
+
+    .button-dark-color {
+        background: #2a3b47;
     }

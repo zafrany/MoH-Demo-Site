@@ -4,6 +4,10 @@ let boxColor = document.querySelectorAll(".light-color-theme__box-color");
 let exlamationMark = document.querySelectorAll(".card-h3-container .circle");
 let circleArray = document.querySelectorAll(".light-circle-color");
 let tooltipArray = document.querySelectorAll(".tooltip");
+let searchButton = document.querySelector(".search-button");
+let searchBox = document.querySelector(".searchbox");
+let buttons = document.querySelectorAll(".searchbox-button");
+let trinagleButtons = document.querySelectorAll(".vaccination-header__category-container");
 
 themeButton.addEventListener('click', ()=>{
     themeButton.children[0].classList.toggle("displayNone");
@@ -26,8 +30,27 @@ themeButton.addEventListener('click', ()=>{
         tooltipArray[i].classList.toggle("dark-color-theme__box-color");
         tooltipArray[i].classList.toggle("light-color-theme__box-color");
     }
-})
 
+    searchButton.classList.toggle("background-light");
+    searchButton.classList.toggle("background-dark");
+    searchButton.classList.toggle("text-color-light");
+    searchButton.classList.toggle("text-color-dark");
+
+    let searchBoxInputLight = document.querySelector(".input-light-theme");
+    let searchBoxInputDark = document.querySelector(".input-dark-theme");
+    searchBox.classList.toggle("background-light");
+    searchBox.classList.toggle("background-dark");
+    searchBoxInputLight.classList.toggle("displayNone");
+    searchBoxInputDark.classList.toggle("displayNone");
+
+
+    for(let i = 0; i < buttons.length; i++){
+        buttons[i].classList.toggle("text-color-light");
+        buttons[i].classList.toggle("button-light-color");
+        buttons[i].classList.toggle("text-color-dark");
+        buttons[i].classList.toggle("button-dark-color");
+    }
+})
 
 for(let i = 0; i < circleArray.length; i++){
     let tooltipArray = document.querySelectorAll('.tooltip');
@@ -36,6 +59,36 @@ for(let i = 0; i < circleArray.length; i++){
     })
     circleArray[i].addEventListener('mouseleave', ()=>{
         tooltipArray[i].classList.toggle("displayNone");
+    })
+}
+
+searchButton.addEventListener('click', ()=>{
+    let arrowIcon = document.querySelector(".arrow-icon");
+    if(arrowIcon.classList.contains("arrow-icon-rotated"))
+    {
+          arrowIcon.classList.remove("arrow-icon-rotated");
+          arrowIcon.classList.add("arrow-icon-unrotated");
+    }
+    else {
+        arrowIcon.classList.remove("arrow-icon-unrotated");
+        arrowIcon.classList.add("arrow-icon-rotated");
+    }
+
+    searchBox.classList.toggle("displayNone");
+})
+
+
+for(let i = 0; i < trinagleButtons.length; i++) {
+    let trinagleButtonsTriangles = document.querySelectorAll(".vaccination-header__category-container span");
+    trinagleButtons[i].addEventListener('click', ()=> {
+        if(trinagleButtons[i] === document.activeElement && trinagleButtonsTriangles[i].classList.contains("displayNone"))
+            trinagleButtonsTriangles[i].classList.toggle("displayNone");
+        trinagleButtonsTriangles[i].classList.toggle("flip-triangle");
+        
+        for(let j = 0; j < trinagleButtons.length; j++)
+            if(i !== j)
+                trinagleButtonsTriangles[j].classList.add("displayNone");
+        
     })
 }
 
