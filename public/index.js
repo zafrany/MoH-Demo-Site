@@ -8,6 +8,7 @@ let searchButton = document.querySelector(".search-button");
 let searchBox = document.querySelector(".searchbox");
 let buttons = document.querySelectorAll(".searchbox-button");
 let trinagleButtons = document.querySelectorAll(".vaccination-header__category-container");
+let vaccinationHeader = document.querySelector(".vaccination-header");
 
 themeButton.addEventListener('click', ()=>{
     themeButton.children[0].classList.toggle("displayNone");
@@ -33,15 +34,13 @@ themeButton.addEventListener('click', ()=>{
 
     searchButton.classList.toggle("background-light");
     searchButton.classList.toggle("background-dark");
-    searchButton.classList.toggle("text-color-light");
     searchButton.classList.toggle("text-color-dark");
 
     let searchBoxInputLight = document.querySelector(".input-light-theme");
-    let searchBoxInputDark = document.querySelector(".input-dark-theme");
+    searchBoxInputLight.classList.toggle("input-dark-theme");
     searchBox.classList.toggle("background-light");
     searchBox.classList.toggle("background-dark");
-    searchBoxInputLight.classList.toggle("displayNone");
-    searchBoxInputDark.classList.toggle("displayNone");
+    
 
 
     for(let i = 0; i < buttons.length; i++){
@@ -49,6 +48,14 @@ themeButton.addEventListener('click', ()=>{
         buttons[i].classList.toggle("button-light-color");
         buttons[i].classList.toggle("text-color-dark");
         buttons[i].classList.toggle("button-dark-color");
+    }
+
+    vaccinationHeader.classList.toggle("button-light-color");
+    vaccinationHeader.classList.toggle("button-dark-color");
+    
+    let vaccinationButton = document.querySelectorAll(".vaccination-header button");
+    for(let i = 0; i < vaccinationButton.length; i++){
+        vaccinationButton[i].classList.toggle("text-color-dark");
     }
 })
 
@@ -110,7 +117,7 @@ let topMockData2 = [
                       ];
 
 let settelmentsMockData = [
-    ["רעננה","89.7%","86.28%","70.69%","153.1","10"],
+    ["רעננה","49.7%","76.28%","70.69%","153.1","10"],
     ["יבנה","74.76%","69.92%","52.18%","113.5","10"],
     ["טירה","64.95%","56.31%","33.66%","19.3","6"],
     ["אשדוד","70.95%","64.18%","47.31%","60.6","9.2"],
@@ -119,7 +126,6 @@ let settelmentsMockData = [
     ["קיסריה","מעל 90%","87.76%","72.34%","167.7","10"]
 ];
     
-
 let dataFields = document.querySelectorAll(".top-cards-flex .top-card-container");
 for(let i = 0; i < dataFields.length; i++) {
     let dataField =  dataFields[i].querySelectorAll('.data');
@@ -130,44 +136,6 @@ for(let i = 0; i < dataFields.length; i++) {
             dataField[j].textContent = topMockData2[i - 6][j];
     }
 }
-
-/*
-let resultTable = "";
-let displayNone = "";
-for(let i = 0; i < settelmentsMockData.length; i++){
-    let rowDiv =
-    "<div class=\"vaccination-row\">" +
-        "<div class=\"sname-row\">" + settelmentsMockData[i][0] + "</div>" + 
-        "<div class=\"row-data\">" +
-            "<div class=\"percentage-bar percentage-bar-background-light " + (settelmentsMockData[i][1] === "מעל 90%" ? "displayNone" : "") + "\">" +
-            "<div style=\"width:"  + (settelmentsMockData[i][1] === "מעל 90%" ? "0%" : settelmentsMockData[i][1]) + "\"" + "class=\"percentage-bar-filled percentage-bar-first-dose-light\"></div>" +
-        "</div>" +
-        settelmentsMockData[i][1] +
-        "</div>" +
-        "<div class=\"row-data\">" +
-            "<div class=\"percentage-bar percentage-bar-background-light " + (settelmentsMockData[i][2] === "מעל 90%" ? "displayNone" : "") + "\">" +
-            "<div style=\"width:"  + (settelmentsMockData[i][2] === "מעל 90%" ? "0%" : settelmentsMockData[i][2]) + "\"" + "class=\"percentage-bar-filled percentage-bar-second-dose-light\"></div>" +
-        "</div>" +
-        settelmentsMockData[i][2] +
-        "</div>" +
-        "<div class=\"row-data\">" +
-            "<div class=\"percentage-bar percentage-bar-background-light " + (settelmentsMockData[i][3] === "מעל 90%" ? "displayNone" : "") + "\">" +
-            "<div style=\"width:"  + (settelmentsMockData[i][3] === "מעל 90%" ? "0%" : settelmentsMockData[i][3]) + "\"" + "class=\"percentage-bar-filled percentage-bar-third-dose-light\"></div>" +
-        "</div>" +
-        settelmentsMockData[i][3] +
-        "</div>" +
-        "<div class=\"row-data\">" + settelmentsMockData[i][4] + "</div>" +
-        "<div class=\"row-data\">" +
-            "<div class=\"colored-sq vaccination-table-first-score\">" +
-            settelmentsMockData[i][5] +
-            "</div>" +
-        "</div>" +
-    "</div>";
-    resultTable += rowDiv;
-}
-let vaccinationTableRows = document.querySelector(".vaccination-table-rows");
-*/
-
 
 let createSnameDiv = function(index) {
     const sName = document.createElement("div");
@@ -250,4 +218,91 @@ let createTable = function() {
     }
 }
 
+
+let deleteTable = function() {
+    let table = document.querySelector(".vaccination-table-rows");
+    while(table.firstChild)
+        table.removeChild(table.firstChild);
+}
+
 createTable();
+
+let sortByCity = function(asc){
+    return function(a, b){
+        if (asc)
+            return a[0].localeCompare(b[0]);
+        else
+            return b[0].localeCompare(a[0]);
+    }
+}
+
+let sortByNumber = function(index, asc) {
+    return function(a, b) {
+        let aNum = a[index];
+        let bNum = b[index];
+        if(aNum === "מעל 90%")
+            aNum = "90";
+        if(bNum === "מעל 90%")
+            bNum = "90";
+
+        if(aNum.indexOf('%') > 0)
+           aNum = parseFloat(aNum.slice(0, aNum.indexOf('%') - 1)); 
+        else anum = parseFloat(aNum);
+
+        if(bNum.indexOf('%') > 0)
+           bNum = parseFloat(bNum.slice(0, bNum.indexOf('%') - 1)); 
+        else anum = parseFloat(bNum);
+
+        if (asc)
+            return aNum - bNum;
+        else
+            return bNum - aNum;
+    }
+}
+
+
+let vaccinationButtons = document.querySelectorAll(".vaccination-header button");
+vaccinationButtons[0].addEventListener('click', ()=>{
+    let asc = vaccinationButtons[0].querySelector('span').classList.contains("flip-triangle");
+    settelmentsMockData = settelmentsMockData.sort(sortByCity(asc));
+    deleteTable();
+    createTable();
+})
+
+for(let i = 1; i < vaccinationButtons.length; i++){
+    vaccinationButtons[i].addEventListener('click', ()=>{
+        let asc = vaccinationButtons[i].querySelector('span').classList.contains("flip-triangle");
+        settelmentsMockData = settelmentsMockData.sort(sortByNumber(i, asc));
+        deleteTable();
+        createTable();
+    })
+}
+
+let VaccinationInput = document.querySelectorAll(".searchbox-top input");
+console.log(VaccinationInput);
+for(let i = 0; i < VaccinationInput.length; i ++){
+    VaccinationInput[i].addEventListener('input', ()=>{
+        let searchResultArr = [];        
+        for(let j = 0; j < settelmentsMockData.length; j++){
+            if(settelmentsMockData[j][0].includes(VaccinationInput[i].value) && VaccinationInput[i].value.length > 0)
+                searchResultArr.push(settelmentsMockData[j][0]);
+        }
+        clearList();
+        createList(searchResultArr);
+    })
+}
+
+let createList = function(arr) {
+    let searchResults = document.querySelector(".search-results");
+    for(let i = 0; i < arr.length; i++) {
+        let listMember = document.createElement("li");
+        listMember.textContent = arr[i];
+        searchResults.appendChild(listMember);
+    }
+}
+
+let clearList = function() {
+    let table = document.querySelector(".search-results");
+    while(table.firstChild)
+        table.removeChild(table.firstChild);
+}
