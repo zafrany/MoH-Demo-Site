@@ -22,11 +22,11 @@
   }
   
   .background-light {
-      background: #edf1f7;
+      background: $background-light;
   }
 
   .background-dark {
-      background: #49667a !important;
+      background: $background-dark !important;
   }
 
   .text-color-light {
@@ -48,19 +48,19 @@
   }
   
   .light-color-theme__box-color {
-      background: white;
+      background: $light-color-theme__box-color;
   }
     
   .dark-color-theme__box-color {
-      background: #384f5f;
+      background: $dark-color-theme__box-color;
   }
   
   .theme-button__light-color{
-      background:#39475d;
+      background:$theme-button__light-color;
   }
   
   .theme-button__dark-color {
-      background: #d8d8d8;
+      background: $theme-button__dark-color;
   }
   
   .tooltip { 
@@ -92,9 +92,42 @@
     }
 
     .button-light-color {
-        background: #e6f1f4;
+        background: $button-light-color;
     }
 
     .button-dark-color {
-        background: #2a3b47;
+        background: $button-dark-color;
+    }
+
+    .flip-triangle{
+        transform: scaleY(-1);
+    }
+
+    .percentage-bar-background-light {
+        background: $percentage-bar-background-light;
+    }
+
+    .percentage-bar-first-dose-light {
+        background: $percentage-bar-first-dose-light;
+    }
+
+    .percentage-bar-second-dose-light {
+        background: $percentage-bar-second-dose-light;
+    }
+
+    .percentage-bar-third-dose-light {
+        background: $percentage-bar-third-dose-light;
+    }
+
+    .vaccination-table-first-score{
+       background: $vaccination-table-first-score;
+    }
+    .vaccination-table-second-score{
+        background: $vaccination-table-second-score;
+    }
+    .vaccination-table-third-score {
+        background: $vaccination-table-third-score;
+    }
+    .vaccination-table-fourth-score{
+        background: $vaccination-table-fourth-score;
     }

@@ -115,7 +115,8 @@ let settelmentsMockData = [
     ["טירה","64.95%","56.31%","33.66%","19.3","6"],
     ["אשדוד","70.95%","64.18%","47.31%","60.6","9.2"],
     ["בני ברק","45.33%","33.38%","19.79%","7.5","5.1"],
-    ["חורה","25.12%","21.08%","8.92%","7.8","4.3"]
+    ["חורה","25.12%","21.08%","8.92%","7.8","4.3"],
+    ["קיסריה","מעל 90%","87.76%","72.34%","167.7","10"]
 ];
     
 
@@ -129,3 +130,124 @@ for(let i = 0; i < dataFields.length; i++) {
             dataField[j].textContent = topMockData2[i - 6][j];
     }
 }
+
+/*
+let resultTable = "";
+let displayNone = "";
+for(let i = 0; i < settelmentsMockData.length; i++){
+    let rowDiv =
+    "<div class=\"vaccination-row\">" +
+        "<div class=\"sname-row\">" + settelmentsMockData[i][0] + "</div>" + 
+        "<div class=\"row-data\">" +
+            "<div class=\"percentage-bar percentage-bar-background-light " + (settelmentsMockData[i][1] === "מעל 90%" ? "displayNone" : "") + "\">" +
+            "<div style=\"width:"  + (settelmentsMockData[i][1] === "מעל 90%" ? "0%" : settelmentsMockData[i][1]) + "\"" + "class=\"percentage-bar-filled percentage-bar-first-dose-light\"></div>" +
+        "</div>" +
+        settelmentsMockData[i][1] +
+        "</div>" +
+        "<div class=\"row-data\">" +
+            "<div class=\"percentage-bar percentage-bar-background-light " + (settelmentsMockData[i][2] === "מעל 90%" ? "displayNone" : "") + "\">" +
+            "<div style=\"width:"  + (settelmentsMockData[i][2] === "מעל 90%" ? "0%" : settelmentsMockData[i][2]) + "\"" + "class=\"percentage-bar-filled percentage-bar-second-dose-light\"></div>" +
+        "</div>" +
+        settelmentsMockData[i][2] +
+        "</div>" +
+        "<div class=\"row-data\">" +
+            "<div class=\"percentage-bar percentage-bar-background-light " + (settelmentsMockData[i][3] === "מעל 90%" ? "displayNone" : "") + "\">" +
+            "<div style=\"width:"  + (settelmentsMockData[i][3] === "מעל 90%" ? "0%" : settelmentsMockData[i][3]) + "\"" + "class=\"percentage-bar-filled percentage-bar-third-dose-light\"></div>" +
+        "</div>" +
+        settelmentsMockData[i][3] +
+        "</div>" +
+        "<div class=\"row-data\">" + settelmentsMockData[i][4] + "</div>" +
+        "<div class=\"row-data\">" +
+            "<div class=\"colored-sq vaccination-table-first-score\">" +
+            settelmentsMockData[i][5] +
+            "</div>" +
+        "</div>" +
+    "</div>";
+    resultTable += rowDiv;
+}
+let vaccinationTableRows = document.querySelector(".vaccination-table-rows");
+*/
+
+
+let createSnameDiv = function(index) {
+    const sName = document.createElement("div");
+    sName.innerText = settelmentsMockData[index][0];
+    sName.classList.add("sname-row");
+    return sName;
+}
+
+let createPercentageBar = function(index,col) {
+    const backgroundBar = document.createElement("div");
+    backgroundBar.classList.add("percentage-bar");
+    backgroundBar.classList.add("percentage-bar-background-light");
+    if(settelmentsMockData[index][col] === "מעל 90%")
+        backgroundBar.classList.add("displayNone");
+    backgroundBar.appendChild(createWidthBar(index, col));
+    return backgroundBar;
+}
+
+let createWidthBar = function(index, col) {
+    const colClass  = ["percentage-bar-first-dose-light", "percentage-bar-second-dose-light", "percentage-bar-third-dose-light"];
+    const widthBar = document.createElement("div");
+    if(settelmentsMockData[index][col] === "מעל 90%")
+        widthBar.style.width = "0%";
+    else
+        widthBar.style.width = settelmentsMockData[index][col];
+    widthBar.classList.add("percentage-bar-filled");
+    widthBar.classList.add(colClass[col - 1]);
+    return widthBar;
+}
+
+let createRowData = function(index, col) {
+    const rowData = document.createElement("div");
+    rowData.appendChild(createPercentageBar(index, col));
+    let innerText = document.createElement("span");
+    innerText.innerText = settelmentsMockData[index][col];
+    rowData.appendChild(innerText);
+    rowData.classList.add("row-data");
+    return rowData;
+}
+
+let createActivePatients = function(index) {
+    const activePatients = document.createElement("div");
+    activePatients.innerText = settelmentsMockData[index][4];
+    activePatients.classList.add("row-data");   
+    return activePatients;
+}
+
+let createScore = function(index) {
+    let parsedScore = parseFloat(settelmentsMockData[index][5]);
+    const scoreClass  = ["vaccination-table-first-score", "vaccination-table-second-score", "vaccination-table-third-score", "vaccination-table-fourth-score"];
+    const score = document.createElement("div");
+    score.innerText = settelmentsMockData[index][5];
+    if(parsedScore >= 7.5)
+        score.classList.add(scoreClass[0]);   
+    else if(parsedScore >= 6)
+        score.classList.add(scoreClass[1]);   
+    else if(parsedScore >= 4.5)
+        score.classList.add(scoreClass[2]);   
+    else 
+        score.classList.add(scoreClass[3]);   
+    score.classList.add("colored-sq");   
+    const scoreDiv = document.createElement("div");
+    scoreDiv.classList.add("row-data");
+    scoreDiv.appendChild(score);
+    return scoreDiv;
+}
+
+let createTable = function() {
+    let table = document.querySelector(".vaccination-table-rows");
+    for(let i = 0; i < settelmentsMockData.length; i++){
+        let tableRow = document.createElement("div");
+        tableRow.appendChild(createSnameDiv(i));
+        for(let col = 1; col < 4; col++){
+            tableRow.appendChild(createRowData(i,col));
+        }
+        tableRow.appendChild(createActivePatients(i));
+        tableRow.appendChild(createScore(i));
+        tableRow.classList.add("vaccination-row");    
+        table.appendChild(tableRow);
+    }
+}
+
+createTable();

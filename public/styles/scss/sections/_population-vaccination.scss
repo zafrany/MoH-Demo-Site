@@ -63,7 +63,6 @@
 
 .population-vaccination {
     margin: 11.2px;
-    @include flex(column, wrap);
     width: 100%;
 }
 
@@ -154,8 +153,7 @@
     height: 36px;
     flex-grow: 1;
     flex-basis: 30px;
-    justify-content: space-around;
-    
+    justify-content: flex-start;
 }
 .vaccination-header__category-container {
     @include flex(row, nowrap);
@@ -163,11 +161,84 @@
     background: none;
     height: 36px;
     align-items: center;
+    font-size: 14px;    
+    width: 16%;
+    justify-content: center;
 
     &:focus {
         border: 2px solid black;
         border-radius: 5px;
     }    
+}
+
+.table-container {
+    direction: ltr;
+    overflow: auto;
+        
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 10px;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+}
+
+.vaccination-table-rows {
+    @include flex(row, wrap);
+    width: 100%;
+    height: 200px;
+}   
+
+.vaccination-row{
+    @include flex(row, wrap);
+    height: 49px;
+    align-items: center;
+    font-size: 14px;
+    width: 100%
+}
+
+.row-data {
+    @include flex(row, wrap);
+    align-items: center;
+    justify-content: space-evenly;
+    width: 16%;
+}
+
+.sname {
+    width: 20%;
+}
+
+.sname-row {
+    @extend .sname;
+    font-weight: 700;
+    text-align: center;
+}
+
+.percentage-bar {
+    width: 25%;
+    height: 10px;
+}
+
+.percentage-bar-filled { 
+    height: 10px;
+}
+
+.colored-sq{
+    padding: 3px;
+    text-align: center;
+    font-weight: 700;
+    width: 28px;
+    height: 24px;
 }
 
 @keyframes rotation {
@@ -186,8 +257,4 @@
     to {
       transform: rotate(0deg);
     }
-}
-
-.flip-triangle{
-    transform: scaleY(-1);
 }

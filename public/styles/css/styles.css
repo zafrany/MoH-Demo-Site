@@ -97,6 +97,42 @@ h2 {
   background: #2a3b47;
 }
 
+.flip-triangle {
+  transform: scaleY(-1);
+}
+
+.percentage-bar-background-light {
+  background: #eff5f9;
+}
+
+.percentage-bar-first-dose-light {
+  background: #3b7d7e;
+}
+
+.percentage-bar-second-dose-light {
+  background: #b6ca51;
+}
+
+.percentage-bar-third-dose-light {
+  background: #66cbfd;
+}
+
+.vaccination-table-first-score {
+  background: #ee9d8e;
+}
+
+.vaccination-table-second-score {
+  background: #f2c580;
+}
+
+.vaccination-table-third-score {
+  background: #fcfc70;
+}
+
+.vaccination-table-fourth-score {
+  background: #b8de92;
+}
+
 .header {
   position: fixed;
   color: #39475d;
@@ -280,9 +316,6 @@ h2 {
 
 .population-vaccination {
   margin: 11.2px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
   width: 100%;
 }
 
@@ -369,7 +402,7 @@ h2 {
   height: 36px;
   flex-grow: 1;
   flex-basis: 30px;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 
 .vaccination-header__category-container {
@@ -380,10 +413,84 @@ h2 {
   background: none;
   height: 36px;
   align-items: center;
+  font-size: 14px;
+  width: 16%;
+  justify-content: center;
 }
 .vaccination-header__category-container:focus {
   border: 2px solid black;
   border-radius: 5px;
+}
+
+.table-container {
+  direction: ltr;
+  overflow: auto;
+}
+.table-container::-webkit-scrollbar {
+  width: 10px;
+}
+.table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.table-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.vaccination-table-rows {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 200px;
+}
+
+.vaccination-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 49px;
+  align-items: center;
+  font-size: 14px;
+  width: 100%;
+}
+
+.row-data {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 16%;
+}
+
+.sname, .sname-row {
+  width: 20%;
+}
+
+.sname-row {
+  font-weight: 700;
+  text-align: center;
+}
+
+.percentage-bar {
+  width: 25%;
+  height: 10px;
+}
+
+.percentage-bar-filled {
+  height: 10px;
+}
+
+.colored-sq {
+  padding: 3px;
+  text-align: center;
+  font-weight: 700;
+  width: 28px;
+  height: 24px;
 }
 
 @keyframes rotation {
@@ -402,10 +509,6 @@ h2 {
     transform: rotate(0deg);
   }
 }
-.flip-triangle {
-  transform: scaleY(-1);
-}
-
 .circle {
   margin-top: 2px;
   padding: 2px;
