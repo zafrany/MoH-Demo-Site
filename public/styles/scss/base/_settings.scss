@@ -131,3 +131,23 @@
     .vaccination-table-fourth-score{
         background: $vaccination-table-fourth-score;
     }
+
+    .border-bottom-light {
+        border-bottom: 1px solid $vaccination-table-row-seperator-light;
+    }
+    
+    .border-bottom-dark {
+        border-bottom: 1px solid $text-color-dark-theme;
+    }
+    
+    .search-result-hover-light {
+        li:hover {
+            background: $button-light-color;
+        }
+    }
+
+    .search-result-hover-dark {
+        li:hover {
+            background: $button-dark-color;
+        }
+    }

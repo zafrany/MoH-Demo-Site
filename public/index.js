@@ -5,8 +5,10 @@ let exlamationMark = document.querySelectorAll(".card-h3-container .circle");
 let circleArray = document.querySelectorAll(".light-circle-color");
 let tooltipArray = document.querySelectorAll(".tooltip");
 let searchButton = document.querySelector(".search-button");
-let searchBox = document.querySelector(".searchbox");
+let searchBoxContainer = document.querySelector(".searchbox-container");
+let searchResults = document.querySelector(".search-results");
 let buttons = document.querySelectorAll(".searchbox-button");
+let searchboxTop = document.querySelector(".searchbox-top");
 let trinagleButtons = document.querySelectorAll(".vaccination-header__category-container");
 let vaccinationHeader = document.querySelector(".vaccination-header");
 
@@ -38,11 +40,10 @@ themeButton.addEventListener('click', ()=>{
 
     let searchBoxInputLight = document.querySelector(".input-light-theme");
     searchBoxInputLight.classList.toggle("input-dark-theme");
-    searchBox.classList.toggle("background-light");
-    searchBox.classList.toggle("background-dark");
+    searchBoxContainer.classList.toggle("background-light");
+    searchBoxContainer.classList.toggle("background-dark");
+    searchboxTop.classList.toggle("dark-color-theme__box-color");
     
-
-
     for(let i = 0; i < buttons.length; i++){
         buttons[i].classList.toggle("text-color-light");
         buttons[i].classList.toggle("button-light-color");
@@ -52,11 +53,20 @@ themeButton.addEventListener('click', ()=>{
 
     vaccinationHeader.classList.toggle("button-light-color");
     vaccinationHeader.classList.toggle("button-dark-color");
-    
+
     let vaccinationButton = document.querySelectorAll(".vaccination-header button");
     for(let i = 0; i < vaccinationButton.length; i++){
         vaccinationButton[i].classList.toggle("text-color-dark");
     }
+    
+    let vaccinationRow = document.querySelectorAll(".vaccination-row");
+    for(let i = 0; i < vaccinationRow.length; i++){
+        vaccinationRow[i].classList.toggle("border-bottom-light");
+        vaccinationRow[i].classList.toggle("border-bottom-dark");
+    }
+
+    searchResults.classList.toggle("search-result-hover-light");
+    searchResults.classList.toggle("search-result-hover-dark");
 })
 
 for(let i = 0; i < circleArray.length; i++){
@@ -81,7 +91,7 @@ searchButton.addEventListener('click', ()=>{
         arrowIcon.classList.add("arrow-icon-rotated");
     }
 
-    searchBox.classList.toggle("displayNone");
+    searchBoxContainer.classList.toggle("displayNone");
 })
 
 
@@ -213,7 +223,8 @@ let createTable = function() {
         }
         tableRow.appendChild(createActivePatients(i));
         tableRow.appendChild(createScore(i));
-        tableRow.classList.add("vaccination-row");    
+        tableRow.classList.add("vaccination-row");
+        tableRow.classList.add("border-bottom-light");
         table.appendChild(tableRow);
     }
 }
@@ -278,31 +289,45 @@ for(let i = 1; i < vaccinationButtons.length; i++){
     })
 }
 
-let VaccinationInput = document.querySelectorAll(".searchbox-top input");
-console.log(VaccinationInput);
-for(let i = 0; i < VaccinationInput.length; i ++){
-    VaccinationInput[i].addEventListener('input', ()=>{
-        let searchResultArr = [];        
-        for(let j = 0; j < settelmentsMockData.length; j++){
-            if(settelmentsMockData[j][0].includes(VaccinationInput[i].value) && VaccinationInput[i].value.length > 0)
-                searchResultArr.push(settelmentsMockData[j][0]);
-        }
-        clearList();
-        createList(searchResultArr);
-    })
-}
+let searchBox = document.querySelector(".searchbox");
+let VaccinationInput = document.querySelector(".searchbox-top input");
+VaccinationInput.addEventListener('input', ()=>{
+    let searchResultArr = [];        
+    for(let j = 0; j < settelmentsMockData.length; j++){
+        if(settelmentsMockData[j][0].includes(VaccinationInput.value) && VaccinationInput.value.length > 0)
+            searchResultArr.push(settelmentsMockData[j][0]);
+    }
+    clearList();
+    if(searchResultArr.length !== 0)
+        searchBox.style.position = "absolute";
+    else
+        searchBox.style.position = "static";
+    createList(searchResultArr);
+})
+
 
 let createList = function(arr) {
-    let searchResults = document.querySelector(".search-results");
+    searchResults.classList.toggle("search-result-hover-light");
     for(let i = 0; i < arr.length; i++) {
         let listMember = document.createElement("li");
+        listMember.addEventListener('click', ()=> {
+            VaccinationInput.value = arr[i];
+            searchBox.style.position = "static";
+            clearList();
+        })
         listMember.textContent = arr[i];
         searchResults.appendChild(listMember);
     }
 }
 
 let clearList = function() {
-    let table = document.querySelector(".search-results");
-    while(table.firstChild)
-        table.removeChild(table.firstChild);
+    while(searchResults.firstChild)
+        searchResults.removeChild(searchResults.firstChild);
 }
+
+buttons[0].addEventListener('click', ()=> {
+    //[VaccinationInput.value]
+    //console.log("in listner");
+    let table = document.querySelector(".vaccination-table-rows");
+    console.log(table.childNodes[1]);
+})

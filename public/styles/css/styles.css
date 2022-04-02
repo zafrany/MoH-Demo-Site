@@ -133,6 +133,22 @@ h2 {
   background: #b8de92;
 }
 
+.border-bottom-light {
+  border-bottom: 1px solid #daeaed;
+}
+
+.border-bottom-dark {
+  border-bottom: 1px solid #fff;
+}
+
+.search-result-hover-light li:hover {
+  background: #e6f1f4;
+}
+
+.search-result-hover-dark li:hover {
+  background: #2a3b47;
+}
+
 .header {
   position: fixed;
   color: #39475d;
@@ -297,6 +313,7 @@ h2 {
 
 .button-container {
   width: 100%;
+  position: relative;
 }
 
 .search-button {
@@ -335,25 +352,40 @@ h2 {
   margin-bottom: 2px;
 }
 
+.searchbox-container {
+  top: 5.2rem;
+  background: white;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border-radius: 5px;
+  border: 1px solid rgba(161, 170, 177, 0.4);
+  right: 1rem;
+  z-index: 200;
+}
+
 .searchbox {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
-  width: 205px;
-  position: absolute;
-  top: 5.3rem;
-  right: 0.8rem;
-  border: 1px solid rgba(161, 170, 177, 0.4);
   border-radius: 5px;
-  z-index: 101;
+  min-width: 200px;
+  background: white;
+  border: 1px solid rgba(161, 170, 177, 0.4);
 }
 .searchbox .searchbox-top {
-  padding: 2px 2px 16px 2px;
+  border-radius: 5px;
+  padding: 1px;
+}
+.searchbox input {
+  width: 100%;
+  border: 1px solid rgba(161, 170, 177, 0.4);
 }
 .searchbox .input-light-theme input {
+  background: white;
   margin: 0;
   padding: 0;
-  width: 200px;
   text-indent: 1rem;
   height: 2rem;
   border: 2px solid rgba(161, 170, 177, 0.4);
@@ -361,14 +393,13 @@ h2 {
   color: #222b45;
 }
 .searchbox .input-dark-theme input {
-  min-width: 200px;
+  background: #384f5f;
   text-indent: 1rem;
   margin-top: 2px;
   height: 2rem;
   border: 2px solid rgba(161, 170, 177, 0.4);
   border-radius: 5px;
   color: white;
-  background: #49667a;
 }
 .searchbox .input-dark-theme input::placeholder {
   color: #fff;
@@ -376,25 +407,29 @@ h2 {
 .searchbox .search-results {
   list-style: none;
   padding: 0;
+  border: none;
+  z-index: 200;
 }
 .searchbox .search-results li {
   font-size: 16px;
   padding: 8px;
-}
-.searchbox .search-results li:hover {
-  background: #e6f1f4;
   cursor: pointer;
 }
-.searchbox button {
+
+.search-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.search-buttons button {
   font-size: 1rem;
-  max-width: 102px;
   height: 2rem;
   padding: 0;
   margin: 0;
   border: none;
   width: 50%;
 }
-.searchbox button:focus {
+.search-buttons button:focus {
   outline: 1px solid black;
   border-left: 1px solid black;
 }

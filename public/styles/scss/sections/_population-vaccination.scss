@@ -44,7 +44,8 @@
 }
 
 .button-container {
-    width: 100%
+    width: 100%;
+    position: relative;
 }
 
 .search-button {
@@ -80,26 +81,39 @@
     margin-bottom: 2px;;
 }
 
+.searchbox-container {
+    top: 5.2rem;
+    background: white;
+    position: absolute;
+    @include flex(column, wrap);
+    border-radius: 5px;
+    border: 1px solid rgba(161,170,177,.4);
+    right: 1rem;
+    z-index: 200;
+}
 
 .searchbox{
-    @include flex(row, wrap);
-    width: 205px;
-    position: absolute;
-    top: 5.3rem;
-    right: 0.8rem;
-    border: 1px solid rgba(161,170,177,.4);
+    @include flex(column, wrap);
     border-radius: 5px;
-    z-index: 101;
-
+    min-width: 200px;
+    background: white;
+    border: 1px solid rgba(161,170,177,.4);
+    
     .searchbox-top {
-        padding: 2px 2px 16px 2px;
+        border-radius: 5px;
+        padding: 1px;
+    }
+
+    input {
+        width: 100%;
+        border: 1px solid rgba(161,170,177,.4);
     }
 
     .input-light-theme{
         input{
+            background: $light-color-theme__box-color;
             margin: 0;
             padding: 0;
-            width: 200px;
             text-indent: 1rem;
             height: 2rem;
             border: 2px solid rgba(161, 170, 177, 0.4);
@@ -110,14 +124,13 @@
 
     .input-dark-theme{
         input{
-            min-width: 200px;
+            background: $dark-color-theme__box-color;
             text-indent: 1rem;
             margin-top: 2px;
             height: 2rem;
             border: 2px solid rgba(161, 170, 177, 0.4);
             border-radius: 5px;
             color: white;
-            background: $background-dark;
         }
 
         input::placeholder{
@@ -128,27 +141,25 @@
     .search-results {
         list-style: none;
         padding: 0;
-        
+        border: none;
+        z-index: 200;
         li{
             font-size: 16px;
             padding: 8px;
-
-            &:hover {
-                background: $button-light-color;
-                cursor: pointer;
-            }
+            cursor: pointer;
         }
     }
+}
 
+.search-buttons {
+    @include flex(row, wrap);
     button {
         font-size: 1rem;
-        max-width: 102px;
         height: 2rem;
         padding: 0;
         margin: 0;
         border: none;
         width: 50%;
-        
         &:focus{
             outline: 1px solid black;
             border-left: 1px solid black;
@@ -221,7 +232,7 @@
     height: 49px;
     align-items: center;
     font-size: 14px;
-    width: 100%
+    width: 100%;
 }
 
 .row-data {
