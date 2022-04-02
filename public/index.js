@@ -21,6 +21,37 @@ themeButton.addEventListener('click', ()=>{
     themeColors.classList.toggle("background-dark");
     themeColors.classList.toggle("text-color-light");
     themeColors.classList.toggle("text-color-dark");
+    
+    //////////////////////////////////////////////////////////
+    if(themeColors.classList.contains("background-dark")){
+        percentageFirstDose = document.querySelectorAll(".percentage-bar-first-dose-light");
+        percentageSecondDose = document.querySelectorAll(".percentage-bar-second-dose-light");
+        percentageThirdDose = document.querySelectorAll(".percentage-bar-third-dose-light");
+        percentageBarBackground = document.querySelectorAll(".percentage-bar-background-light");
+    }
+    else {
+        percentageFirstDose = document.querySelectorAll(".percentage-bar-first-dose-dark");
+        percentageSecondDose = document.querySelectorAll(".percentage-bar-second-dose-dark");
+        percentageThirdDose = document.querySelectorAll(".percentage-bar-third-dose-dark");
+        percentageBarBackground = document.querySelectorAll(".percentage-bar-background-dark");
+    }
+
+    for(let i = 0; i < percentageBarBackground.length; i++) {
+        percentageBarBackground[i].classList.toggle("percentage-bar-background-light");
+        percentageBarBackground[i].classList.toggle("percentage-bar-background-dark");
+    }
+
+    console.log(percentageFirstDose.length);
+    for(let i = 0; i < percentageFirstDose.length; i++){
+         percentageFirstDose[i].classList.toggle("percentage-bar-first-dose-light");
+         percentageSecondDose[i].classList.toggle("percentage-bar-second-dose-light");
+         percentageThirdDose[i].classList.toggle("percentage-bar-third-dose-light"); 
+
+         percentageFirstDose[i].classList.toggle("percentage-bar-first-dose-dark");
+         percentageSecondDose[i].classList.toggle("percentage-bar-second-dose-dark"); 
+         percentageThirdDose[i].classList.toggle("percentage-bar-third-dose-dark"); 
+    }
+    ///////////////////////////////////////////////////////
 
     for(let i = 0; i < boxColor.length; i++){
         boxColor[i].classList.toggle("light-color-theme__box-color");
@@ -157,7 +188,10 @@ let createSnameDiv = function(index) {
 let createPercentageBar = function(index,col) {
     const backgroundBar = document.createElement("div");
     backgroundBar.classList.add("percentage-bar");
-    backgroundBar.classList.add("percentage-bar-background-light");
+    if(themeColors.classList.contains("background-light"))
+        backgroundBar.classList.add("percentage-bar-background-light");
+    else
+        backgroundBar.classList.add("percentage-bar-background-dark");
     if(settelmentsMockData[index][col] === "מעל 90%")
         backgroundBar.classList.add("displayNone");
     backgroundBar.appendChild(createWidthBar(index, col));
@@ -165,7 +199,13 @@ let createPercentageBar = function(index,col) {
 }
 
 let createWidthBar = function(index, col) {
-    const colClass  = ["percentage-bar-first-dose-light", "percentage-bar-second-dose-light", "percentage-bar-third-dose-light"];
+    let colClass;
+    if(themeColors.classList.contains("background-light")){
+         colClass  = ["percentage-bar-first-dose-light", "percentage-bar-second-dose-light", "percentage-bar-third-dose-light"];
+    }
+    else {
+        colClass  = ["percentage-bar-first-dose-dark", "percentage-bar-second-dose-dark", "percentage-bar-third-dose-dark"];
+    }
     const widthBar = document.createElement("div");
     if(settelmentsMockData[index][col] === "מעל 90%")
         widthBar.style.width = "0%";
@@ -327,7 +367,29 @@ let clearList = function() {
 
 buttons[0].addEventListener('click', ()=> {
     //[VaccinationInput.value]
-    //console.log("in listner");
     let table = document.querySelector(".vaccination-table-rows");
-    console.log(table.childNodes[1]);
+    console.log(table.childNodes);
+})
+
+buttons[1].addEventListener('click', ()=> {
+    let arrowIcon = document.querySelector(".arrow-icon");
+    let searchButtonText = document.querySelector(".search-button__text");
+    if(arrowIcon.classList.contains("arrow-icon-rotated"))
+    {
+          arrowIcon.classList.remove("arrow-icon-rotated");
+          arrowIcon.classList.add("arrow-icon-unrotated");
+    }
+    else {
+        arrowIcon.classList.remove("arrow-icon-unrotated");
+        arrowIcon.classList.add("arrow-icon-rotated");
+    }
+    searchBoxContainer.classList.toggle("displayNone");
+
+    if(VaccinationInput.value.length !== 0) {
+        searchButtonText.innerText = VaccinationInput.value;
+    }
+    else {
+        console.log("in else");
+        searchButtonText.innerText = "כלל הישובים";
+    }
 })

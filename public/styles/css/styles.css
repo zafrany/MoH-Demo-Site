@@ -117,6 +117,22 @@ h2 {
   background: #66cbfd;
 }
 
+.percentage-bar-background-dark {
+  background: #293b48;
+}
+
+.percentage-bar-first-dose-dark {
+  background: #9ffa82;
+}
+
+.percentage-bar-second-dose-dark {
+  background: #fd8264;
+}
+
+.percentage-bar-third-dose-dark {
+  background: #2cd2db;
+}
+
 .vaccination-table-first-score {
   background: #ee9d8e;
 }
