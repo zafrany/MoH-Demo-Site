@@ -41,7 +41,6 @@ themeButton.addEventListener('click', ()=>{
         percentageBarBackground[i].classList.toggle("percentage-bar-background-dark");
     }
 
-    console.log(percentageFirstDose.length);
     for(let i = 0; i < percentageFirstDose.length; i++){
          percentageFirstDose[i].classList.toggle("percentage-bar-first-dose-light");
          percentageSecondDose[i].classList.toggle("percentage-bar-second-dose-light");
@@ -61,8 +60,6 @@ themeButton.addEventListener('click', ()=>{
     for(let i = 0; i < exlamationMark.length; i++){
         exlamationMark[i].classList.toggle("light-circle-color");
         exlamationMark[i].classList.toggle("dark-circle-color");
-        tooltipArray[i].classList.toggle("dark-color-theme__box-color");
-        tooltipArray[i].classList.toggle("light-color-theme__box-color");
     }
 
     searchButton.classList.toggle("background-light");
@@ -178,27 +175,27 @@ for(let i = 0; i < dataFields.length; i++) {
     }
 }
 
-let createSnameDiv = function(index) {
+let createSnameDiv = function(dataTable ,index) {
     const sName = document.createElement("div");
-    sName.innerText = settelmentsMockData[index][0];
+    sName.innerText = dataTable[index][0];
     sName.classList.add("sname-row");
     return sName;
 }
 
-let createPercentageBar = function(index,col) {
+let createPercentageBar = function(dataTable, index,col) {
     const backgroundBar = document.createElement("div");
     backgroundBar.classList.add("percentage-bar");
     if(themeColors.classList.contains("background-light"))
         backgroundBar.classList.add("percentage-bar-background-light");
     else
         backgroundBar.classList.add("percentage-bar-background-dark");
-    if(settelmentsMockData[index][col] === "מעל 90%")
+    if(dataTable[index][col] === "מעל 90%")
         backgroundBar.classList.add("displayNone");
-    backgroundBar.appendChild(createWidthBar(index, col));
+    backgroundBar.appendChild(createWidthBar(dataTable, index, col));
     return backgroundBar;
 }
 
-let createWidthBar = function(index, col) {
+let createWidthBar = function(dataTable, index, col) {
     let colClass;
     if(themeColors.classList.contains("background-light")){
          colClass  = ["percentage-bar-first-dose-light", "percentage-bar-second-dose-light", "percentage-bar-third-dose-light"];
@@ -207,37 +204,37 @@ let createWidthBar = function(index, col) {
         colClass  = ["percentage-bar-first-dose-dark", "percentage-bar-second-dose-dark", "percentage-bar-third-dose-dark"];
     }
     const widthBar = document.createElement("div");
-    if(settelmentsMockData[index][col] === "מעל 90%")
+    if(dataTable[index][col] === "מעל 90%")
         widthBar.style.width = "0%";
     else
-        widthBar.style.width = settelmentsMockData[index][col];
+        widthBar.style.width = dataTable[index][col];
     widthBar.classList.add("percentage-bar-filled");
     widthBar.classList.add(colClass[col - 1]);
     return widthBar;
 }
 
-let createRowData = function(index, col) {
+let createRowData = function(dataTable, index, col) {
     const rowData = document.createElement("div");
-    rowData.appendChild(createPercentageBar(index, col));
+    rowData.appendChild(createPercentageBar(dataTable, index, col));
     let innerText = document.createElement("span");
-    innerText.innerText = settelmentsMockData[index][col];
+    innerText.innerText = dataTable[index][col];
     rowData.appendChild(innerText);
     rowData.classList.add("row-data");
     return rowData;
 }
 
-let createActivePatients = function(index) {
+let createActivePatients = function(dataTable, index) {
     const activePatients = document.createElement("div");
-    activePatients.innerText = settelmentsMockData[index][4];
+    activePatients.innerText = dataTable[index][4];
     activePatients.classList.add("row-data");   
     return activePatients;
 }
 
-let createScore = function(index) {
-    let parsedScore = parseFloat(settelmentsMockData[index][5]);
+let createScore = function(dataTable, index) {
+    let parsedScore = parseFloat(dataTable[index][5]);
     const scoreClass  = ["vaccination-table-first-score", "vaccination-table-second-score", "vaccination-table-third-score", "vaccination-table-fourth-score"];
     const score = document.createElement("div");
-    score.innerText = settelmentsMockData[index][5];
+    score.innerText = dataTable[index][5];
     if(parsedScore >= 7.5)
         score.classList.add(scoreClass[0]);   
     else if(parsedScore >= 6)
@@ -253,16 +250,16 @@ let createScore = function(index) {
     return scoreDiv;
 }
 
-let createTable = function() {
+let createTable = function(dataTable) {
     let table = document.querySelector(".vaccination-table-rows");
-    for(let i = 0; i < settelmentsMockData.length; i++){
+    for(let i = 0; i < dataTable.length; i++){
         let tableRow = document.createElement("div");
-        tableRow.appendChild(createSnameDiv(i));
+        tableRow.appendChild(createSnameDiv(dataTable, i));
         for(let col = 1; col < 4; col++){
-            tableRow.appendChild(createRowData(i,col));
+            tableRow.appendChild(createRowData(dataTable, i,col));
         }
-        tableRow.appendChild(createActivePatients(i));
-        tableRow.appendChild(createScore(i));
+        tableRow.appendChild(createActivePatients(dataTable, i));
+        tableRow.appendChild(createScore(dataTable, i));
         tableRow.classList.add("vaccination-row");
         tableRow.classList.add("border-bottom-light");
         table.appendChild(tableRow);
@@ -276,7 +273,7 @@ let deleteTable = function() {
         table.removeChild(table.firstChild);
 }
 
-createTable();
+createTable(settelmentsMockData);
 
 let sortByCity = function(asc){
     return function(a, b){
@@ -314,18 +311,24 @@ let sortByNumber = function(index, asc) {
 
 let vaccinationButtons = document.querySelectorAll(".vaccination-header button");
 vaccinationButtons[0].addEventListener('click', ()=>{
+    let table = document.querySelector(".vaccination-table-rows");
     let asc = vaccinationButtons[0].querySelector('span').classList.contains("flip-triangle");
-    settelmentsMockData = settelmentsMockData.sort(sortByCity(asc));
-    deleteTable();
-    createTable();
+    if(table.children.length > 1) {
+        settelmentsMockData = settelmentsMockData.sort(sortByCity(asc));
+        deleteTable();
+        createTable(settelmentsMockData);
+    }
 })
 
 for(let i = 1; i < vaccinationButtons.length; i++){
     vaccinationButtons[i].addEventListener('click', ()=>{
+        let table = document.querySelector(".vaccination-table-rows");
         let asc = vaccinationButtons[i].querySelector('span').classList.contains("flip-triangle");
-        settelmentsMockData = settelmentsMockData.sort(sortByNumber(i, asc));
-        deleteTable();
-        createTable();
+        if(table.children.length > 1) {
+            settelmentsMockData = settelmentsMockData.sort(sortByNumber(i, asc));
+            deleteTable();
+            createTable(settelmentsMockData);
+        }
     })
 }
 
@@ -366,9 +369,18 @@ let clearList = function() {
 }
 
 buttons[0].addEventListener('click', ()=> {
-    //[VaccinationInput.value]
     let table = document.querySelector(".vaccination-table-rows");
-    console.log(table.childNodes);
+    let requiredRow;
+    for(let i = 0; i < table.children.length; i++){
+        if(table.children[i].children[0].innerText === VaccinationInput.value)
+            requiredRow = table.children[i];
+    }
+
+    deleteTable();
+    if(requiredRow !== undefined)    
+        table.appendChild(requiredRow);
+    else 
+        createTable(settelmentsMockData)
 })
 
 buttons[1].addEventListener('click', ()=> {
@@ -388,8 +400,16 @@ buttons[1].addEventListener('click', ()=> {
     if(VaccinationInput.value.length !== 0) {
         searchButtonText.innerText = VaccinationInput.value;
     }
-    else {
-        console.log("in else");
+    else 
         searchButtonText.innerText = "כלל הישובים";
-    }
 })
+
+let ramzorMockData = [
+    ["רעננה", "9.4", "161.3", "17%", "-18%", "994"],
+    ["יבנה", "9.8", "126.2", "24%", "-10%", "466"],
+    ["טירה","5.6","20.4","4%","6%","49"],
+    ["אשדוד","9.3","81.4","20%","5%","1429"],
+    ["בני ברק","5","6.4","5%","-25%","151"],
+    ["חורה","6.3","10.0","11%","65%","21"],
+    ["קיסריה","98.1","11%","-59%","43"]
+];

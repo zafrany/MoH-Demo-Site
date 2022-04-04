@@ -165,6 +165,48 @@ h2 {
   background: #2a3b47;
 }
 
+.ramzor-highlighted-light {
+  background: #daeaed !important;
+}
+
+.ramzor-highlighted-dark {
+  background: #354047;
+}
+
+.section-container, .ramzor {
+  margin: 11.2px;
+  width: 100%;
+}
+
+.section-container__table-container, .ramzor-table-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-radius: 10px;
+  margin: 11.2px;
+  box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.section-container__table-container .card-h3-container, .ramzor-table-container .card-h3-container {
+  width: 50%;
+  margin-bottom: 8px;
+  padding-right: 1rem;
+  padding-top: 1rem;
+}
+.section-container__table-container .tooltip, .ramzor-table-container .tooltip {
+  top: 2.5rem;
+}
+
+.ramzor-italic-text-light {
+  color: #757575;
+}
+
+.ramzor-italic-text-dark {
+  color: #cacaca;
+}
+
 .header {
   position: fixed;
   color: #39475d;
@@ -284,25 +326,129 @@ h2 {
   width: 100%;
 }
 
-.settelments-vacccination {
+.ramzor {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  border-radius: 10px;
-  margin: 11.2px;
-  box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1);
-  justify-content: space-between;
+}
+
+.ramzor-header-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
   align-items: center;
-  position: relative;
+  justify-content: space-between;
+  font-size: 12px;
+  padding: 1rem 24px;
 }
-.settelments-vacccination .card-h3-container {
-  width: 50%;
-  margin-bottom: 8px;
-  padding-right: 1rem;
-  padding-top: 1rem;
+
+.ramzor-header-search-section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }
-.settelments-vacccination .tooltip {
-  top: 2.5rem;
+
+.ramzor-header-container__date-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding: 5px;
+  height: 1.5rem;
+  align-items: center;
+  border-radius: 3px;
+  min-width: 200px;
+}
+.ramzor-header-container__date-container .circle {
+  margin-left: 3px;
+}
+
+.ramzor-table-container {
+  width: 100%;
+}
+@media (min-width: 1200px) {
+  .ramzor-table-container {
+    flex: 0 0 66.66666667%;
+    max-width: 66.66666667%;
+  }
+}
+.ramzor-table-container .card-h3-container {
+  padding: 0px;
+  margin: 0px;
+  width: auto;
+}
+.ramzor-table-container .card-h3-container h3 {
+  margin: 0px;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.search-container button {
+  font-size: 12px;
+  max-width: 170px;
+  min-width: 150px;
+  margin-right: 6px;
+}
+@media (min-width: 760px) {
+  .search-container button {
+    min-width: 170px;
+  }
+}
+.search-container input {
+  border: none;
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-right: 6px;
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  border: 1px solid gray;
+  justify-content: center;
+  align-items: center;
+}
+
+.ramzor-legend {
+  width: 100%;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ramzor-score-legend {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding-top: 3px;
+}
+
+.score-legend-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-left: 15px;
+}
+
+.legend-text-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  padding-right: 4px;
+  font-size: 14px;
+}
+
+.legend-italic {
+  font-style: italic;
+}
+
+.square {
+  height: 32px;
+  width: 32px;
 }
 
 .search-button {
@@ -345,11 +491,6 @@ h2 {
 .search-button__text {
   padding: 0.35rem;
   width: 85%;
-}
-
-.population-vaccination {
-  margin: 11.2px;
-  width: 100%;
 }
 
 .dots-flex {
@@ -462,10 +603,12 @@ h2 {
   width: 100%;
   margin-top: 1rem;
   font-size: 1rem;
-  height: 36px;
+  min-height: 36px;
   flex-grow: 1;
   flex-basis: 30px;
-  justify-content: flex-start;
+}
+.vaccination-header button {
+  text-align: center;
 }
 
 .vaccination-header__category-container {
@@ -474,11 +617,10 @@ h2 {
   flex-wrap: nowrap;
   border: none;
   background: none;
-  height: 36px;
   align-items: center;
+  justify-content: center;
   font-size: 14px;
   width: 16%;
-  justify-content: center;
 }
 .vaccination-header__category-container:focus {
   border: 2px solid black;
@@ -532,12 +674,18 @@ h2 {
 }
 
 .sname, .sname-row {
+  padding-right: 1rem;
+  justify-content: right;
   width: 20%;
 }
 
 .sname-row {
+  padding-right: 2px;
   font-weight: 700;
-  text-align: center;
+}
+
+.score {
+  justify-content: center;
 }
 
 .percentage-bar {

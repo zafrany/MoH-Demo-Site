@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use 'mixins' as *;
 
 * {
     box-sizing: border-box;
@@ -167,4 +168,48 @@
         li:hover {
             background: $button-dark-color;
         }
+    }
+
+    .ramzor-highlighted-light {
+        background: $ramzor-highlighted-light !important;
+    }
+
+    .ramzor-highlighted-dark {
+        background: $ramzor-highlighted-dark;
+    }
+
+    .section-container {
+        margin: 11.2px;
+        width: 100%;
+    }
+
+    .section-container__table-container {
+        @include flex(row, wrap);
+        border-radius: 10px;
+        margin: 11.2px;
+        box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.1);
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    
+        .card-h3-container{
+            width: 50%;
+            margin-bottom: 8px;
+            padding-right: 1rem;
+            padding-top: 1rem;
+        }
+    
+        .tooltip {
+            top: 2.5rem;
+        }
+    }
+
+    .ramzor-italic-text-light {
+        color: $ramzor-italic-text-light;
+
+    }
+
+    .ramzor-italic-text-dark {
+        color: $ramzor-italic-text-dark;
+        
     }

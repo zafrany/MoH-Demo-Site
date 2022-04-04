@@ -1,0 +1,109 @@
+@use '../base' as *;
+
+.ramzor {
+    @extend .section-container;
+    @include flex(row, wrap);
+}
+
+.ramzor-header-container {
+    @include flex(row, wrap);
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 1rem 24px;
+}
+
+.ramzor-header-search-section{
+    @include flex(row, nowrap);
+}
+
+.ramzor-header-container__date-container{
+    @include flex(row, nowrap);
+    padding: 5px;
+    height: 1.5rem;
+    align-items: center;
+    border-radius: 3px;
+    min-width: 200px;
+    .circle {
+        margin-left: 3px;
+    }
+}
+
+.ramzor-table-container {
+    @media (min-width: 1200px){
+        flex: 0 0 66.66666667%;
+        max-width: 66.66666667%;
+    }
+    width: 100%;
+    @extend .section-container__table-container;
+    .card-h3-container{
+        padding: 0px;
+        margin: 0px;
+        width: auto;
+
+        h3{
+            margin: 0px;
+        }
+    }
+}
+
+.search-container {
+    @include flex(row, nowrap);
+    button{
+        font-size: 12px;
+        max-width: 170px;
+        min-width: 150px;
+        margin-right: 6px;
+        @media(min-width: 760px){
+            min-width: 170px;
+        }
+    }
+
+    input {
+        border: none;
+    }
+}
+
+.icon-container {
+    @include flex(row, nowrap);
+    margin-right: 6px;
+    width: 29px;
+    height: 29px;
+    border-radius: 50%;
+    border: 1px solid gray;
+    justify-content: center;
+    align-items: center;
+}
+
+.ramzor-legend {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.ramzor-score-legend {
+    @include flex(row, nowrap);
+    padding-top: 3px;
+}
+
+.score-legend-container {
+    @include flex(row, nowrap);
+    margin-left: 15px;
+}
+
+.legend-text-container {
+    @include flex(column, nowrap);
+    padding-right: 4px;
+    font-size: 14px;
+}
+
+.legend-italic {
+    font-style: italic;
+
+}
+
+.square {
+    height: 32px;
+    width: 32px;
+}
