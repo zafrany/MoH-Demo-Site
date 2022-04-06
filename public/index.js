@@ -582,3 +582,128 @@ let ramzorCreateList = function(arr) {
         ramzorSearchResults.appendChild(listMember);
     }
 }
+
+/*charts code start here */
+Highcharts.setOptions({
+    
+    chart: {
+        style: {
+            font: '12px Sans-serif'
+        },
+    },
+
+    title: {
+        style:{
+            font: '14px Sans-serif',
+            color: '#777b88'
+        },
+        margin: -20,
+        x : 55,
+        widthAdjust: -600,
+    },
+
+    legend: {
+        itemStyle: {
+            font: '12px Sans-serif'
+         }
+    },
+});
+
+Highcharts.chart('container', {
+    chart: {
+        type: 'areaspline'
+    },
+    
+    title: {
+        text: 'מספר מאושפזים',
+        align: 'left',
+    },
+
+    legend: {
+        layout: 'horizontal',
+        align: 'center',
+        verticalAlign: 'top',
+        useHTML: true,
+        borderWidth: 0,
+        backgroundColor:
+            Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+        rtl: true
+    },
+
+    xAxis: {
+        categories: [
+            '08.03',
+            '13.03',
+            '18.03',
+            '23.03',
+            '28.03',
+            '02.04',
+            '05.04',
+        ],
+        tickWidth: 1,
+        tickmarkPlacement: 'on',
+        title: {
+            text: 'תאריך',
+            style:{
+                font: '14px Sans-serif',
+                color: '#777b88'
+            },
+        },        
+    },
+    yAxis: {
+        tickWidth: 1,   
+        tickInterval : 85,
+        gridLineColor: '#cccccc',
+
+        title: {
+            text: '',
+        },
+        
+        tickPositioner: function() {
+           let maxVal = this.series[0].yAxis.getExtremes().dataMax ;
+           let currentTick = 0;
+           let res = [];
+           while(currentTick < maxVal + 85 && maxVal !== null){
+                res.push(currentTick);
+                currentTick+=85;
+           }
+           return res
+        },
+
+        labels: {
+          x: -40,
+        }
+
+    },
+
+    tooltip: {
+        shared: true,
+        borderRadius: 10,
+        shape: "rect",
+        useHTML: true,
+        align: 'center',
+    },
+
+    credits: {
+        enabled: false
+    },
+
+    plotOptions: {
+        areaspline: {
+            fillOpacity: 0.7,
+        },
+        series: {
+            marker : {
+                lineWidth : 1
+            }
+        }
+    },
+
+    series: [{
+        name: 'קשה',
+        data: [410, 367, 336, 330, 308, 294, 273],
+        color: '#50cbfd',
+        pointPlacement: 'on'
+    }
+    ]
+});

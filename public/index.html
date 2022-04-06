@@ -47,8 +47,7 @@
                     <h3>מאומתים אתמול</h3>
                     <div class="circle light-circle-color">i</div>
                 </div>
-                <div class="tooltip light-color-theme__box-color displayNone">
-                    מספר המאומתים לנגיף COVID-19 שאותרו משעה 00:00 עד שעה 23:59 של יום אתמול.
+                <div class="tooltip light-color-theme__box-color displayNone">מספר המאומתים לנגיף COVID-19 שאותרו משעה 00:00 עד שעה 23:59 של יום אתמול.
 
                     סה"כ: מספר המאומתים מפרוץ המגיפה, כולל מי שהתגלו כמאומתים לנגיף שוב.
 
@@ -324,7 +323,6 @@
                 </div>
             </div>
         </div>
-        <!---->
         <div class="ramzor">
             <h2>רמזור בישובים</h2>
             <div class="ramzor-table-container light-color-theme__box-color">
@@ -334,13 +332,14 @@
                         <div class="circle light-circle-color">i</div>
                     </div>
                     <div class="tooltip displayNone light-color-theme__box-color">ציוני וצבעי הרמזור לישובים בהם יותר מ-2,000 תושבים.
-    הציון מחושב בכל יום על סמך נתונים יומיים של שאר המדדים המוצגים בטבלה (לא כולל חולים פעילים).
-    צבע הרקע של הציון מעיד על הסיווג אליו משויך הישוב לפי הקטגוריות של מודל הרמזור המפורטות במקרא.
+                           הציון מחושב בכל יום על סמך נתונים יומיים של שאר המדדים המוצגים בטבלה (לא כולל חולים פעילים).
+                           צבע הרקע של הציון מעיד על הסיווג אליו משויך הישוב לפי הקטגוריות של מודל הרמזור המפורטות במקרא.
                     </div>
                     <div class="ramzor-header-search-section">
                         <div class="ramzor-header-container__date-container button-light-color">
                             <div class="circle light-circle-color">i</div>
                             <div>הנתונים נכונים לתאריך 01/04/2022</div>
+                            <div class="tooltip displayNone"></div>
                         </div>
                         <div class="search-container">                        
                             <button class="search-button light-color-theme__box-color text-color-light">
@@ -421,6 +420,13 @@
                 </div>
             </div>
         </div>
+        <div class="charts">
+            <figure class="highcharts-figure">
+                <div id="container"></div>
+            </figure>
+        </div>
+    </div>
+<script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="index.js"></script>
 </body>
 </html>
