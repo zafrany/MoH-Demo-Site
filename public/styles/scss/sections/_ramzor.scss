@@ -2,7 +2,6 @@
 
 .ramzor {
     @extend .section-container;
-    @include flex(row, wrap);
 }
 
 .ramzor-header-container {
@@ -21,10 +20,12 @@
 .ramzor-header-container__date-container{
     @include flex(row, nowrap);
     padding: 5px;
-    height: 1.5rem;
     align-items: center;
     border-radius: 3px;
-    min-width: 200px;
+    @media(min-width: 650px){
+        min-width: 200px;
+    }
+
     .circle {
         margin-left: 3px;
     }
@@ -35,12 +36,11 @@
         flex: 0 0 66.66666667%;
         max-width: 66.66666667%;
     }
-    width: 100%;
+    
     @extend .section-container__table-container;
     .card-h3-container{
         padding: 0px;
         margin: 0px;
-        width: auto;
 
         h3{
             margin: 0px;
@@ -49,24 +49,26 @@
 }
 
 .search-container {
-    @include flex(row, nowrap);
-    button{
-        font-size: 12px;
-        max-width: 170px;
-        min-width: 150px;
-        margin-right: 6px;
-        @media(min-width: 760px){
-            min-width: 170px;
+    position: relative;
+    @include flex(row, wrap);
+    @media(min-width:650px){
+        button{
+            font-size: 12px;
+            max-width: 170px;
+            min-width: 150px;
+            margin-right: 6px;
+            @media(min-width: 760px){
+                min-width: 170px;
+            }
         }
     }
-
     input {
         border: none;
     }
 }
 
 .icon-container {
-    @include flex(row, nowrap);
+    @include flex(row, wrap);
     margin-right: 6px;
     width: 29px;
     height: 29px;
@@ -83,17 +85,20 @@
 }
 
 .ramzor-score-legend {
-    @include flex(row, nowrap);
+    @media(min-width: 650px){
+        @include flex(row, nowrap);
+    }
+    @include flex(column, wrap);
     padding-top: 3px;
 }
 
 .score-legend-container {
-    @include flex(row, nowrap);
+    @include flex(row, wrap);
     margin-left: 15px;
 }
 
 .legend-text-container {
-    @include flex(column, nowrap);
+    @include flex(column, wrap);
     padding-right: 4px;
     font-size: 14px;
 }
@@ -104,6 +109,50 @@
 }
 
 .square {
-    height: 32px;
-    width: 32px;
+    @media(min-width: 650px){
+        height: 32px;
+        width: 32px;
+    }
+    height: 26px;
+    width: 26px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.ramzor-header{
+    @include flex(row, wrap);
+    width: 100%;
+    font-size: 1rem;
+    min-height: 36px;
+    flex-grow: 1;
+    flex-basis: 30px;
+    padding-right: 10px;
+
+    button {
+        text-align: center;
+    }
+}
+
+.ramzor-table-rows {
+    .vaccination-row {
+        height: 31px;
+    }
+
+    span {
+        direction: ltr;
+    }
+
+    .score {
+        text-decoration: underline;
+    }
+}
+
+.ramzor-search-results {
+    @extend .search-results;
+    position: absolute;
+    border: 1px solid rgba(161,170,177,.4);
+    width: 132px;
+    font-weight: bold;
+    top: 2rem;
+    right: 1.5rem;
 }

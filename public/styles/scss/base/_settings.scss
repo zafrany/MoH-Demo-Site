@@ -170,11 +170,11 @@
         }
     }
 
-    .ramzor-highlighted-light {
-        background: $ramzor-highlighted-light !important;
+    .ramzor-header .ramzor-highlighted-light{
+        background: $ramzor-highlighted-light;
     }
 
-    .ramzor-highlighted-dark {
+    .ramzor-header .ramzor-highlighted-dark {
         background: $ramzor-highlighted-dark;
     }
 
@@ -191,9 +191,8 @@
         justify-content: space-between;
         align-items: center;
         position: relative;
-    
+
         .card-h3-container{
-            width: 50%;
             margin-bottom: 8px;
             padding-right: 1rem;
             padding-top: 1rem;
@@ -213,3 +212,27 @@
         color: $ramzor-italic-text-dark;
         
     }
+
+.ramzor-table-highlighed-light {
+    background: #f7fafc;
+    border: none;
+    height: 100%;
+}
+
+.ramzor-table-highlighed-dark {
+    background: #304453;
+    border: none;
+    height: 100%;
+};
+
+.search-results {
+    list-style: none;
+    padding: 0;
+    border: none;
+    z-index: 200;
+    li{
+        font-size: 16px;
+        padding: 8px;
+        cursor: pointer;
+    }
+}

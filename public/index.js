@@ -12,6 +12,9 @@ let searchboxTop = document.querySelector(".searchbox-top");
 let trinagleButtons = document.querySelectorAll(".vaccination-header__category-container");
 let vaccinationHeader = document.querySelector(".vaccination-header");
 
+let ramzorSearchBox = document.querySelector(".search-container input");
+let ramzorSearchResults = document.querySelector(".ramzor-search-results");
+
 themeButton.addEventListener('click', ()=>{
     themeButton.children[0].classList.toggle("displayNone");
     themeButton.children[1].classList.toggle("displayNone");
@@ -93,8 +96,41 @@ themeButton.addEventListener('click', ()=>{
         vaccinationRow[i].classList.toggle("border-bottom-dark");
     }
 
-    searchResults.classList.toggle("search-result-hover-light");
+    
     searchResults.classList.toggle("search-result-hover-dark");
+    
+    ramzorSearchResults.classList.toggle("text-color-dark");
+    ramzorSearchResults.classList.toggle("search-result-hover-dark");
+
+    let italicText = document.querySelectorAll(".ramzor-italic-text-light");
+    for(let i = 0; i < italicText.length; i++){
+        italicText[i].classList.toggle("ramzor-italic-text-dark")
+    }
+
+    let ramzorSearchBox = document.querySelector(".search-container input");
+    ramzorSearchBox.classList.toggle("dark-color-theme__box-color");
+    ramzorSearchBox.classList.toggle("text-color-dark");
+    
+    let ramzorButtons = document.querySelectorAll(".ramzor .button-light-color");
+    for(let i = 0; i < ramzorButtons.length; i++) {
+        ramzorButtons[i].classList.toggle("button-dark-color");
+    }
+
+    let ramzorButtonText = document.querySelectorAll(".ramzor button");
+    for(let i = 0; i < ramzorButtonText.length; i++){
+        ramzorButtonText[i].classList.toggle("text-color-dark");
+    }
+
+    let ramzorHighlight = document.querySelectorAll(".ramzor-header .ramzor-highlighted-light");
+    for(let i = 0; i < ramzorHighlight.length; i++) {        
+        ramzorHighlight[i].classList.toggle("ramzor-highlighted-dark");
+    }
+
+    let ramzorTableHighlight = document.querySelectorAll(".ramzor-table-highlighed-light");
+    for(let i = 0; i < ramzorTableHighlight.length; i++) {
+        ramzorTableHighlight[i].classList.toggle("ramzor-table-highlighed-dark");
+        
+    }
 })
 
 for(let i = 0; i < circleArray.length; i++){
@@ -230,11 +266,11 @@ let createActivePatients = function(dataTable, index) {
     return activePatients;
 }
 
-let createScore = function(dataTable, index) {
-    let parsedScore = parseFloat(dataTable[index][5]);
+let createScore = function(dataTable, index, scoreIndex) {
+    let parsedScore = parseFloat(dataTable[index][scoreIndex]);
     const scoreClass  = ["vaccination-table-first-score", "vaccination-table-second-score", "vaccination-table-third-score", "vaccination-table-fourth-score"];
     const score = document.createElement("div");
-    score.innerText = dataTable[index][5];
+    score.innerText = dataTable[index][scoreIndex];
     if(parsedScore >= 7.5)
         score.classList.add(scoreClass[0]);   
     else if(parsedScore >= 6)
@@ -244,13 +280,14 @@ let createScore = function(dataTable, index) {
     else 
         score.classList.add(scoreClass[3]);   
     score.classList.add("colored-sq");   
+    score.classList.add("score");
     const scoreDiv = document.createElement("div");
     scoreDiv.classList.add("row-data");
     scoreDiv.appendChild(score);
     return scoreDiv;
 }
 
-let createTable = function(dataTable) {
+let createTable = function(dataTable, scoreIndex) {
     let table = document.querySelector(".vaccination-table-rows");
     for(let i = 0; i < dataTable.length; i++){
         let tableRow = document.createElement("div");
@@ -259,7 +296,7 @@ let createTable = function(dataTable) {
             tableRow.appendChild(createRowData(dataTable, i,col));
         }
         tableRow.appendChild(createActivePatients(dataTable, i));
-        tableRow.appendChild(createScore(dataTable, i));
+        tableRow.appendChild(createScore(dataTable, i, scoreIndex));
         tableRow.classList.add("vaccination-row");
         tableRow.classList.add("border-bottom-light");
         table.appendChild(tableRow);
@@ -273,7 +310,7 @@ let deleteTable = function() {
         table.removeChild(table.firstChild);
 }
 
-createTable(settelmentsMockData);
+createTable(settelmentsMockData, 5);
 
 let sortByCity = function(asc){
     return function(a, b){
@@ -294,11 +331,11 @@ let sortByNumber = function(index, asc) {
             bNum = "90";
 
         if(aNum.indexOf('%') > 0)
-           aNum = parseFloat(aNum.slice(0, aNum.indexOf('%') - 1)); 
+           aNum = parseFloat(aNum.slice(0, aNum.indexOf('%'))); 
         else anum = parseFloat(aNum);
 
         if(bNum.indexOf('%') > 0)
-           bNum = parseFloat(bNum.slice(0, bNum.indexOf('%') - 1)); 
+           bNum = parseFloat(bNum.slice(0, bNum.indexOf('%'))); 
         else anum = parseFloat(bNum);
 
         if (asc)
@@ -316,7 +353,7 @@ vaccinationButtons[0].addEventListener('click', ()=>{
     if(table.children.length > 1) {
         settelmentsMockData = settelmentsMockData.sort(sortByCity(asc));
         deleteTable();
-        createTable(settelmentsMockData);
+        createTable(settelmentsMockData, 5);
     }
 })
 
@@ -327,7 +364,7 @@ for(let i = 1; i < vaccinationButtons.length; i++){
         if(table.children.length > 1) {
             settelmentsMockData = settelmentsMockData.sort(sortByNumber(i, asc));
             deleteTable();
-            createTable(settelmentsMockData);
+            createTable(settelmentsMockData, 5);
         }
     })
 }
@@ -380,7 +417,7 @@ buttons[0].addEventListener('click', ()=> {
     if(requiredRow !== undefined)    
         table.appendChild(requiredRow);
     else 
-        createTable(settelmentsMockData)
+        createTable(settelmentsMockData, 5)
 })
 
 buttons[1].addEventListener('click', ()=> {
@@ -411,5 +448,137 @@ let ramzorMockData = [
     ["אשדוד","9.3","81.4","20%","5%","1429"],
     ["בני ברק","5","6.4","5%","-25%","151"],
     ["חורה","6.3","10.0","11%","65%","21"],
-    ["קיסריה","98.1","11%","-59%","43"]
+    ["קיסריה","7.7","98.1","11%","-59%","43"]
 ];
+
+
+let createRamzorTable = function(dataTable, scoreIndex) {
+    let table = document.querySelector(".ramzor-table-rows");
+    for(let i = 0; i < dataTable.length; i++){
+        let tableRow = document.createElement("div");
+        tableRow.appendChild(createSnameDiv(dataTable, i));
+        tableRow.appendChild(createScore(dataTable, i, scoreIndex));
+        for(let col = 2; col < 6; col++){
+            tableRow.appendChild(createRamzorRowData(dataTable, i,col));
+        }
+        tableRow.classList.add("vaccination-row");
+        tableRow.classList.add("border-bottom-light");
+        table.appendChild(tableRow);
+    }
+}
+
+let createRamzorRowData = function(dataTable, index, col) {
+    const rowData = document.createElement("div");
+    let innerText = document.createElement("span");
+    
+    if(col > 1 && col < 5){
+        if(themeColors.classList.contains("background-dark"))
+            rowData.classList.add("ramzor-table-highlighed-dark");
+        rowData.classList.add("ramzor-table-highlighed-light");
+    }   
+    
+    
+    innerText.innerText = dataTable[index][col];
+    rowData.appendChild(innerText);
+    rowData.classList.add("row-data");
+    return rowData;
+}
+
+let deleteRamzorTable = function() {
+    let table = document.querySelector(".ramzor-table-rows");
+    while(table.firstChild)
+        table.removeChild(table.firstChild);
+}
+
+createRamzorTable(ramzorMockData, 1);
+
+let ramzorButtons = document.querySelectorAll(".ramzor-header button");
+
+ramzorButtons[0].addEventListener('click', ()=>{
+    let table = document.querySelector(".ramzor-table-rows");
+    let asc = ramzorButtons[0].querySelector('span').classList.contains("flip-triangle");
+    if(table.children.length > 1) {
+        ramzorMockData = ramzorMockData.sort(sortByCity(asc));
+        deleteRamzorTable();
+        createRamzorTable(ramzorMockData, 1);
+    }   
+})
+
+for(let i = 1; i < ramzorButtons.length; i++){
+    ramzorButtons[i].addEventListener('click', ()=>{
+        let table = document.querySelector(".ramzor-table-rows");
+        let asc = ramzorButtons[i].querySelector('span').classList.contains("flip-triangle");
+        if(table.children.length > 1) {
+            ramzorMockData = ramzorMockData.sort(sortByNumber(i, asc));
+            deleteRamzorTable();
+            createRamzorTable(ramzorMockData, 1);
+        }
+    })
+}
+
+ramzorSearchBox.addEventListener('input', ()=>{
+    let searchResultArr = [];
+    let filterdMockData = [];
+
+    for(let j = 0; j < ramzorMockData.length; j++){
+        if(ramzorMockData[j][0].includes(ramzorSearchBox.value) && ramzorSearchBox.value.length > 0)
+        searchResultArr.push(ramzorMockData[j][0]);
+    }
+
+    if(searchResultArr.length > 0)
+        ramzorSearchResults.classList.remove("displayNone");
+    else {
+        ramzorSearchResults.classList.add("displayNone");
+    }
+
+    ramzorClearList();
+    ramzorCreateList(searchResultArr);
+    filterdMockData = applyMockFilter(searchResultArr, ramzorMockData);
+    deleteRamzorTable();
+    if(filterdMockData.length > 0)
+        createRamzorTable(filterdMockData, 1);
+    else
+        createRamzorTable(ramzorMockData, 1);
+
+    //can it be done better?
+    let ramzorTableRows = document.querySelector(".ramzor-table-rows");
+    if(ramzorTableRows.offsetHeight < 200) {
+        ramzorTableRows.style.paddingRight = "10px";
+    }
+    else {
+        ramzorTableRows.style.paddingRight = "0px";
+    }
+    ///////////////////////
+})
+
+let applyMockFilter = function(filterArray, mockArray) {
+    let filteredMockData = [];
+    for(let i = 0; i < filterArray.length; i++) {
+        for(let j = 0; j < mockArray.length; j++){
+            if(filterArray[i] === mockArray[j][0])
+                filteredMockData.push(mockArray[j]);
+        }
+    }
+    return filteredMockData;
+}
+
+
+let ramzorClearList = function() {
+    while(ramzorSearchResults.firstChild)
+        ramzorSearchResults.removeChild(ramzorSearchResults.firstChild);
+}
+
+let ramzorCreateList = function(arr) {
+    for(let i = 0; i < arr.length; i++) {
+        let listMember = document.createElement("li");
+        listMember.addEventListener('click', ()=> {
+            ramzorSearchBox.value = listMember.innerText;
+            ramzorSearchResults.classList.add("displayNone");
+            let filterdMockData = applyMockFilter([ramzorSearchBox.value], ramzorMockData);
+            deleteRamzorTable();
+            createRamzorTable(filterdMockData,1);
+        })
+        listMember.textContent = arr[i];
+        ramzorSearchResults.appendChild(listMember);
+    }
+}
