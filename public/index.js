@@ -585,7 +585,7 @@ let ramzorCreateList = function(arr) {
 
 /*charts code start here */
 Highcharts.setOptions({
-    
+
     chart: {
         style: {
             font: '12px Sans-serif'
@@ -609,7 +609,7 @@ Highcharts.setOptions({
     },
 });
 
-Highcharts.chart('container', {
+Highcharts.chart('container-areaSpline', {
     chart: {
         type: 'areaspline'
     },
@@ -631,15 +631,8 @@ Highcharts.chart('container', {
     },
 
     xAxis: {
-        categories: [
-            '08.03',
-            '13.03',
-            '18.03',
-            '23.03',
-            '28.03',
-            '02.04',
-            '05.04',
-        ],
+        type: 'datetime',
+        
         tickWidth: 1,
         tickmarkPlacement: 'on',
         title: {
@@ -648,7 +641,16 @@ Highcharts.chart('container', {
                 font: '14px Sans-serif',
                 color: '#777b88'
             },
-        },        
+        },
+        crosshair: {
+            width: 1,
+            color: 'grey',
+        },
+         
+        labels: {
+            format: '{value: %d.%m}'
+        },
+        useHTML: true,
     },
     yAxis: {
         tickWidth: 1,   
@@ -667,9 +669,8 @@ Highcharts.chart('container', {
                 res.push(currentTick);
                 currentTick+=85;
            }
-           return res
+           return res;
         },
-
         labels: {
           x: -40,
         }
@@ -677,11 +678,43 @@ Highcharts.chart('container', {
     },
 
     tooltip: {
-        shared: true,
         borderRadius: 10,
         shape: "rect",
         useHTML: true,
         align: 'center',
+
+        formatter: function () {
+            const weekday = ["יום א'","יום ב'","יום ג'","יום ד'","יום ה'","יום ו'","יום ש'"];
+            let _date = new Date(this.x);
+            let _day = _date.getDay();
+            return '<span>' + weekday[_day] + " " + _date.getDate() + "."  + (_date.getMonth() + 1) + "." + _date.getFullYear() + '</span>'
+                 ;
+        },
+
+        positioner: function(labelWidth, labelHeight, point) {
+            let seriesPoints = this.chart.series[0].points,
+            indexValue, tooltipX, tooltipY;
+
+            seriesPoints.forEach(function(el, inx) {
+            if ((point.plotX === Math.round(el.plotX)) && (point.plotY === Math.round(el.plotY))) {
+                indexValue = inx;
+            }
+            });
+
+            tooltipX = point.plotX;
+            tooltipY = this.chart.chartHeight - this.chart.plotTop - this.chart.xAxis[0].bottom;
+
+            if (indexValue === 0) {
+                tooltipX += this.chart.plotLeft;
+            }
+
+            if (indexValue === seriesPoints.length)
+                tooltipX -= this.chart.plotLeft;
+            return {
+            x: tooltipX,
+            y: tooltipY
+            };
+        },
     },
 
     credits: {
@@ -703,7 +736,9 @@ Highcharts.chart('container', {
         name: 'קשה',
         data: [410, 367, 336, 330, 308, 294, 273],
         color: '#50cbfd',
-        pointPlacement: 'on'
-    }
+        pointPlacement: 'on',
+        pointStart: Date.UTC(2022, 2, 9),
+        pointInterval: 24 * 36e5
+     }
     ]
 });
