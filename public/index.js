@@ -585,7 +585,6 @@ let ramzorCreateList = function(arr) {
 
 /*charts code start here */
 Highcharts.setOptions({
-
     chart: {
         style: {
             font: '12px Sans-serif'
@@ -609,6 +608,7 @@ Highcharts.setOptions({
     },
 });
 
+let areaSplintChart =
 Highcharts.chart('container-areaSpline', {
     chart: {
         type: 'areaspline'
@@ -621,13 +621,16 @@ Highcharts.chart('container-areaSpline', {
 
     legend: {
         layout: 'horizontal',
-        align: 'center',
+        align: 'right',
         verticalAlign: 'top',
         useHTML: true,
         borderWidth: 0,
         backgroundColor:
             Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
-        rtl: true
+        rtl: true,
+        itemStyle: {
+            'cursor': 'default'
+        }
     },
 
     xAxis: {
@@ -678,6 +681,7 @@ Highcharts.chart('container-areaSpline', {
     },
 
     tooltip: {
+        shared: true,
         borderRadius: 10,
         shape: "rect",
         useHTML: true,
@@ -687,29 +691,29 @@ Highcharts.chart('container-areaSpline', {
             const weekday = ["יום א'","יום ב'","יום ג'","יום ד'","יום ה'","יום ו'","יום ש'"];
             let _date = new Date(this.x);
             let _day = _date.getDay();
-            return '<span>' + weekday[_day] + " " + _date.getDate() + "."  + (_date.getMonth() + 1) + "." + _date.getFullYear() + '</span>'
-                 ;
+
+            return '<div class="highcharts-tooltip">' + 
+                        tooltipXaxisText(weekday[_day], _date.getDate(), _date.getMonth() + 1, _date.getFullYear()) + 
+                        tooltipFlex([
+                                     [["colored-circle-tooltip"], ["background:" + areaSplintChart.series[0].color],""],
+                                     [["tooltip-number"], [], this.y],
+                                     [["tooltip-text"],[], areaSplintChart.series[0].name]
+                                    ]
+                                    ) +
+                    '</div>';
         },
 
         positioner: function(labelWidth, labelHeight, point) {
-            let seriesPoints = this.chart.series[0].points,
-            indexValue, tooltipX, tooltipY;
+        
+            if(point.plotX < areaSplintChart.plotLeft)
+                tooltipX = point.plotX + areaSplintChart.plotLeft;
 
-            seriesPoints.forEach(function(el, inx) {
-            if ((point.plotX === Math.round(el.plotX)) && (point.plotY === Math.round(el.plotY))) {
-                indexValue = inx;
-            }
-            });
+            else if(point.plotX + labelWidth > areaSplintChart.plotWidth + 80)
+                tooltipX = point.plotX - labelWidth;
+            else
+                tooltipX = point.plotX;
 
-            tooltipX = point.plotX;
-            tooltipY = this.chart.chartHeight - this.chart.plotTop - this.chart.xAxis[0].bottom;
-
-            if (indexValue === 0) {
-                tooltipX += this.chart.plotLeft;
-            }
-
-            if (indexValue === seriesPoints.length)
-                tooltipX -= this.chart.plotLeft;
+            tooltipY = point.plotY + 80;
             return {
             x: tooltipX,
             y: tooltipY
@@ -733,12 +737,90 @@ Highcharts.chart('container-areaSpline', {
     },
 
     series: [{
+        zIndex : 300,
         name: 'קשה',
         data: [410, 367, 336, 330, 308, 294, 273],
         color: '#50cbfd',
         pointPlacement: 'on',
         pointStart: Date.UTC(2022, 2, 9),
-        pointInterval: 24 * 36e5
-     }
+        pointInterval: 24 * 36e5,
+        marker: {
+            symbol: 'circle'
+        },
+        events: {
+            legendItemClick: function(e) {
+                e.preventDefault()
+            },
+        },
+        states: {
+            inactive: {
+                opacity: 1
+            }
+        }
+     }, 
+     
+     {
+        zIndex : 200,
+        name: 'בינוני',
+        symbol: 'circle',
+        data: [],
+        color: "",
+        pointPlacement: 'on',
+        pointStart: Date.UTC(2022, 2, 9),
+        pointInterval: 24 * 36e5,
+        marker: {
+            symbol: 'circle'
+        },
+        events: {
+            legendItemClick: function(e) {
+                e.preventDefault()
+            },
+        },
+        states: {
+            inactive: {
+                opacity: 1
+            }
+        },
+     },
     ]
 });
+
+let tooltipXaxisText = function(weekday, day, month,year){
+    return '<b>' + weekday + " " + day + "."  + month + "." + year + '</b>'
+}
+
+let tooltipFlex = function(divs) {
+    let retvalue = '<div class="tooltip-flex">'; 
+    for(let i = 0; i < divs.length; i++){
+        retvalue+=tooltipFlexItem(divs[i][0], divs[i][1], divs[i][2]);
+    }
+    return retvalue + "</div>";
+}
+
+let tooltipFlexItem = function(classes, styles , data) {
+    let retValue = "<div class=\"";
+    for(let i = 0; i < classes.length; i++) {
+        retValue = retValue + " " + classes[i];
+    }
+    
+    retValue+="\" style=\"";
+
+    for(let i = 0; i < styles.length; i++) {
+        retValue = retValue + " " + styles[i];
+    }
+    retValue += "\""
+    return retValue + ">" + data + "</div>";
+}
+
+let areaSplineMediumData = [510, 467, 436, 430, 408, 394, 373];
+
+areaSplintChart.series[1].setData(areaSplineMediumData);
+areaSplintChart.series[1].update({ color:'#b6ca51' });
+
+/*
+areaSplintChart.series[1].setVisible(false);
+areaSplintChart.series[1].update({showInLegend: false});
+
+areaSplintChart.series[1].setVisible(true);
+areaSplintChart.series[1].update({showInLegend: true});
+*/

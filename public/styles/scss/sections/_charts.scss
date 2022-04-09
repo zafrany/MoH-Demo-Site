@@ -50,3 +50,24 @@
 .highcharts-data-table tr:hover {
     background: #f1f7ff;
 }
+
+.highcharts-tooltip {
+    font-family: sans-serif;
+}
+
+.colored-circle-tooltip {
+    border-radius: 50%;
+    width: 9px;
+    height: 9px;
+    margin-left : 0.5rem;
+}
+
+.tooltip-number {
+    margin-left : 0.5rem;
+    font-weight: 700;
+}
+
+.tooltip-flex {
+    @include flex(row, nowrap);
+    align-items: center;
+}
