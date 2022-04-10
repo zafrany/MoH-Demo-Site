@@ -691,16 +691,22 @@ Highcharts.chart('container-areaSpline', {
             const weekday = ["יום א'","יום ב'","יום ג'","יום ד'","יום ה'","יום ו'","יום ש'"];
             let _date = new Date(this.x);
             let _day = _date.getDay();
+            let tooltipString = "";
+            let pointIndex;
 
-            return '<div class="highcharts-tooltip">' + 
-                        tooltipXaxisText(weekday[_day], _date.getDate(), _date.getMonth() + 1, _date.getFullYear()) + 
-                        tooltipFlex([
-                                     [["colored-circle-tooltip"], ["background:" + areaSplintChart.series[0].color],""],
-                                     [["tooltip-number"], [], this.y],
-                                     [["tooltip-text"],[], areaSplintChart.series[0].name]
-                                    ]
-                                    ) +
-                    '</div>';
+            tooltipString = '<div class="highcharts-tooltip">' + 
+                        tooltipXaxisText(weekday[_day], _date.getDate(), _date.getMonth() + 1, _date.getFullYear());
+            for(let i = 0; i < areaSplintChart.series.length; i++){
+                pointIndex = getXvalueIndex(this.x, areaSplintChart.series[i].points);
+                tooltipString += tooltipFlex([
+                            [["colored-circle-tooltip"], ["background:" + areaSplintChart.series[i].color],""],
+                            [["tooltip-number"], [], areaSplintChart.series[i].points[pointIndex].y],
+                            [["tooltip-text"],[], areaSplintChart.series[i].name]
+                            ]
+                        )
+            } 
+            tooltipString+='</div>';
+            return tooltipString;
         },
 
         positioner: function(labelWidth, labelHeight, point) {
@@ -736,52 +742,53 @@ Highcharts.chart('container-areaSpline', {
         }
     },
 
-    series: [{
-        zIndex : 300,
-        name: 'קשה',
-        data: [410, 367, 336, 330, 308, 294, 273],
-        color: '#50cbfd',
-        pointPlacement: 'on',
-        pointStart: Date.UTC(2022, 2, 9),
-        pointInterval: 24 * 36e5,
-        marker: {
-            symbol: 'circle'
-        },
-        events: {
-            legendItemClick: function(e) {
-                e.preventDefault()
+    series: [
+        {
+            zIndex : 300,
+            name: 'קשה',
+            data: [410, 367, 336, 330, 308, 294, 273],
+            color: '#50cbfd',
+            pointPlacement: 'on',
+            pointStart: Date.UTC(2022, 2, 9),
+            pointInterval: 24 * 36e5,
+            marker: {
+                symbol: 'circle'
             },
-        },
-        states: {
-            inactive: {
-                opacity: 1
+            events: {
+                legendItemClick: function(e) {
+                    e.preventDefault()
+                },
+            },
+            states: {
+                inactive: {
+                    opacity: 1
+                }
             }
-        }
-     }, 
+        }, 
      
-     {
-        zIndex : 200,
-        name: 'בינוני',
-        symbol: 'circle',
-        data: [],
-        color: "",
-        pointPlacement: 'on',
-        pointStart: Date.UTC(2022, 2, 9),
-        pointInterval: 24 * 36e5,
-        marker: {
-            symbol: 'circle'
-        },
-        events: {
-            legendItemClick: function(e) {
-                e.preventDefault()
+        {
+            zIndex : 200,
+            name: 'בינוני',
+            symbol: 'circle',
+            data: [],
+            color: "",
+            pointPlacement: 'on',
+            pointStart: Date.UTC(2022, 2, 9),
+            pointInterval: 24 * 36e5,
+            marker: {
+                symbol: 'circle'
+            },
+            events: {
+                legendItemClick: function(e) {
+                    e.preventDefault()
+                },
+            },
+            states: {
+                inactive: {
+                    opacity: 1
+                }
             },
         },
-        states: {
-            inactive: {
-                opacity: 1
-            }
-        },
-     },
     ]
 });
 
@@ -810,6 +817,16 @@ let tooltipFlexItem = function(classes, styles , data) {
     }
     retValue += "\""
     return retValue + ">" + data + "</div>";
+}
+
+let getXvalueIndex = function(xValue, pointArray) {
+    let index = 0;
+    while(true) {
+        if(pointArray[index].x === xValue){
+            return index;
+        }
+        index++;
+    }
 }
 
 let areaSplineMediumData = [510, 467, 436, 430, 408, 394, 373];

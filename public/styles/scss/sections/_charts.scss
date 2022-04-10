@@ -1,18 +1,22 @@
 @use '../base' as *;
 
 .charts{
-   max-width: 30vw;
+    width: 100%;
+    margin: 11.2px;
+}
+
+.chart-container {
+    width: 400px;
 }
 
 #container-areaSpline {
     height: 265px;
-    width: 100%;
+    width: 350px;
 }
 
 .highcharts-figure,
 .highcharts-data-table table {
-    min-width: 470px;
-    max-width: 30vw;
+    
     margin: 1em auto;
 }
 
@@ -70,4 +74,36 @@
 .tooltip-flex {
     @include flex(row, nowrap);
     align-items: center;
+}
+
+.searchbox-container {
+    flex-flow: column;
+}
+
+.filterbox-container {
+    overflow: auto;
+    height: 280px;
+}
+
+.filterbox {
+    padding: 0px 16px 10px;
+
+    ul{
+        padding: 0;
+        list-style: none;
+
+        li {
+            @include flex(row, nowrap);
+            justify-content: right;
+            height: 28px;
+            font-size: 14px;
+            input {
+                width: 20px;   
+            }
+        }
+    }
+
+    h4{
+        margin: 12px 0px 4px 0px;
+    }
 }

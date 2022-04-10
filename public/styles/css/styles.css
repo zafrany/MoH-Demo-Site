@@ -2,6 +2,19 @@
   box-sizing: border-box;
   direction: rtl;
 }
+*::-webkit-scrollbar {
+  width: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+*::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 
 html {
   font-family: sans-serif;
@@ -572,7 +585,6 @@ h2 {
   flex-wrap: wrap;
   align-items: flex-end;
   padding-left: 1.5rem;
-  width: 45%;
 }
 
 .dot {
@@ -693,19 +705,6 @@ h2 {
   direction: ltr;
   overflow: auto;
   width: 100%;
-}
-.table-container::-webkit-scrollbar {
-  width: 10px;
-}
-.table-container::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-.table-container::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
-}
-.table-container::-webkit-scrollbar-thumb:hover {
-  background: #555;
 }
 
 .vaccination-table-rows {
@@ -933,18 +932,21 @@ h2 {
 }
 
 .charts {
-  max-width: 30vw;
+  width: 100%;
+  margin: 11.2px;
+}
+
+.chart-container {
+  width: 400px;
 }
 
 #container-areaSpline {
   height: 265px;
-  width: 100%;
+  width: 350px;
 }
 
 .highcharts-figure,
 .highcharts-data-table table {
-  min-width: 470px;
-  max-width: 30vw;
   margin: 1em auto;
 }
 
@@ -1004,4 +1006,35 @@ h2 {
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
+}
+
+.searchbox-container {
+  flex-flow: column;
+}
+
+.filterbox-container {
+  overflow: auto;
+  height: 280px;
+}
+
+.filterbox {
+  padding: 0px 16px 10px;
+}
+.filterbox ul {
+  padding: 0;
+  list-style: none;
+}
+.filterbox ul li {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: right;
+  height: 28px;
+  font-size: 14px;
+}
+.filterbox ul li input {
+  width: 20px;
+}
+.filterbox h4 {
+  margin: 12px 0px 4px 0px;
 }
