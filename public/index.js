@@ -1,19 +1,19 @@
-let themeButton = document.querySelector(".theme-button");
-let themeColors = document.querySelector(".content-container");
-let boxColor = document.querySelectorAll(".light-color-theme__box-color");
-let exlamationMark = document.querySelectorAll(".card-h3-container .circle");
-let circleArray = document.querySelectorAll(".light-circle-color");
-let tooltipArray = document.querySelectorAll(".tooltip");
-let searchButton = document.querySelector(".search-button");
-let searchBoxContainer = document.querySelector(".searchbox-container");
-let searchResults = document.querySelector(".search-results");
-let buttons = document.querySelectorAll(".searchbox-button");
-let searchboxTop = document.querySelector(".searchbox-top");
-let trinagleButtons = document.querySelectorAll(".vaccination-header__category-container");
-let vaccinationHeader = document.querySelector(".vaccination-header");
+const themeButton = document.querySelector(".theme-button");
+const themeColors = document.querySelector(".content-container");
+const boxColor = document.querySelectorAll(".light-color-theme__box-color");
+const exlamationMark = document.querySelectorAll(".card-h3-container .circle");
+const circleArray = document.querySelectorAll(".light-circle-color");
+const tooltipArray = document.querySelectorAll(".tooltip");
+const searchButton = document.querySelector(".search-button");
+const searchBoxContainer = document.querySelector(".searchbox-container");
+const searchResults = document.querySelector(".search-results");
+const buttons = document.querySelectorAll(".searchbox-button");
+const searchboxTop = document.querySelector(".searchbox-top");
+const trinagleButtons = document.querySelectorAll(".vaccination-header__category-container");
+const vaccinationHeader = document.querySelector(".vaccination-header");
 
-let ramzorSearchBox = document.querySelector(".search-container input");
-let ramzorSearchResults = document.querySelector(".ramzor-search-results");
+const ramzorSearchBox = document.querySelector(".search-container input");
+const ramzorSearchResults = document.querySelector(".ramzor-search-results");
 
 themeButton.addEventListener('click', ()=>{
     themeButton.children[0].classList.toggle("displayNone");
@@ -144,18 +144,8 @@ for(let i = 0; i < circleArray.length; i++){
 }
 
 searchButton.addEventListener('click', ()=>{
-    let arrowIcon = document.querySelector(".arrow-icon");
-    if(arrowIcon.classList.contains("arrow-icon-rotated"))
-    {
-          arrowIcon.classList.remove("arrow-icon-rotated");
-          arrowIcon.classList.add("arrow-icon-unrotated");
-    }
-    else {
-        arrowIcon.classList.remove("arrow-icon-unrotated");
-        arrowIcon.classList.add("arrow-icon-rotated");
-    }
-
-    searchBoxContainer.classList.toggle("displayNone");
+   arrowRotate(".vaccination-arrow");
+   searchBoxContainer.classList.toggle("displayNone");
 })
 
 
@@ -391,8 +381,10 @@ let createList = function(arr) {
     for(let i = 0; i < arr.length; i++) {
         let listMember = document.createElement("li");
         listMember.addEventListener('click', ()=> {
+            let searchButtonText = document.querySelector(".search-button__text");
             VaccinationInput.value = arr[i];
             searchBox.style.position = "static";
+            searchButtonText.innerText = arr[i];
             clearList();
         })
         listMember.textContent = arr[i];
@@ -408,21 +400,31 @@ let clearList = function() {
 buttons[0].addEventListener('click', ()=> {
     let table = document.querySelector(".vaccination-table-rows");
     let requiredRow;
+    
     for(let i = 0; i < table.children.length; i++){
         if(table.children[i].children[0].innerText === VaccinationInput.value)
             requiredRow = table.children[i];
     }
-
     deleteTable();
+    
     if(requiredRow !== undefined)    
         table.appendChild(requiredRow);
     else 
         createTable(settelmentsMockData, 5)
+
+    arrowRotate(".vaccination-arrow");
+    searchTextClear();
+    searchBoxContainer.classList.toggle("displayNone");
 })
 
 buttons[1].addEventListener('click', ()=> {
-    let arrowIcon = document.querySelector(".arrow-icon");
-    let searchButtonText = document.querySelector(".search-button__text");
+    arrowRotate(".vaccination-arrow");
+    searchTextClear();
+    searchBoxContainer.classList.toggle("displayNone");
+})
+
+const arrowRotate = function(arrowSelector){
+    let arrowIcon = document.querySelector(arrowSelector);
     if(arrowIcon.classList.contains("arrow-icon-rotated"))
     {
           arrowIcon.classList.remove("arrow-icon-rotated");
@@ -432,14 +434,21 @@ buttons[1].addEventListener('click', ()=> {
         arrowIcon.classList.remove("arrow-icon-unrotated");
         arrowIcon.classList.add("arrow-icon-rotated");
     }
-    searchBoxContainer.classList.toggle("displayNone");
+}
 
+const searchTextClear = function() {
+    let searchButtonText = document.querySelector(".search-button__text");
+     
     if(VaccinationInput.value.length !== 0) {
         searchButtonText.innerText = VaccinationInput.value;
     }
-    else 
+    else {
         searchButtonText.innerText = "כלל הישובים";
-})
+        VaccinationInput.value ="";
+    }
+}
+
+
 
 let ramzorMockData = [
     ["רעננה", "9.4", "161.3", "17%", "-18%", "994"],
@@ -611,7 +620,7 @@ Highcharts.setOptions({
 let areaSplintChart =
 Highcharts.chart('container-areaSpline', {
     chart: {
-        type: 'areaspline'
+        type: 'areaspline',
     },
     
     title: {
@@ -637,6 +646,9 @@ Highcharts.chart('container-areaSpline', {
         type: 'datetime',
         
         tickWidth: 1,
+
+        tickPixelInterval : 50,
+
         tickmarkPlacement: 'on',
         title: {
             text: 'תאריך',
@@ -655,6 +667,7 @@ Highcharts.chart('container-areaSpline', {
         },
         useHTML: true,
     },
+
     yAxis: {
         tickWidth: 1,   
         tickInterval : 85,
@@ -665,19 +678,20 @@ Highcharts.chart('container-areaSpline', {
         },
         
         tickPositioner: function() {
-           let maxVal = this.series[0].yAxis.getExtremes().dataMax ;
-           let currentTick = 0;
-           let res = [];
-           while(currentTick < maxVal + 85 && maxVal !== null){
+            let currentTick = 0;
+            let res = [];
+            let maxVal = this.chart.yAxis[0].max;
+
+            for(let i = 0; i < 6; i++){
                 res.push(currentTick);
-                currentTick+=85;
-           }
+                currentTick+= Math.floor((maxVal / 5));
+            }   
+            
            return res;
         },
         labels: {
           x: -40,
-        }
-
+        },
     },
 
     tooltip: {
@@ -738,18 +752,19 @@ Highcharts.chart('container-areaSpline', {
         series: {
             marker : {
                 lineWidth : 1
-            }
+            },
+            stacking: 'normal'
         }
+        
     },
 
     series: [
         {
-            zIndex : 300,
             name: 'קשה',
-            data: [410, 367, 336, 330, 308, 294, 273],
-            color: '#50cbfd',
+            data: [],
+            color: 'blue',
             pointPlacement: 'on',
-            pointStart: Date.UTC(2022, 2, 9),
+            pointStart: Date.UTC(2021, 0, 1),
             pointInterval: 24 * 36e5,
             marker: {
                 symbol: 'circle'
@@ -767,13 +782,35 @@ Highcharts.chart('container-areaSpline', {
         }, 
      
         {
-            zIndex : 200,
             name: 'בינוני',
             symbol: 'circle',
             data: [],
-            color: "",
+            color: "green",
             pointPlacement: 'on',
-            pointStart: Date.UTC(2022, 2, 9),
+            pointStart: Date.UTC(2021, 0, 1),
+            pointInterval: 24 * 36e5,
+            marker: {
+                symbol: 'circle'
+            },
+            events: {
+                legendItemClick: function(e) {
+                    e.preventDefault()
+                },
+            },
+            states: {
+                inactive: {
+                    opacity: 1
+                }
+            },
+        },
+
+        {
+            name: 'קל',
+            symbol: 'circle',
+            data: [],
+            color: "red",
+            pointPlacement: 'on',
+            pointStart: Date.UTC(2021, 0, 1),
             pointInterval: 24 * 36e5,
             marker: {
                 symbol: 'circle'
@@ -791,6 +828,12 @@ Highcharts.chart('container-areaSpline', {
         },
     ]
 });
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); 
+}
 
 let tooltipXaxisText = function(weekday, day, month,year){
     return '<b>' + weekday + " " + day + "."  + month + "." + year + '</b>'
@@ -829,10 +872,32 @@ let getXvalueIndex = function(xValue, pointArray) {
     }
 }
 
-let areaSplineMediumData = [510, 467, 436, 430, 408, 394, 373];
+const areaSplineData = [[],[],[]];
+for(let i = 0; i < Math.floor((Date.now() - Date.UTC(2021, 0, 1)) / (24 * 36e5)); i++){
+    areaSplineData[0].push(getRandomInt(100, 800));
+    areaSplineData[1].push(getRandomInt(100, 800));
+    areaSplineData[2].push(getRandomInt(100, 800));
+}
 
-areaSplintChart.series[1].setData(areaSplineMediumData);
-areaSplintChart.series[1].update({ color:'#b6ca51' });
+for(let i = 0; i < areaSplintChart.series.length; i++)
+    areaSplintChart.series[i].setData(areaSplineData[i]);
+
+//areaSplintChart.series[1].update({ color:'#b6ca51' });
+
+const areaSplineFilter = document.querySelector(".areaSpline-filter");
+areaSplineFilter.addEventListener('click', ()=> {
+    let filterboxContainer = document.querySelector(".filterbox-container");
+    arrowRotate(".areaSpline-arrow");
+    filterboxContainer.classList.toggle("displayNone");
+})
+
+const areaSplineButtons = document.querySelectorAll('.filterbox-container button');
+areaSplineButtons[1].addEventListener('click', ()=> {
+    let filterboxContainer = document.querySelector(".filterbox-container");
+    arrowRotate(".areaSpline-arrow");
+    filterboxContainer.classList.toggle("displayNone");
+
+})
 
 /*
 areaSplintChart.series[1].setVisible(false);

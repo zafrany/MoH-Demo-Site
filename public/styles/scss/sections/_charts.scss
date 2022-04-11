@@ -107,3 +107,15 @@
         margin: 12px 0px 4px 0px;
     }
 }
+
+.areaSpline-filter{
+    .search-button__text{
+        font-size: 15px;
+    }
+
+    .search-button {
+        @media (min-width: 650px){
+            min-width: 215px;
+        }
+    }
+}

@@ -623,6 +623,7 @@ h2 {
 .searchbox input {
   width: 100%;
   border: 1px solid rgba(161, 170, 177, 0.4);
+  font-size: 1rem;
 }
 .searchbox .input-light-theme input {
   background: white;
@@ -1037,4 +1038,13 @@ h2 {
 }
 .filterbox h4 {
   margin: 12px 0px 4px 0px;
+}
+
+.areaSpline-filter .search-button__text {
+  font-size: 15px;
+}
+@media (min-width: 650px) {
+  .areaSpline-filter .search-button {
+    min-width: 215px;
+  }
 }
