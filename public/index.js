@@ -644,11 +644,8 @@ Highcharts.chart('container-areaSpline', {
 
     xAxis: {
         type: 'datetime',
-        
         tickWidth: 1,
-
         tickPixelInterval : 50,
-
         tickmarkPlacement: 'on',
         title: {
             text: 'תאריך',
@@ -670,7 +667,6 @@ Highcharts.chart('container-areaSpline', {
 
     yAxis: {
         tickWidth: 1,   
-        tickInterval : 85,
         gridLineColor: '#cccccc',
 
         title: {
@@ -746,6 +742,11 @@ Highcharts.chart('container-areaSpline', {
     },
 
     plotOptions: {
+        dataGrouping: {
+            enabled: true,
+            forced: true,
+            
+        },
         areaspline: {
             fillOpacity: 0.7,
         },
@@ -753,9 +754,16 @@ Highcharts.chart('container-areaSpline', {
             marker : {
                 lineWidth : 1
             },
-            stacking: 'normal'
-        }
-        
+            stacking: 'normal',
+
+            states: {
+                hover: {
+                    halo: {
+                        size: 0,
+                    }
+                }
+            }
+        }  
     },
 
     series: [
@@ -767,7 +775,7 @@ Highcharts.chart('container-areaSpline', {
             pointStart: Date.UTC(2021, 0, 1),
             pointInterval: 24 * 36e5,
             marker: {
-                symbol: 'circle'
+                symbol: 'circle',
             },
             events: {
                 legendItemClick: function(e) {
@@ -872,8 +880,9 @@ let getXvalueIndex = function(xValue, pointArray) {
     }
 }
 
+//Math.floor((Date.now() - Date.UTC(2021, 0, 1)) / (24 * 36e5))
 const areaSplineData = [[],[],[]];
-for(let i = 0; i < Math.floor((Date.now() - Date.UTC(2021, 0, 1)) / (24 * 36e5)); i++){
+for(let i = 0; i < 30; i++){
     areaSplineData[0].push(getRandomInt(100, 800));
     areaSplineData[1].push(getRandomInt(100, 800));
     areaSplineData[2].push(getRandomInt(100, 800));
