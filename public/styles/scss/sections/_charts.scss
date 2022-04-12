@@ -16,7 +16,6 @@
 
 .highcharts-figure,
 .highcharts-data-table table {
-    
     margin: 1em auto;
 }
 
@@ -77,17 +76,18 @@
 }
 
 .searchbox-container {
+    width: 220px;
     flex-flow: column;
+    overflow: auto;
 }
 
 .filterbox-container {
-    overflow: auto;
+    
     height: 280px;
 }
 
 .filterbox {
     padding: 0px 16px 10px;
-
     ul{
         padding: 0;
         list-style: none;

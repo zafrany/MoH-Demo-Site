@@ -131,6 +131,16 @@ themeButton.addEventListener('click', ()=>{
         ramzorTableHighlight[i].classList.toggle("ramzor-table-highlighed-dark");
         
     }
+
+    if(areaSplintChart.series[0].color ===  lightPatientsLight){
+        updateChartSeriesColors(areaSplintChart, [lightPatientsDark, mediumPatientsDark, severePatientsDark]);
+        updateChartTextColors(areaSplintChart, 'white');
+    }
+
+    else {
+        updateChartSeriesColors(areaSplintChart, [lightPatientsLight, mediumPatientsLight,severePatientsLight]);
+        updateChartTextColors(areaSplintChart, '#222b45');
+    }
 })
 
 for(let i = 0; i < circleArray.length; i++){
@@ -615,12 +625,21 @@ Highcharts.setOptions({
             font: '12px Sans-serif'
          }
     },
+
+    xAxis: {  
+        labels: {
+            style:{
+
+            }
+        },
+    }
 });
 
-let areaSplintChart =
+const areaSplintChart =
 Highcharts.chart('container-areaSpline', {
     chart: {
         type: 'areaspline',
+        backgroundColor: 'rgba(222,222,222,0)',
     },
     
     title: {
@@ -634,12 +653,12 @@ Highcharts.chart('container-areaSpline', {
         verticalAlign: 'top',
         useHTML: true,
         borderWidth: 0,
-        backgroundColor:
-            Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
         rtl: true,
         itemStyle: {
             'cursor': 'default'
-        }
+        },
+        backgroundColor: 'rgba(222,222,222,0)',
+        reversed : true,
     },
 
     xAxis: {
@@ -660,7 +679,10 @@ Highcharts.chart('container-areaSpline', {
         },
          
         labels: {
-            format: '{value: %d.%m}'
+            format: '{value: %d.%m}',
+            style:{
+                
+            }
         },
         useHTML: true,
     },
@@ -687,6 +709,9 @@ Highcharts.chart('container-areaSpline', {
         },
         labels: {
           x: -40,
+          style:{
+                
+          }
         },
     },
 
@@ -696,7 +721,7 @@ Highcharts.chart('container-areaSpline', {
         shape: "rect",
         useHTML: true,
         align: 'center',
-
+        
         formatter: function () {
             const weekday = ["יום א'","יום ב'","יום ג'","יום ד'","יום ה'","יום ו'","יום ש'"];
             let _date = new Date(this.x);
@@ -706,19 +731,21 @@ Highcharts.chart('container-areaSpline', {
 
             tooltipString = '<div class="highcharts-tooltip">' + 
                         tooltipXaxisText(weekday[_day], _date.getDate(), _date.getMonth() + 1, _date.getFullYear());
-            for(let i = 0; i < areaSplintChart.series.length; i++){
-                pointIndex = getXvalueIndex(this.x, areaSplintChart.series[i].points);
-                tooltipString += tooltipFlex([
-                            [["colored-circle-tooltip"], ["background:" + areaSplintChart.series[i].color],""],
-                            [["tooltip-number"], [], areaSplintChart.series[i].points[pointIndex].y],
-                            [["tooltip-text"],[], areaSplintChart.series[i].name]
-                            ]
-                        )
+            for(let i = 2; i >= 0; i--){
+                if(areaSplintChart.series[i].visible) {
+                    pointIndex = getXvalueIndex(this.x, areaSplintChart.series[i].points);
+                    tooltipString += tooltipFlex([
+                                [["colored-circle-tooltip"], ["background:" + areaSplintChart.series[i].color],""],
+                                [["tooltip-number"], [], areaSplintChart.series[i].points[pointIndex].y],
+                                [["tooltip-text"],[], areaSplintChart.series[i].name]
+                                ]
+                            )
+                }
             } 
             tooltipString+='</div>';
             return tooltipString;
         },
-
+        
         positioner: function(labelWidth, labelHeight, point) {
         
             if(point.plotX < areaSplintChart.plotLeft)
@@ -742,15 +769,12 @@ Highcharts.chart('container-areaSpline', {
     },
 
     plotOptions: {
-        dataGrouping: {
-            enabled: true,
-            forced: true,
-            
-        },
         areaspline: {
             fillOpacity: 0.7,
         },
         series: {
+            pointStart: Date.now() - 24 * 36e5 * 30,
+            pointInterval: 24 * 36e5,
             marker : {
                 lineWidth : 1
             },
@@ -763,17 +787,57 @@ Highcharts.chart('container-areaSpline', {
                     }
                 }
             }
-        }  
+        },  
     },
 
     series: [
         {
+            name: 'קל',
+            symbol: 'circle',
+            data: [],
+            color: "",
+            pointPlacement: 'on',
+            marker: {
+                symbol: 'circle'
+            },
+            events: {
+                legendItemClick: function(e) {
+                    e.preventDefault()
+                },
+            },
+            states: {
+                inactive: {
+                    opacity: 1
+                }
+            },
+        },
+
+        {
+            name: 'בינוני',
+            symbol: 'circle',
+            data: [],
+            color: "",
+            pointPlacement: 'on',
+            marker: {
+                symbol: 'circle'
+            },
+            events: {
+                legendItemClick: function(e) {
+                    e.preventDefault()
+                },
+            },
+            states: {
+                inactive: {
+                    opacity: 1
+                }
+            },
+        },
+
+        {
             name: 'קשה',
             data: [],
-            color: 'blue',
+            color: '',
             pointPlacement: 'on',
-            pointStart: Date.UTC(2021, 0, 1),
-            pointInterval: 24 * 36e5,
             marker: {
                 symbol: 'circle',
             },
@@ -788,52 +852,6 @@ Highcharts.chart('container-areaSpline', {
                 }
             }
         }, 
-     
-        {
-            name: 'בינוני',
-            symbol: 'circle',
-            data: [],
-            color: "green",
-            pointPlacement: 'on',
-            pointStart: Date.UTC(2021, 0, 1),
-            pointInterval: 24 * 36e5,
-            marker: {
-                symbol: 'circle'
-            },
-            events: {
-                legendItemClick: function(e) {
-                    e.preventDefault()
-                },
-            },
-            states: {
-                inactive: {
-                    opacity: 1
-                }
-            },
-        },
-
-        {
-            name: 'קל',
-            symbol: 'circle',
-            data: [],
-            color: "red",
-            pointPlacement: 'on',
-            pointStart: Date.UTC(2021, 0, 1),
-            pointInterval: 24 * 36e5,
-            marker: {
-                symbol: 'circle'
-            },
-            events: {
-                legendItemClick: function(e) {
-                    e.preventDefault()
-                },
-            },
-            states: {
-                inactive: {
-                    opacity: 1
-                }
-            },
-        },
     ]
 });
 
@@ -880,20 +898,59 @@ let getXvalueIndex = function(xValue, pointArray) {
     }
 }
 
-//Math.floor((Date.now() - Date.UTC(2021, 0, 1)) / (24 * 36e5))
 const areaSplineData = [[],[],[]];
-for(let i = 0; i < 30; i++){
-    areaSplineData[0].push(getRandomInt(100, 800));
-    areaSplineData[1].push(getRandomInt(100, 800));
+for(let i = 0; i < Math.floor((Date.now() - Date.UTC(2021, 0, 1)) / (24 * 36e5)); i++){
     areaSplineData[2].push(getRandomInt(100, 800));
+    areaSplineData[1].push(getRandomInt(100, 800));
+    areaSplineData[0].push(getRandomInt(100, 800));
 }
 
-for(let i = 0; i < areaSplintChart.series.length; i++)
-    areaSplintChart.series[i].setData(areaSplineData[i]);
+const updatePointData = function(chart, data){
+    for(let i = 0; i < data.length; i++){
+        chart.series[i].setData(data[i]);
+    }
+}
 
-//areaSplintChart.series[1].update({ color:'#b6ca51' });
+const updatePointDataSlice = function(chart, data, offset) {
+    let slicedData = [];
+    for(let i = 0; i < data.length; i++){
+        slicedData.push(data[i].slice(offset));
+    }
+    updatePointData(chart,  slicedData);
+}
 
+const updateXaxisValues = function(currentChart, offset) {
+    if (offset === 0) {
+        currentChart.update({ 
+            plotOptions: {
+                series: {
+                    pointStart: Date.UTC(2021, 0, 1),
+                }
+            }
+        })
+    }
+    else {
+        currentChart.update({ 
+            plotOptions: {
+                series: {
+                    pointStart: Date.now() + 24 * 36e5 * offset,
+                }
+            }
+        })
+    }
+}
+
+updatePointDataSlice(areaSplintChart, areaSplineData, -30);
+
+const lightPatientsLight = '#237d7d';
+const mediumPatientsLight = '#b6ca51';
+const severePatientsLight = '#50cbfd';
+const lightPatientsDark = '#9be985';
+const mediumPatientsDark = '#fd8264';
+const severePatientsDark = '#2cd2db';
+const graphBackgroundDark = '#384f5f';
 const areaSplineFilter = document.querySelector(".areaSpline-filter");
+
 areaSplineFilter.addEventListener('click', ()=> {
     let filterboxContainer = document.querySelector(".filterbox-container");
     arrowRotate(".areaSpline-arrow");
@@ -901,17 +958,85 @@ areaSplineFilter.addEventListener('click', ()=> {
 })
 
 const areaSplineButtons = document.querySelectorAll('.filterbox-container button');
+
+areaSplineButtons[0].addEventListener('click' , ()=> {
+    const filterboxContainer = document.querySelector(".filterbox-container");
+    const areaSplineRadio = document.querySelectorAll('input[name="time"]');
+    const areaSplineCheck = document.querySelectorAll('input[name="state"]');
+    const daysIntervalArray = [0, -365, -180, -90, -30];
+
+    for(let i = 0; i < areaSplineCheck.length; i++) {
+        if(areaSplineCheck[i].checked === false) {
+            areaSplintChart.series[areaSplineCheck.length - 1 - i].update({visible: false});
+            areaSplintChart.series[areaSplineCheck.length - 1 - i].update({showInLegend: false});
+        }
+
+        else {
+            areaSplintChart.series[areaSplineCheck.length - 1 - i].update({visible: true});
+            areaSplintChart.series[areaSplineCheck.length - 1 - i].update({showInLegend: true});
+        }
+    }
+    
+    for(let i = 0; i < areaSplineRadio.length; i++) {        
+        if(areaSplineRadio[i].checked){
+            updateXaxisValues(areaSplintChart, daysIntervalArray[i]);
+            updatePointDataSlice(areaSplintChart, areaSplineData, daysIntervalArray[i]);
+        }
+    }
+
+    arrowRotate(".areaSpline-arrow");
+    filterboxContainer.classList.toggle("displayNone");
+})
+
 areaSplineButtons[1].addEventListener('click', ()=> {
-    let filterboxContainer = document.querySelector(".filterbox-container");
+    const filterboxContainer = document.querySelector(".filterbox-container");
     arrowRotate(".areaSpline-arrow");
     filterboxContainer.classList.toggle("displayNone");
 
 })
 
-/*
-areaSplintChart.series[1].setVisible(false);
-areaSplintChart.series[1].update({showInLegend: false});
+areaSplintChart.series[2].update({ color: severePatientsLight});
+areaSplintChart.series[1].update({ color: mediumPatientsLight});
+areaSplintChart.series[0].update({ color: lightPatientsLight});
 
-areaSplintChart.series[1].setVisible(true);
-areaSplintChart.series[1].update({showInLegend: true});
-*/
+
+const updateChartTextColors = function(chart, colorVar){
+    chart.update({
+        title: {
+            style: {
+                color: colorVar
+            }
+        },
+        legend: {
+            itemStyle: {
+                color: colorVar
+             }
+        },
+        xAxis: {
+            labels: {
+                style:{
+                    color: colorVar
+                }
+            },
+            title: {
+                style: {
+                    color: colorVar
+                }
+            },
+        },
+        yAxis: {
+            labels: {
+                style:{
+                    color: colorVar
+                }
+            },
+        },
+    })
+}
+
+const updateChartSeriesColors = function (chart, colorArray) {
+    for(let i = 0; i < colorArray.length; i++) {
+        chart.series[i].update({color : colorArray[i]})
+    }
+}
+

@@ -1010,11 +1010,12 @@ h2 {
 }
 
 .searchbox-container {
+  width: 220px;
   flex-flow: column;
+  overflow: auto;
 }
 
 .filterbox-container {
-  overflow: auto;
   height: 280px;
 }
 
