@@ -4,7 +4,7 @@ const boxColor = document.querySelectorAll(".light-color-theme__box-color");
 const exlamationMark = document.querySelectorAll(".card-h3-container .circle");
 const circleArray = document.querySelectorAll(".light-circle-color");
 const tooltipArray = document.querySelectorAll(".tooltip");
-const searchButton = document.querySelector(".search-button");
+const searchButton = document.querySelectorAll(".search-button");
 const searchBoxContainer = document.querySelector(".searchbox-container");
 const searchResults = document.querySelector(".search-results");
 const buttons = document.querySelectorAll(".searchbox-button");
@@ -65,9 +65,11 @@ themeButton.addEventListener('click', ()=>{
         exlamationMark[i].classList.toggle("dark-circle-color");
     }
 
-    searchButton.classList.toggle("background-light");
-    searchButton.classList.toggle("background-dark");
-    searchButton.classList.toggle("text-color-dark");
+    for(let i = 0; i < searchButton.length; i++){
+        searchButton[i].classList.toggle("background-light");
+        searchButton[i].classList.toggle("background-dark");
+        searchButton[i].classList.toggle("text-color-dark");
+    }
 
     let searchBoxInputLight = document.querySelector(".input-light-theme");
     searchBoxInputLight.classList.toggle("input-dark-theme");
@@ -153,10 +155,11 @@ for(let i = 0; i < circleArray.length; i++){
     })
 }
 
-searchButton.addEventListener('click', ()=>{
-   arrowRotate(".vaccination-arrow");
-   searchBoxContainer.classList.toggle("displayNone");
-})
+    searchButton[0].addEventListener('click', ()=>{
+    arrowRotate(".vaccination-arrow");
+    searchBoxContainer.classList.toggle("displayNone");
+    })
+
 
 
 for(let i = 0; i < trinagleButtons.length; i++) {
@@ -645,6 +648,7 @@ Highcharts.chart('container-areaSpline', {
     title: {
         text: 'מספר מאושפזים',
         align: 'left',
+        y: 0,
     },
 
     legend: {
@@ -664,7 +668,6 @@ Highcharts.chart('container-areaSpline', {
     xAxis: {
         type: 'datetime',
         tickWidth: 1,
-        tickPixelInterval : 50,
         tickmarkPlacement: 'on',
         title: {
             text: 'תאריך',
@@ -685,6 +688,18 @@ Highcharts.chart('container-areaSpline', {
             }
         },
         useHTML: true,
+        
+        tickPositioner: function() {
+            let currentTick = this.chart.xAxis[0].min;
+            const res = [];
+            const maxVal = this.chart.xAxis[0].max;
+            const interval = (maxVal - currentTick) / (24 * 36e5) / (this.width / 45);
+            for(let i = 0; i < this.width / 45; i++){
+                res.push(currentTick);
+                currentTick+= interval * 24 * 36e5;
+            }   
+           return res;
+        },
     },
 
     yAxis: {
@@ -906,6 +921,10 @@ for(let i = 0; i < Math.floor((Date.now() - Date.UTC(2021, 0, 1)) / (24 * 36e5))
 }
 
 const updatePointData = function(chart, data){
+    const areaSplineCheck = document.querySelectorAll('input[name="state"]');
+    for(let i = 0; i < data.length; i++){
+        chart.series[i].setData([]);
+    }
     for(let i = 0; i < data.length; i++){
         chart.series[i].setData(data[i]);
     }
@@ -960,6 +979,9 @@ areaSplineFilter.addEventListener('click', ()=> {
 const areaSplineButtons = document.querySelectorAll('.filterbox-container button');
 
 areaSplineButtons[0].addEventListener('click' , ()=> {
+    const buttonText = document.querySelector(".areaSpline-filter .search-button__text");
+    let   updatedText = ""; 
+    const timeText = document.querySelectorAll(".time span");
     const filterboxContainer = document.querySelector(".filterbox-container");
     const areaSplineRadio = document.querySelectorAll('input[name="time"]');
     const areaSplineCheck = document.querySelectorAll('input[name="state"]');
@@ -974,18 +996,21 @@ areaSplineButtons[0].addEventListener('click' , ()=> {
         else {
             areaSplintChart.series[areaSplineCheck.length - 1 - i].update({visible: true});
             areaSplintChart.series[areaSplineCheck.length - 1 - i].update({showInLegend: true});
+            updatedText+=  areaSplintChart.series[areaSplineCheck.length - 1 - i].name + ',';
         }
     }
     
-    for(let i = 0; i < areaSplineRadio.length; i++) {        
+    for(let i = 0; i < areaSplineRadio.length; i++) { 
         if(areaSplineRadio[i].checked){
             updateXaxisValues(areaSplintChart, daysIntervalArray[i]);
             updatePointDataSlice(areaSplintChart, areaSplineData, daysIntervalArray[i]);
+            updatedText+= " " + timeText[i].innerText;
         }
     }
 
     arrowRotate(".areaSpline-arrow");
     filterboxContainer.classList.toggle("displayNone");
+    buttonText.innerText = updatedText;
 })
 
 areaSplineButtons[1].addEventListener('click', ()=> {
@@ -1040,3 +1065,13 @@ const updateChartSeriesColors = function (chart, colorArray) {
     }
 }
 
+
+window.addEventListener('resize', function(event) {
+    const chartContainer = document.querySelector('.chart-container');
+    areaSplintChart.update(
+        {
+        chart: {
+            width: 0.9 * chartContainer.offsetWidth
+        }
+    })
+}, true);

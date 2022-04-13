@@ -252,7 +252,7 @@ h2 {
   flex-wrap: nowrap;
   width: 100%;
   box-shadow: 0px 14px 12px 0px rgba(0, 0, 0, 0.1);
-  z-index: 100;
+  z-index: 1000;
 }
 .header .seperator {
   display: none;
@@ -564,7 +564,6 @@ h2 {
   flex-direction: row;
   flex-wrap: nowrap;
   border: 1px solid rgba(161, 170, 177, 0.4);
-  max-width: 130px;
   border-radius: 20px;
   align-items: center;
 }
@@ -613,7 +612,6 @@ h2 {
   flex-wrap: wrap;
   border-radius: 5px;
   min-width: 200px;
-  background: white;
   border: 1px solid rgba(161, 170, 177, 0.4);
 }
 .searchbox .searchbox-top {
@@ -938,12 +936,22 @@ h2 {
 }
 
 .chart-container {
-  width: 400px;
+  width: 100%;
+}
+@media (min-width: 775px) {
+  .chart-container {
+    max-width: 30vw;
+  }
 }
 
 #container-areaSpline {
   height: 265px;
-  width: 350px;
+  width: 95%;
+}
+@media (min-width: 775px) {
+  #container-areaSpline {
+    max-width: 30vw;
+  }
 }
 
 .highcharts-figure,
@@ -1044,8 +1052,17 @@ h2 {
 .areaSpline-filter .search-button__text {
   font-size: 15px;
 }
-@media (min-width: 650px) {
+@media (min-width: 900px) {
   .areaSpline-filter .search-button {
     min-width: 215px;
   }
+}
+@media (max-width: 775px) {
+  .areaSpline-filter .search-button {
+    min-width: 215px;
+  }
+}
+
+.highcharts-figure {
+  width: 100%;
 }

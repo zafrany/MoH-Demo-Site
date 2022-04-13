@@ -6,12 +6,18 @@
 }
 
 .chart-container {
-    width: 400px;
+    @media(min-width: 775px){
+        max-width: 30vw;
+    }
+    width: 100%;
 }
 
 #container-areaSpline {
     height: 265px;
-    width: 350px;
+    @media(min-width: 775px){
+        max-width: 30vw;
+    }
+    width: 95%;
 }
 
 .highcharts-figure,
@@ -114,8 +120,16 @@
     }
 
     .search-button {
-        @media (min-width: 650px){
+        @media (min-width: 900px){
+            min-width: 215px;
+        }
+
+        @media (max-width: 775px) {
             min-width: 215px;
         }
     }
+}
+
+.highcharts-figure {
+    width: 100%;
 }
