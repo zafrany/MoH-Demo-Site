@@ -611,6 +611,7 @@ Highcharts.setOptions({
         style: {
             font: '12px Sans-serif'
         },
+        marginLeft : 50,
     },
 
     title: {
@@ -618,7 +619,7 @@ Highcharts.setOptions({
             font: '14px Sans-serif',
             color: '#777b88'
         },
-        margin: -20,
+        
         x : 55,
         widthAdjust: -600,
     },
@@ -626,18 +627,11 @@ Highcharts.setOptions({
     legend: {
         itemStyle: {
             font: '12px Sans-serif'
-         }
+         },
+         itemMarginTop: -40,
     },
-
-    xAxis: {  
-        labels: {
-            style:{
-
-            }
-        },
-    }
 });
-
+/////////////////////////////////area-spline///////////////////////////////////
 const areaSplintChart =
 Highcharts.chart('container-areaSpline', {
     chart: {
@@ -648,7 +642,7 @@ Highcharts.chart('container-areaSpline', {
     title: {
         text: 'מספר מאושפזים',
         align: 'left',
-        y: 0,
+        x: 45,
     },
 
     legend: {
@@ -663,6 +657,7 @@ Highcharts.chart('container-areaSpline', {
         },
         backgroundColor: 'rgba(222,222,222,0)',
         reversed : true,
+        
     },
 
     xAxis: {
@@ -723,10 +718,7 @@ Highcharts.chart('container-areaSpline', {
            return res;
         },
         labels: {
-          x: -40,
-          style:{
-                
-          }
+          align : 'left',
         },
     },
 
@@ -983,8 +975,8 @@ areaSplineButtons[0].addEventListener('click' , ()=> {
     let   updatedText = ""; 
     const timeText = document.querySelectorAll(".time span");
     const filterboxContainer = document.querySelector(".filterbox-container");
-    const areaSplineRadio = document.querySelectorAll('input[name="time"]');
-    const areaSplineCheck = document.querySelectorAll('input[name="state"]');
+    const areaSplineRadio = document.querySelectorAll('.main-metrics input[name="time"]');
+    const areaSplineCheck = document.querySelectorAll('.main-metrics input[name="state"]');
     const daysIntervalArray = [0, -365, -180, -90, -30];
 
     for(let i = 0; i < areaSplineCheck.length; i++) {
@@ -1075,3 +1067,255 @@ window.addEventListener('resize', function(event) {
         }
     })
 }, true);
+
+/////////////////////////////line chart//////////////////////////////////
+
+const lineChart =
+Highcharts.chart('container-line', {
+    chart: {
+        type: 'line',
+        backgroundColor: 'rgba(222,222,222,0)',
+    },
+    
+    title: {
+        text: 'תושבים נכנסים',
+        align: 'left',
+        y: 30,
+        x: 0,
+    },
+
+    legend: {
+        layout: 'horizontal',
+        align: 'right',
+        verticalAlign: 'top',
+        useHTML: true,
+        borderWidth: 0,
+        rtl: true,
+        itemStyle: {
+            'cursor': 'default'
+        },
+        backgroundColor: 'rgba(222,222,222,0)',
+        reversed : true,
+        labelFormatter: function() {
+            let resultStr =  
+            '<div class="chart-legend">' +
+                '<div class="colored-circle-tooltip" style="background:'+ this.color +';"></div>' +
+                '<div>' + this.name + '</div>' +
+            '</div>';
+            return resultStr;
+        },
+        symbolWidth: 0,
+    },
+
+    xAxis: {
+        type: 'datetime',
+        tickWidth: 1,
+        tickmarkPlacement: 'on',
+        title: {
+            text: 'תאריך',
+            style:{
+                font: '14px Sans-serif',
+                color: '#777b88'
+            },
+        },
+        crosshair: {
+            width: 1,
+            color: 'grey',
+        },
+         
+        labels: {
+            format: '{value: %d.%m}',
+            style:{
+                
+            }
+        },
+        useHTML: true,
+        
+        tickPositioner: function() {
+            let currentTick = this.chart.xAxis[0].min;
+            const res = [];
+            const maxVal = this.chart.xAxis[0].max;
+            const interval = (maxVal - currentTick) / (24 * 36e5) / (this.width / 45);
+            for(let i = 0; i < this.width / 45; i++){
+                res.push(currentTick);
+                currentTick+= interval * 24 * 36e5;
+            }   
+           return res;
+        },
+    },
+
+    yAxis: {
+        tickWidth: 1,   
+        gridLineColor: '#cccccc',
+
+        title: {
+            text: '',
+        },
+        
+        tickPositioner: function() {
+            let currentTick = 0;
+            let res = [];
+            let maxVal = this.chart.yAxis[0].max;
+
+            for(let i = 0; i < 6; i++){
+                res.push(currentTick);
+                currentTick+= Math.floor((maxVal / 5));
+            }   
+            
+           return res;
+        },
+        labels: {
+          x: -40,
+          style:{
+                
+          }
+        },
+    },
+
+    tooltip: {
+        shared: true,
+        borderRadius: 10,
+        shape: "rect",
+        useHTML: true,
+        align: 'center',
+        
+        formatter: function () {
+            const weekday = ["יום א'","יום ב'","יום ג'","יום ד'","יום ה'","יום ו'","יום ש'"];
+            let _date = new Date(this.x);
+            let _day = _date.getDay();
+            let tooltipString = "";
+            let pointIndex;
+
+            tooltipString = '<div class="highcharts-tooltip">' + 
+                        tooltipXaxisText(weekday[_day], _date.getDate(), _date.getMonth() + 1, _date.getFullYear());
+            for(let i = 2; i >= 0; i--){
+                if(areaSplintChart.series[i].visible) {
+                    pointIndex = getXvalueIndex(this.x, areaSplintChart.series[i].points);
+                    tooltipString += tooltipFlex([
+                                [["colored-circle-tooltip"], ["background:" + areaSplintChart.series[i].color],""],
+                                [["tooltip-number"], [], areaSplintChart.series[i].points[pointIndex].y],
+                                [["tooltip-text"],[], areaSplintChart.series[i].name]
+                                ]
+                            )
+                }
+            } 
+            tooltipString+='</div>';
+            return tooltipString;
+        },
+        
+        positioner: function(labelWidth, labelHeight, point) {
+        
+            if(point.plotX < areaSplintChart.plotLeft)
+                tooltipX = point.plotX + areaSplintChart.plotLeft;
+
+            else if(point.plotX + labelWidth > areaSplintChart.plotWidth + 80)
+                tooltipX = point.plotX - labelWidth;
+            else
+                tooltipX = point.plotX;
+
+            tooltipY = point.plotY + 80;
+            return {
+            x: tooltipX,
+            y: tooltipY
+            };
+        },
+    },
+
+    credits: {
+        enabled: false
+    },
+
+    plotOptions: {
+        areaspline: {
+            fillOpacity: 0.7,
+        },
+        series: {
+            pointStart: Date.now() - 24 * 36e5 * 30,
+            pointInterval: 24 * 36e5,
+            marker : {
+                lineWidth : 1,
+            },
+
+            states: {
+                hover: {
+                    halo: {
+                        size: 0,
+                    }
+                }
+            }
+        },  
+    },
+
+    series: [
+        {
+            name: 'לא מחוסנים',
+            symbol: 'circle',
+            data: [],
+            color: "",
+            pointPlacement: 'on',
+            marker: {
+                symbol: 'circle'
+            },
+            events: {
+                legendItemClick: function(e) {
+                    e.preventDefault()
+                },
+            },
+            states: {
+                inactive: {
+                    opacity: 1
+                }
+            },
+        },
+
+        {
+            name: 'מחוסנים ללא תוקף',
+            symbol: 'circle',
+            data: [],
+            color: "",
+            pointPlacement: 'on',
+            marker: {
+                symbol: 'circle'
+            },
+            events: {
+                legendItemClick: function(e) {
+                    e.preventDefault()
+                },
+            },
+            states: {
+                inactive: {
+                    opacity: 1
+                }
+            },
+        },
+
+        {
+            name: 'מחוסנים',
+            data: [],
+            color: '',
+            pointPlacement: 'on',
+            marker: {
+                symbol: 'circle',
+            },
+            events: {
+                legendItemClick: function(e) {
+                    e.preventDefault()
+                },
+            },
+            states: {
+                inactive: {
+                    opacity: 1
+                }
+            }
+        }, 
+    ]
+});
+
+const lineData = [[],[],[]];
+for(let i = 0; i < Math.floor((Date.now() - Date.UTC(2021, 0, 1)) / (24 * 36e5)); i++){
+    lineData[2].push(getRandomInt(100, 800));
+    lineData[1].push(getRandomInt(100, 800));
+    lineData[0].push(getRandomInt(100, 800));
+}
+
+updatePointDataSlice(lineChart, lineData, -30);

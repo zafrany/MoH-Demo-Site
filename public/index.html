@@ -20,7 +20,7 @@
                     <img  src="./images/logo.png" alt="moh-logo">
                 </div>
             </div>
-            <div class="header__logo-title">
+             <div class="header__logo-title">
                 <div class="h1-container">
                     <h1>נגיף הקורונה בישראל - תמונת מצב כללית</h1>
                     <div class="seperator">|</div>
@@ -420,7 +420,7 @@
                 </div>
             </div>
         </div>
-        <div class="charts">
+        <div class="charts main-metrics">
             <h2>מדדים מרכזיים</h2>
             <div class="chart-container">
                 <div class="section-container__table-container light-color-theme__box-color">
@@ -428,7 +428,7 @@
                         <h3>מספר מאושפזים - יומי</h3>
                         <div class="circle light-circle-color">i</div>
                     </div>
-                    <div class="tooltip displayNone light-color-theme__box-color"> placeholder </div>
+                    <div class="tooltip displayNone light-color-theme__box-color"> מספר החולים היומי במחלת נגיף COVID-19 המאושפזים בבתי חולים בחלוקה לפי מצב רפואי : קשה (כולל קריטי), בינוני וקל. </div>
                     <div class="dots-flex">
                         <div class="dot background-dark"></div>
                         <div class="dot background-dark"></div>
@@ -497,8 +497,87 @@
                             <button class="cancel searchbox-button button-light-color">ביטול</button>
                         </div>
                     </div>
+                    <div class="highcharts-figure">
+                        <div id="container-areaSpline" class="areaspline-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="charts abroad-metrics">
+            <h2>תחלואה מחו"ל</h2>
+            <div class="chart-container">
+                <div class="section-container__table-container light-color-theme__box-color">
+                    <div class="card-h3-container">
+                        <h3>תושבים שנכנסו לישראל - מצב התחסנות</h3>
+                        <div class="circle light-circle-color">i</div>
+                    </div>
+                    <div class="tooltip displayNone light-color-theme__box-color">placeholder</div>
+                    <div class="dots-flex">
+                        <div class="dot background-dark"></div>
+                        <div class="dot background-dark"></div>
+                        <div class="dot background-dark"></div>
+                    </div>
+                    <div class="line-filter button-container">
+                        <button class="search-button background-light">
+                            <div class="search-button__text">כלל המדינות, מספר תושבים שנכנסו, חודש אחרון</div>
+                            <div class="line-arrow arrow-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24">
+                                    <g fill="currentColor">
+                                        <g data-name="chevron-down">
+                                            <rect width="24" height="24" opacity="0"></rect>
+                                            <path d="M12 15.5a1 1 0 0 1-.71-.29l-4-4a1 1 0 1 1 1.42-1.42L12 13.1l3.3-3.18a1 1 0 1 1 1.38 1.44l-4 3.86a1 1 0 0 1-.68.28z"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="searchbox-container filterbox-container displayNone">
+                        <div class="searchbox filterbox light-color-theme__box-color">
+                            <h4>הצג לפי</h4>
+                            <ul>
+                                <li>
+                                    <input type="radio" name="state" checked>
+                                    <span>מספר תושבים שנכנסו</span>
+                                </li>
+                                <li>
+                                    <input type="radio" name="state">
+                                    <span>מספר תושבים מאומתים שנכנסו</span>
+                                </li>
+                            </ul>
+                            <h4>זמן</h4>
+                            <div class="time">
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="time">
+                                        <span>עד עכשיו</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="time">
+                                        <span>שנה</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="time">
+                                        <span>6 חודשים</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="time">
+                                        <span>3 חודשים</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="time" checked>
+                                        <span>חודש אחרון</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="search-buttons">
+                            <button class="ok searchbox-button button-light-color">אישור</button>
+                            <button class="cancel searchbox-button button-light-color">ביטול</button>
+                        </div>
+                    </div>
                 <div class="highcharts-figure">
-                    <div id="container-areaSpline" class="areaspline-container"></div>
+                    <div id="container-line" class="line-container"></div>
                 </div>
             </div>
         </div>
