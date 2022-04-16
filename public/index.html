@@ -278,7 +278,7 @@
                 </div>
                 <div class="searchbox-container displayNone">
                     <div class="searchbox">
-                        <div class="searchbox-top">
+                        <div class="searchbox-top backgroundWhite">
                             <div class="input-light-theme">
                                 <input type="search" id="settelment-name-light" name="sname" placeholder="חיפוש ישוב" class="background-light">
                             </div>
@@ -449,7 +449,7 @@
                             </div>
                         </button>
                     </div>
-                    <div class="searchbox-container filterbox-container displayNone">
+                    <div class="searchbox-container filterbox-container main-metrics-areaFilter displayNone">
                         <div class="searchbox filterbox light-color-theme__box-color">
                             <h4>מצב מאושפזים</h4>
                             <ul>
@@ -511,7 +511,19 @@
                         <h3>תושבים שנכנסו לישראל - מצב התחסנות</h3>
                         <div class="circle light-circle-color">i</div>
                     </div>
-                    <div class="tooltip displayNone light-color-theme__box-color">placeholder</div>
+                    <div class="tooltip displayNone light-color-theme__box-color">מספר התושבים הנכנסים לישראל מחו"ל מכל המעברים, בכל יום, לפי מצב התחסנות. 
+                        ניתן להציג את נתון המאומתים מתוך התושבים הנכנסים לפי מצב ההתחסנות.
+                        נתוני המצב החיסוני של התושבים הנכנסים מחו"ל מעודכנים החל מתאריך 28.9.2021 
+                        
+                        מחוסנים: 
+                        - מי שקיבלו 2 מנות חיסון או יותר ועבר שבוע מאז קבלת המנה האחרונה (שבועיים בחיסוני מודרנה) אך עוד לא עבר מאז תוקף הזמן שנקבע למנה
+                        - מי שהחלימו וקיבלו לאחר מכן לפחות מנת חיסון אחת ועבר שבוע מאז קבלת המנה (שבועיים בחיסוני מודרנה)
+                        - מי שקיבלו לפחות מנת חיסון אחת ולאחר מכן נדבקו והחלימו
+                        
+                        מחוסנים ללא תוקף - מי שקיבלו 2 מנות חיסון ועברו יותר מחצי שנה ושבוע מאז קבלת המנה האחרונה (חצי שנה ושבועיים בחיסוני מודרנה) ולא קיבלו מנה נוספת.
+                        
+                        לא מחוסנים - מי שלא קיבלו מנת חיסון ראשונה.
+                        </div>
                     <div class="dots-flex">
                         <div class="dot background-dark"></div>
                         <div class="dot background-dark"></div>
@@ -532,19 +544,21 @@
                             </div>
                         </button>
                     </div>
-                    <div class="searchbox-container filterbox-container displayNone">
+                    <div class="searchbox-container filterbox-container abroad-metrics-filter displayNone">
                         <div class="searchbox filterbox light-color-theme__box-color">
                             <h4>הצג לפי</h4>
-                            <ul>
-                                <li>
-                                    <input type="radio" name="state" checked>
-                                    <span>מספר תושבים שנכנסו</span>
-                                </li>
-                                <li>
-                                    <input type="radio" name="state">
-                                    <span>מספר תושבים מאומתים שנכנסו</span>
-                                </li>
-                            </ul>
+                            <div class="verified-aboard">
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="state" checked>
+                                        <span>מספר תושבים שנכנסו</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="state">
+                                        <span>מספר תושבים מאומתים שנכנסו</span>
+                                    </li>
+                                </ul>
+                            </div>
                             <h4>זמן</h4>
                             <div class="time">
                                 <ul>
@@ -582,7 +596,7 @@
             </div>
         </div>
     </div>
+<script type="module" src="scripts/index.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="index.js"></script>
 </body>
 </html>

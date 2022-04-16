@@ -63,6 +63,7 @@
 
 .highcharts-tooltip {
     font-family: sans-serif;
+    text-align: right;
 }
 
 .colored-circle-tooltip {
@@ -114,6 +115,12 @@
     }
 }
 
+.main-metrics {
+    .searchbox-container {
+        width: 50%;
+    }
+}
+
 .areaSpline-filter{
     .search-button__text{
         font-size: 15px;
@@ -132,6 +139,12 @@
 
 .highcharts-figure {
     width: 100%;
+}
+
+.abroad-metrics {
+    .searchbox-container {
+        width: 55%;
+    }
 }
 
 .line-filter{
@@ -155,4 +168,8 @@
 .chart-legend {
     @include flex(row, nowrap);
     align-items: center;
+    .colored-circle-tooltip {
+        height: 10px;
+        width: 10px;
+    }
 }
