@@ -1,6 +1,7 @@
 import { arrowRotate } from './docUtils.mjs';
 import * as areaSpline from './areaSpline.mjs';
 import * as abroadChart from './abroadChart.mjs';
+import * as activePatientsChart from './activePatientsChart.mjs'
 import * as utils from './chartUtils.mjs';
 
 const themeButton = document.querySelector(".theme-button");
@@ -147,7 +148,7 @@ themeButton.addEventListener('click', ()=>{
         utils.updateChartSeriesColors(areaSpline.areaSplintChart, [areaSpline.lightPatientsDark, areaSpline.mediumPatientsDark, areaSpline.severePatientsDark]);
         utils.updateChartTextColors(areaSpline.areaSplintChart, 'white');
 
-        utils.updateChartSeriesColors(abroadChart.lineChart, [abroadChart.lightPatientsDark, abroadChart.mediumPatientsDark, abroadChart.severePatientsDark]);
+        utils.updateChartSeriesColors(abroadChart.lineChart, [abroadChart.severePatientsDark, abroadChart.mediumPatientsDark, abroadChart.lightPatientsDark]);
         utils.updateChartTextColors(abroadChart.lineChart, 'white');
     }
 
@@ -155,7 +156,7 @@ themeButton.addEventListener('click', ()=>{
         utils.updateChartSeriesColors(areaSpline.areaSplintChart, [areaSpline.lightPatientsLight, areaSpline.mediumPatientsLight, areaSpline.severePatientsLight]);
         utils.updateChartTextColors(areaSpline.areaSplintChart, '#222b45');
 
-        utils.updateChartSeriesColors(abroadChart.lineChart, [abroadChart.lightPatientsLight, abroadChart.mediumPatientsLight, abroadChart.severePatientsLight]);
+        utils.updateChartSeriesColors(abroadChart.lineChart, [abroadChart.severePatientsLight, abroadChart.mediumPatientsLight, abroadChart.lightPatientsLight]);
         utils.updateChartTextColors(abroadChart.lineChart, '#222b45');
     }
 })
@@ -604,3 +605,4 @@ let ramzorCreateList = function(arr) {
         ramzorSearchResults.appendChild(listMember);
     }
 }
+

@@ -949,13 +949,15 @@ h2 {
 }
 
 #container-areaSpline,
-#container-line {
+#container-line,
+#container-active-patients {
   height: 265px;
   width: 95%;
 }
 @media (min-width: 775px) {
   #container-areaSpline,
-#container-line {
+#container-line,
+#container-active-patients {
     max-width: 30vw;
   }
 }
@@ -1056,7 +1058,7 @@ h2 {
 }
 
 .main-metrics .searchbox-container {
-  width: 50%;
+  width: 55%;
 }
 
 .areaSpline-filter .search-button__text {
@@ -1078,7 +1080,7 @@ h2 {
 }
 
 .abroad-metrics .searchbox-container {
-  width: 55%;
+  width: 70%;
 }
 
 .line-filter .search-button__text {
@@ -1108,4 +1110,22 @@ h2 {
 .chart-legend .colored-circle-tooltip {
   height: 10px;
   width: 10px;
+}
+
+.active-patients-filter .search-button__text {
+  font-size: 15px;
+  width: 100%;
+}
+.active-patients-filter .search-button {
+  justify-content: space-between;
+}
+@media (min-width: 900px) {
+  .active-patients-filter .search-button {
+    min-width: 250px;
+  }
+}
+@media (max-width: 775px) {
+  .active-patients-filter .search-button {
+    min-width: 215px;
+  }
 }

@@ -1,16 +1,20 @@
 export const highchartsSettings =
 Highcharts.setOptions({
+    lang: {
+        numericSymbols: null
+    },
+
     chart: {
         style: {
             font: '12px Sans-serif'
         },
-        marginLeft : 50,
+        marginLeft : 40,
     },
 
     title: {
         style:{
             font: '14px Sans-serif',
-            color: '#777b88'
+            color: '#777b88',
         },
         
         x : 55,
@@ -23,6 +27,13 @@ Highcharts.setOptions({
          },
          itemMarginTop: -40,
     },
+
+    tooltip: {
+        style: {
+            fontFamily: 'Sans-serif',
+            fontSize: '14px', 
+        }
+    },
 });
 
 export const getRandomInt = function (min, max) {
@@ -31,8 +42,7 @@ export const getRandomInt = function (min, max) {
     return Math.floor(Math.random() * (max - min) + min); 
 }
 
-const updatePointData = function(chart, data){
-    const areaSplineCheck = document.querySelectorAll('input[name="state"]');
+export const updatePointData = function(chart, data){
     for(let i = 0; i < data.length; i++){
         chart.series[i].setData([]);
     }
@@ -49,7 +59,6 @@ export const updatePointDataSlice =  function(chart, data, offset) {
     updatePointData(chart,  slicedData);
 }
 
-
 export const tooltipXaxisText = function(weekday, day, month,year){
     return '<b>' + weekday + " " + day + "."  + month + "." + year + '</b>'
 }
@@ -58,6 +67,16 @@ export const getXvalueIndex = function(xValue, pointArray) {
     let index = 0;
     while(true) {
         if(pointArray[index].x === xValue){
+            return index;
+        }
+        index++;
+    }
+}
+
+export const getCategoryIndex = function(category, pointArray) {
+    let index = 0;
+    while(true) {
+        if(pointArray[index].category === category){
             return index;
         }
         index++;

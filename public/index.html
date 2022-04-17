@@ -470,23 +470,23 @@
                             <div class="time">
                                 <ul>
                                     <li>
-                                        <input type="radio" name="time">
+                                        <input type="radio" name="time-main-metrics">
                                         <span>עד עכשיו</span>
                                     </li>
                                     <li>
-                                        <input type="radio" name="time">
+                                        <input type="radio" name="time-main-metrics">
                                         <span>שנה</span>
                                     </li>
                                     <li>
-                                        <input type="radio" name="time">
+                                        <input type="radio" name="time-main-metrics">
                                         <span>6 חודשים</span>
                                     </li>
                                     <li>
-                                        <input type="radio" name="time">
+                                        <input type="radio" name="time-main-metrics">
                                         <span>3 חודשים</span>
                                     </li>
                                     <li>
-                                        <input type="radio" name="time" checked>
+                                        <input type="radio" name="time-main-metrics" checked>
                                         <span>חודש אחרון</span>
                                     </li>
                                 </ul>
@@ -550,11 +550,11 @@
                             <div class="verified-aboard">
                                 <ul>
                                     <li>
-                                        <input type="radio" name="state" checked>
+                                        <input type="radio" name="state-abroad-metrics" checked>
                                         <span>מספר תושבים שנכנסו</span>
                                     </li>
                                     <li>
-                                        <input type="radio" name="state">
+                                        <input type="radio" name="state-abroad-metrics">
                                         <span>מספר תושבים מאומתים שנכנסו</span>
                                     </li>
                                 </ul>
@@ -563,23 +563,23 @@
                             <div class="time">
                                 <ul>
                                     <li>
-                                        <input type="radio" name="time">
+                                        <input type="radio" name="time-abroad-metrics">
                                         <span>עד עכשיו</span>
                                     </li>
                                     <li>
-                                        <input type="radio" name="time">
+                                        <input type="radio" name="time-abroad-metrics">
                                         <span>שנה</span>
                                     </li>
                                     <li>
-                                        <input type="radio" name="time">
+                                        <input type="radio" name="time-abroad-metrics">
                                         <span>6 חודשים</span>
                                     </li>
                                     <li>
-                                        <input type="radio" name="time">
+                                        <input type="radio" name="time-abroad-metrics">
                                         <span>3 חודשים</span>
                                     </li>
                                     <li>
-                                        <input type="radio" name="time" checked>
+                                        <input type="radio" name="time-abroad-metrics" checked>
                                         <span>חודש אחרון</span>
                                     </li>
                                 </ul>
@@ -592,6 +592,74 @@
                     </div>
                 <div class="highcharts-figure">
                     <div id="container-line" class="line-container"></div>
+                </div>
+            </div>
+        </div>
+        <div class="charts active-patients-chart">
+            <h2>השפעת התחסנות על התחלואה</h2>
+            <div class="chart-container">
+                <div class="section-container__table-container light-color-theme__box-color">
+                    <div class="card-h3-container">
+                        <h3>חולים פעילים - גיל והתחסנות</h3>
+                        <div class="circle light-circle-color">i</div>
+                    </div>
+                    <div class="tooltip displayNone light-color-theme__box-color">placeholder</div>
+                    <div class="dots-flex">
+                        <div class="dot background-dark"></div>
+                        <div class="dot background-dark"></div>
+                        <div class="dot background-dark"></div>
+                    </div>
+                    <div class="active-patients-filter button-container">
+                        <button class="search-button background-light">
+                            <div class="search-button__text">חולים פעילים, ל-100 אלף תושבים</div>
+                            <div class="active-patients-arrow arrow-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24">
+                                    <g fill="currentColor">
+                                        <g data-name="chevron-down">
+                                            <rect width="24" height="24" opacity="0"></rect>
+                                            <path d="M12 15.5a1 1 0 0 1-.71-.29l-4-4a1 1 0 1 1 1.42-1.42L12 13.1l3.3-3.18a1 1 0 1 1 1.38 1.44l-4 3.86a1 1 0 0 1-.68.28z"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="searchbox-container filterbox-container active-patients-filterbox displayNone">
+                        <div class="searchbox filterbox light-color-theme__box-color">
+                            <h4>משתנה</h4>
+                            <div class="verified-aboard">
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="state-verified-patients" >
+                                        <span>חולים פעילים</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="state-verified-patients" checked>
+                                        <span>חולים קשה</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h4>סוג ניתוח</h4>
+                            <div class="time">
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="number-verified-patients">
+                                        <span>מספר מוחלט</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="number-verified-patients" checked>
+                                        <span>ל-100 אלף תושבים</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="search-buttons">
+                            <button class="ok searchbox-button button-light-color">אישור</button>
+                            <button class="cancel searchbox-button button-light-color">ביטול</button>
+                        </div>
+                    </div>
+                <div class="highcharts-figure">
+                    <div id="container-active-patients" class="active-patients-container"></div>
                 </div>
             </div>
         </div>

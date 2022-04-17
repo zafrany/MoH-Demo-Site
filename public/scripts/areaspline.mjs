@@ -261,7 +261,7 @@ areaSplineButtons[0].addEventListener('click' , ()=> {
     let   updatedText = ""; 
     const timeText = document.querySelectorAll(".main-metrics-areaFilter .time span");
     const filterboxContainer = document.querySelector(".main-metrics-areaFilter");
-    const areaSplineRadio = document.querySelectorAll('.main-metrics-areaFilter input[name="time"]');
+    const areaSplineRadio = document.querySelectorAll('.main-metrics-areaFilter input[name="time-main-metrics"]');
     const areaSplineCheck = document.querySelectorAll('.main-metrics-areaFilter input[name="state"]');
     const daysIntervalArray = [0, -365, -180, -90, -30];
 
@@ -280,8 +280,8 @@ areaSplineButtons[0].addEventListener('click' , ()=> {
     
     for(let i = 0; i < areaSplineRadio.length; i++) { 
         if(areaSplineRadio[i].checked){
-            updateXaxisValues(areaSplintChart, daysIntervalArray[i]);
-            updatePointDataSlice(areaSplintChart, areaSplineData, daysIntervalArray[i]);
+            utils.updateXaxisValues(areaSplintChart, daysIntervalArray[i]);
+            utils.updatePointDataSlice(areaSplintChart, areaSplineData, daysIntervalArray[i]);
             updatedText+= " " + timeText[i].innerText;
         }
     }
