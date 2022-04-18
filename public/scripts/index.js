@@ -150,6 +150,9 @@ themeButton.addEventListener('click', ()=>{
 
         utils.updateChartSeriesColors(abroadChart.lineChart, [abroadChart.severePatientsDark, abroadChart.mediumPatientsDark, abroadChart.lightPatientsDark]);
         utils.updateChartTextColors(abroadChart.lineChart, 'white');
+
+        utils.updateChartSeriesColors(activePatientsChart.activePatientsChart, [activePatientsChart.severePatientsDark, activePatientsChart.mediumPatientsDark, activePatientsChart.lightPatientsDark]);
+        utils.updateChartTextColors(activePatientsChart.activePatientsChart, 'white');
     }
 
     else {
@@ -158,6 +161,9 @@ themeButton.addEventListener('click', ()=>{
 
         utils.updateChartSeriesColors(abroadChart.lineChart, [abroadChart.severePatientsLight, abroadChart.mediumPatientsLight, abroadChart.lightPatientsLight]);
         utils.updateChartTextColors(abroadChart.lineChart, '#222b45');
+
+        utils.updateChartSeriesColors(activePatientsChart.activePatientsChart, [activePatientsChart.severePatientsLight, activePatientsChart.mediumPatientsLight, activePatientsChart.lightPatientsLight]);
+        utils.updateChartTextColors(activePatientsChart.activePatientsChart, '#222b45');
     }
 })
 

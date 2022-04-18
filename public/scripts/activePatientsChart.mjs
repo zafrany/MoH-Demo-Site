@@ -38,8 +38,8 @@ Highcharts.chart('container-active-patients', {
 
     xAxis: {
         type: '',
+        gridLineWidth: 1,
         tickWidth: 1,
-        tickmarkPlacement: 'on',
         title: {
             text: 'קבוצת גיל',
             style:{
@@ -48,12 +48,13 @@ Highcharts.chart('container-active-patients', {
             },
         },
         crosshair: {
-            width: 1,
-            color: 'grey',
+            color: 'rgba(204, 204, 204, 0.5)',
         },
          
         labels: {
+            
         },
+        
         useHTML: true,
         categories: [
             '5-11',
@@ -71,6 +72,7 @@ Highcharts.chart('container-active-patients', {
     },
 
     yAxis: {
+        gridLineWidth: 1,
         tickWidth: 1,   
         gridLineColor: '#cccccc',
 
@@ -219,43 +221,45 @@ activePatientsFilter.addEventListener('click', ()=> {
     filterboxContainer.classList.toggle("displayNone");
 })
 
-//console.log(activePatientsChart.series[0].points.length);
 
-/*
-const abroadMetricsButtons = document.querySelectorAll('.abroad-metrics-filter button');
-abroadMetricsButtons[0].addEventListener('click' , ()=> {
-    const buttonText = document.querySelector(".line-filter .search-button__text"); 
-    const filterboxContainer = document.querySelector(".abroad-metrics-filter");
-    const lineRadioCategory = document.querySelectorAll('.abroad-metrics-filter input[name="state"]');
-    const lineRadioTime = document.querySelectorAll('.abroad-metrics-filter input[name="time"]');
-    const daysIntervalArray = [0, -365, -180, -90, -30];
-    const timeText = document.querySelectorAll(".abroad-metrics-filter .time span");
-    const verifiedText = document.querySelectorAll(".verified-aboard span");
-    let updatedText = "כלל המדינות, ";
+const activePatientsButtons = document.querySelectorAll('.active-patients-filterbox button');
 
-    let dataSet = lineRadioCategory[0].checked? lineData: lineDataVerified;
-    updatedText = updatedText+ " " + (lineRadioCategory[0].checked? verifiedText[0].innerText : verifiedText[1].innerText) + ",";
+activePatientsButtons[0].addEventListener('click' , ()=> {
+    const buttonText = document.querySelector(".active-patients-filter .search-button__text"); 
+    const filterboxContainer = document.querySelector(".active-patients-filterbox");
+    const verifiedPatientsState = document.querySelectorAll('input[name="state-verified-patients"]');
+    const verifiedPatientsNumber = document.querySelectorAll('input[name="number-verified-patients"]');
     
-    for(let i = 0; i < lineRadioTime.length; i++) { 
-        if(lineRadioTime[i].checked){
+    const verifiedText = document.querySelectorAll(".verified-patients-state span");
+    const numberText = document.querySelectorAll(".number-of-verified span");
+    let updatedText = "";
+    
+    //let dataSet = verifiedPatientsState[0].checked? lineData: lineDataVerified;
+    console.log(verifiedPatientsState[0].checked);
+    updatedText = updatedText + (verifiedPatientsState[0].checked? verifiedText[0].innerText : verifiedText[1].innerText) + ",";
+    
+    /*
+    for(let i = 0; i < verifiedPatientsNumber.length; i++) { 
+        if(verifiedPatientsNumber[i].checked){
             utils.updateXaxisValues(lineChart, daysIntervalArray[i]);
             utils.updatePointDataSlice(lineChart, dataSet, daysIntervalArray[i]);
-            updatedText+= " " + timeText[i].innerText;
+            updatedText+= " " + verifiedText[i].innerText;
         }
     }
-
-    arrowRotate(".line-arrow");
+    */
+    arrowRotate(".active-patients-arrow");
     filterboxContainer.classList.toggle("displayNone");
     buttonText.innerText = updatedText;
 })
 
-abroadMetricsButtons[1].addEventListener('click', ()=> {
-    const filterboxContainer = document.querySelector(".abroad-metrics-filter");
+activePatientsButtons[1].addEventListener('click', ()=> {
+    const filterboxContainer = document.querySelector(".active-patients-filterbox");
     arrowRotate(".line-arrow");
     filterboxContainer.classList.toggle("displayNone");
 
 })
-*/
+
+
 window.addEventListener('resize', function(event) {
     const chartContainer = document.querySelector('.chart-container');
     activePatientsChart.update(

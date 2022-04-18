@@ -603,7 +603,22 @@
                         <h3>חולים פעילים - גיל והתחסנות</h3>
                         <div class="circle light-circle-color">i</div>
                     </div>
-                    <div class="tooltip displayNone light-color-theme__box-color">placeholder</div>
+                    <div class="tooltip displayNone light-color-theme__box-color">פילוח של מספר החולים הפעילים וחולים קשה במחלת נגיף COVID-19, לפי קבוצות גיל באוכלוסייה ולפי מצבי התחסנות בכל קבוצת גיל.
+
+                        לאור גידול באוכלוסייה בקבוצות הגיל בישראל, חל עדכון בתמונת נתונים המוצגת. נתוני אוכלוסיה כעת מתייחסים לאפריל 2021. 
+                        
+                        ל-100K תושבים - שכיחות החולים לכל 100,000 תושבים, עבור כל קבוצת מצב התחסנות. 
+                        
+                        חולים פעילים - הם כל מי שנבדקו ונמצאו חיוביים לנגיף COVID-19, ללא קשר להופעת תסמינים, שלא קיבלו עדיין תוצאה שלילית לנגיף בבדיקות נוספות ושלא נפטרו.
+                        
+                        מחוסנים: 
+                        - מי שקיבלו 2 מנות חיסון או יותר ועבר שבוע מאז קבלת המנה האחרונה (שבועיים בחיסוני מודרנה) אך עוד לא עבר מאז תוקף הזמן שנקבע למנה
+                        - מי שהחלימו וקיבלו לאחר מכן לפחות מנת חיסון אחת ועבר שבוע מאז קבלת המנה (שבועיים בחיסוני מודרנה)
+                        - מי שקיבלו לפחות מנת חיסון אחת ולאחר מכן נדבקו והחלימו
+                        
+                        מחוסנים ללא תוקף - מי שקיבלו 2 מנות חיסון ועברו יותר מחצי שנה ושבוע מאז קבלת המנה האחרונה (חצי שנה ושבועיים בחיסוני מודרנה) ולא קיבלו מנה נוספת.
+                        
+                        לא מחוסנים - מי שלא קיבלו מנת חיסון ראשונה.</div>
                     <div class="dots-flex">
                         <div class="dot background-dark"></div>
                         <div class="dot background-dark"></div>
@@ -627,20 +642,20 @@
                     <div class="searchbox-container filterbox-container active-patients-filterbox displayNone">
                         <div class="searchbox filterbox light-color-theme__box-color">
                             <h4>משתנה</h4>
-                            <div class="verified-aboard">
+                            <div class="verified-patients-state">
                                 <ul>
                                     <li>
-                                        <input type="radio" name="state-verified-patients" >
+                                        <input type="radio" name="state-verified-patients" checked>
                                         <span>חולים פעילים</span>
                                     </li>
                                     <li>
-                                        <input type="radio" name="state-verified-patients" checked>
+                                        <input type="radio" name="state-verified-patients" >
                                         <span>חולים קשה</span>
                                     </li>
                                 </ul>
                             </div>
                             <h4>סוג ניתוח</h4>
-                            <div class="time">
+                            <div class="number-of-verified">
                                 <ul>
                                     <li>
                                         <input type="radio" name="number-verified-patients">
