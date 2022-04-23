@@ -523,7 +523,7 @@
                         מחוסנים ללא תוקף - מי שקיבלו 2 מנות חיסון ועברו יותר מחצי שנה ושבוע מאז קבלת המנה האחרונה (חצי שנה ושבועיים בחיסוני מודרנה) ולא קיבלו מנה נוספת.
                         
                         לא מחוסנים - מי שלא קיבלו מנת חיסון ראשונה.
-                        </div>
+                    </div>
                     <div class="dots-flex">
                         <div class="dot background-dark"></div>
                         <div class="dot background-dark"></div>
@@ -590,8 +590,9 @@
                             <button class="cancel searchbox-button button-light-color">ביטול</button>
                         </div>
                     </div>
-                <div class="highcharts-figure">
-                    <div id="container-line" class="line-container"></div>
+                    <div class="highcharts-figure">
+                        <div id="container-line" class="line-container"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -673,8 +674,168 @@
                             <button class="cancel searchbox-button button-light-color">ביטול</button>
                         </div>
                     </div>
-                <div class="highcharts-figure">
-                    <div id="container-active-patients" class="active-patients-container"></div>
+                    <div class="highcharts-figure">
+                        <div id="container-active-patients" class="active-patients-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="charts deceased-chart">
+            <h2>נפטרים</h2>
+            <div class="chart-container">
+                <div class="section-container__table-container light-color-theme__box-color">
+                    <div class="card-h3-container">
+                        <h3>נפטרים - יומי</h3>
+                        <div class="circle light-circle-color">i</div>
+                    </div>
+                    <div class="tooltip displayNone light-color-theme__box-color">מגמת השינוי היומית במספר הנפטרים ממחלת הנגיף COVID-19, לאורך ציר הזמן.
+                        נתוני הנפטרים מתעדכנים לאחר שנבדקו תעודות הפטירה לוידוא סיבת המוות ולכן ייתכנו עדכונים מאוחרים של מספר הנפטרים. </div>
+                    <div class="dots-flex">
+                        <div class="dot background-dark"></div>
+                        <div class="dot background-dark"></div>
+                        <div class="dot background-dark"></div>
+                    </div>
+                    <div class="deceased-filter button-container">
+                        <button class="search-button background-light">
+                            <div class="search-button__text">חודש אחרון</div>
+                            <div class="deceased-arrow arrow-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24">
+                                    <g fill="currentColor">
+                                        <g data-name="chevron-down">
+                                            <rect width="24" height="24" opacity="0"></rect>
+                                            <path d="M12 15.5a1 1 0 0 1-.71-.29l-4-4a1 1 0 1 1 1.42-1.42L12 13.1l3.3-3.18a1 1 0 1 1 1.38 1.44l-4 3.86a1 1 0 0 1-.68.28z"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="searchbox-container filterbox-container deceased-filterbox displayNone">
+                        <div class="searchbox filterbox light-color-theme__box-color">
+                            <h4>זמן</h4>
+                            <div class="time">
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="deceased-metrics">
+                                        <span>עד עכשיו</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="deceased-metrics">
+                                        <span>שנה</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="deceased-metrics">
+                                        <span>6 חודשים</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="deceased-metrics">
+                                        <span>3 חודשים</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="deceased-metrics" checked>
+                                        <span>חודש אחרון</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="search-buttons">
+                            <button class="ok searchbox-button button-light-color">אישור</button>
+                            <button class="cancel searchbox-button button-light-color">ביטול</button>
+                        </div>
+                    </div>
+                    <div class="highcharts-figure">
+                        <div id="container-deceased" class="deceased-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="charts age-sex-metrics-chart">
+            <h2>תחקורים נוספים</h2>
+            <div class="chart-container">
+                <div class="section-container__table-container light-color-theme__box-color">
+                    <div class="card-h3-container">
+                        <h3>פילוח מדדים שונים על פי גיל ומין</h3>
+                        <div class="circle light-circle-color">i</div>
+                    </div>
+                    <div class="tooltip displayNone light-color-theme__box-color">פילוח המאומתים לנגיף COVID-19 לפי קבוצות גיל באוכלוסייה ולפי פילוח זכר ונקבה
+                        ניתן לסנן את נתוני המאומתים לפי קבוצות: חולים קשה, מונשמים ונפטרים </div>
+                    <div class="dots-flex">
+                        <div class="dot background-dark"></div>
+                        <div class="dot background-dark"></div>
+                        <div class="dot background-dark"></div>
+                    </div>
+                    <div class="age-sex-filter button-container">
+                        <button class="search-button background-light">
+                            <div class="search-button__text">מאומתים, חודש אחרון</div>
+                            <div class="age-sex-arrow arrow-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24">
+                                    <g fill="currentColor">
+                                        <g data-name="chevron-down">
+                                            <rect width="24" height="24" opacity="0"></rect>
+                                            <path d="M12 15.5a1 1 0 0 1-.71-.29l-4-4a1 1 0 1 1 1.42-1.42L12 13.1l3.3-3.18a1 1 0 1 1 1.38 1.44l-4 3.86a1 1 0 0 1-.68.28z"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="searchbox-container filterbox-container age-sex-metrics-filterbox displayNone">
+                        <div class="searchbox filterbox light-color-theme__box-color">
+                            <h4>הצג לפי</h4>
+                            <div class="age-sex-state">
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="state-age-sex" checked>
+                                        <span>מאומתים</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="state-age-sex" >
+                                        <span>נפטרים</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="state-age-sex" >
+                                        <span>מונשמים</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="state-age-sex" >
+                                        <span>מצב קשה</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h4>סוג ניתוח</h4>
+                            <div class="time">
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="age-sex-metrics">
+                                        <span>עד עכשיו</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="age-sex-metrics">
+                                        <span>שנה</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="age-sex-metrics">
+                                        <span>6 חודשים</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="age-sex-metrics">
+                                        <span>3 חודשים</span>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="age-sex-metrics" checked>
+                                        <span>חודש אחרון</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="search-buttons">
+                            <button class="ok searchbox-button button-light-color">אישור</button>
+                            <button class="cancel searchbox-button button-light-color">ביטול</button>
+                        </div>
+                    </div>
+                    <div class="highcharts-figure">
+                        <div id="container-age-sex-metrics" class="age-sex-metrics-container"></div>
+                    </div>
                 </div>
             </div>
         </div>

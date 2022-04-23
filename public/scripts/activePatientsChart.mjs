@@ -104,7 +104,7 @@ Highcharts.chart('container-active-patients', {
         shape: "rect",
         useHTML: true,
         align: 'center',
-
+        
         formatter: function () {
             let tooltipString = "";
             let pointIndex;
@@ -201,14 +201,29 @@ Highcharts.chart('container-active-patients', {
     ]
 });
 
-const activePatientsData = [[],[],[]];
+const activePatientsData = [[[],[],[]] , [[],[],[]]];
 for(let i = 0; i < activePatientsChart.xAxis[0].categories.length; i++){
-    activePatientsData[2].push(utils.getRandomInt(0, 3500));
-    activePatientsData[1].push(utils.getRandomInt(0, 3500));
-    activePatientsData[0].push(utils.getRandomInt(0, 3500));
+    activePatientsData[0][2].push(utils.getRandomInt(0, 3500)); //absolute
+    activePatientsData[0][1].push(utils.getRandomInt(0, 3500));
+    activePatientsData[0][0].push(utils.getRandomInt(0, 3500));
+
+    activePatientsData[1][2].push(utils.getRandomInt(0, 500)); //per 100k
+    activePatientsData[1][1].push(utils.getRandomInt(0, 500));
+    activePatientsData[1][0].push(utils.getRandomInt(0, 500));
 }
 
-utils.updatePointData(activePatientsChart, activePatientsData);
+const severePatientsData = [[[],[],[]] , [[],[],[]]];
+for(let i = 0; i < activePatientsChart.xAxis[0].categories.length; i++){
+    severePatientsData[0][2].push(utils.getRandomInt(0, 300)); //absolute 
+    severePatientsData[0][1].push(utils.getRandomInt(0, 300));
+    severePatientsData[0][0].push(utils.getRandomInt(0, 300));
+
+    severePatientsData[1][2].push(utils.getRandomInt(0, 100)); //per 100k
+    severePatientsData[1][1].push(utils.getRandomInt(0, 100));
+    severePatientsData[1][0].push(utils.getRandomInt(0, 100));
+}
+
+utils.updatePointData(activePatientsChart, activePatientsData[1]);
 
 activePatientsChart.series[2].update({ color: severePatientsLight});
 activePatientsChart.series[1].update({ color: mediumPatientsLight});
@@ -234,19 +249,19 @@ activePatientsButtons[0].addEventListener('click' , ()=> {
     const numberText = document.querySelectorAll(".number-of-verified span");
     let updatedText = "";
     
-    //let dataSet = verifiedPatientsState[0].checked? lineData: lineDataVerified;
-    console.log(verifiedPatientsState[0].checked);
+    let dataSet = verifiedPatientsState[0].checked? activePatientsData: severePatientsData;
+    dataSet = verifiedPatientsNumber[0].checked? dataSet[0] : dataSet[1];
+
     updatedText = updatedText + (verifiedPatientsState[0].checked? verifiedText[0].innerText : verifiedText[1].innerText) + ",";
     
-    /*
-    for(let i = 0; i < verifiedPatientsNumber.length; i++) { 
-        if(verifiedPatientsNumber[i].checked){
-            utils.updateXaxisValues(lineChart, daysIntervalArray[i]);
-            utils.updatePointDataSlice(lineChart, dataSet, daysIntervalArray[i]);
-            updatedText+= " " + verifiedText[i].innerText;
-        }
-    }
-    */
+    
+    for(let i = 0; i < dataSet.length; i++) 
+        utils.updatePointData(activePatientsChart, dataSet);
+
+    
+    updatedText = updatedText + " " + (verifiedPatientsNumber[0].checked? numberText[0].innerText : numberText[1].innerText);
+    
+    
     arrowRotate(".active-patients-arrow");
     filterboxContainer.classList.toggle("displayNone");
     buttonText.innerText = updatedText;

@@ -247,6 +247,14 @@ h2 {
   cursor: pointer;
 }
 
+.datalabel-light {
+  color: #222b45;
+}
+
+.datalabel-dark {
+  color: white;
+}
+
 .header {
   position: fixed;
   color: #39475d;
@@ -934,7 +942,7 @@ h2 {
   padding-bottom: 10px;
 }
 
-.main-metrics, .abroad-metrics {
+.charts {
   width: 100%;
   margin: 11.2px;
 }
@@ -954,14 +962,18 @@ h2 {
 
 #container-areaSpline,
 #container-line,
-#container-active-patients {
+#container-active-patients,
+#container-deceased,
+#container-age-sex-metrics {
   height: 265px;
   width: 95%;
 }
 @media (min-width: 775px) {
   #container-areaSpline,
 #container-line,
-#container-active-patients {
+#container-active-patients,
+#container-deceased,
+#container-age-sex-metrics {
     max-width: 30vw;
   }
 }
@@ -1013,14 +1025,18 @@ h2 {
 
 .colored-circle-tooltip {
   border-radius: 50%;
-  width: 9px;
-  height: 9px;
+  width: 12px;
+  height: 12px;
   margin-left: 0.5rem;
 }
 
 .tooltip-number {
   margin-left: 0.5rem;
   font-weight: 700;
+}
+
+.tooltip-text {
+  padding-right: 2px;
 }
 
 .tooltip-flex {
@@ -1033,10 +1049,11 @@ h2 {
 .charts .searchbox-container {
   overflow: auto;
   flex-flow: column;
+  width: 55%;
 }
 
 .filterbox-container {
-  height: 280px;
+  height: 250px;
 }
 
 .filterbox {
@@ -1084,7 +1101,7 @@ h2 {
 }
 
 .abroad-metrics .searchbox-container {
-  width: 70%;
+  width: 60%;
 }
 
 .line-filter .search-button__text {
@@ -1111,10 +1128,6 @@ h2 {
   flex-wrap: nowrap;
   align-items: center;
 }
-.chart-legend .colored-circle-tooltip {
-  height: 10px;
-  width: 10px;
-}
 
 .active-patients-filter .search-button__text {
   font-size: 15px;
@@ -1132,4 +1145,12 @@ h2 {
   .active-patients-filter .search-button {
     min-width: 215px;
   }
+}
+
+.deceased-chart .highcharts-legend-item rect {
+  display: none;
+}
+
+.datalabel-style {
+  font-family: sans-serif;
 }

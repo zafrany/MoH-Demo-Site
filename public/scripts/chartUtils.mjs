@@ -166,3 +166,11 @@ export const updateChartSeriesColors = function (chart, colorArray) {
         chart.series[i].update({color : colorArray[i]})
     }
 }
+
+export const setDataLabelColor = function() {
+    const dataLabels = document.querySelectorAll(".datalabel-style");
+    for(let i = 0; i < dataLabels.length; i++) {
+        dataLabels[i].classList.toggle("datalabel-light");
+        dataLabels[i].classList.toggle("datalabel-dark");
+    }
+}

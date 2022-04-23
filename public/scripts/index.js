@@ -1,7 +1,10 @@
 import { arrowRotate } from './docUtils.mjs';
+import { setDataLabelColor } from './chartUtils.mjs';
 import * as areaSpline from './areaSpline.mjs';
 import * as abroadChart from './abroadChart.mjs';
 import * as activePatientsChart from './activePatientsChart.mjs'
+import * as deceasedChart from './deceasedChart.mjs'
+import * as sexAndAgeChart from './ageAndSexMetrics.mjs'
 import * as utils from './chartUtils.mjs';
 
 const themeButton = document.querySelector(".theme-button");
@@ -153,6 +156,12 @@ themeButton.addEventListener('click', ()=>{
 
         utils.updateChartSeriesColors(activePatientsChart.activePatientsChart, [activePatientsChart.severePatientsDark, activePatientsChart.mediumPatientsDark, activePatientsChart.lightPatientsDark]);
         utils.updateChartTextColors(activePatientsChart.activePatientsChart, 'white');
+        
+        utils.updateChartSeriesColors(deceasedChart.deceasedChart, [deceasedChart.deceasedAverageDark, deceasedChart.deceasedCountDark]);
+        utils.updateChartTextColors(deceasedChart.deceasedChart, 'white');
+
+        utils.updateChartSeriesColors(sexAndAgeChart.ageAndsexMetricsChart, [sexAndAgeChart.menDark, sexAndAgeChart.womenDark]);
+        utils.updateChartTextColors(sexAndAgeChart.ageAndsexMetricsChart, 'white');
     }
 
     else {
@@ -164,7 +173,15 @@ themeButton.addEventListener('click', ()=>{
 
         utils.updateChartSeriesColors(activePatientsChart.activePatientsChart, [activePatientsChart.severePatientsLight, activePatientsChart.mediumPatientsLight, activePatientsChart.lightPatientsLight]);
         utils.updateChartTextColors(activePatientsChart.activePatientsChart, '#222b45');
+
+        utils.updateChartSeriesColors(deceasedChart.deceasedChart, [deceasedChart.deceasedCountLight, deceasedChart.deceasedAverageLight]);
+        utils.updateChartTextColors(deceasedChart.deceasedChart, '#222b45');
+
+        utils.updateChartSeriesColors(sexAndAgeChart.ageAndsexMetricsChart, [sexAndAgeChart.menLight, sexAndAgeChart.womenLight]);
+        utils.updateChartTextColors(sexAndAgeChart.ageAndsexMetricsChart, '#222b45');
     }
+    
+    setDataLabelColor();
 })
 
 for(let i = 0; i < circleArray.length; i++){
@@ -177,11 +194,10 @@ for(let i = 0; i < circleArray.length; i++){
     })
 }
 
-    searchButton[0].addEventListener('click', ()=>{
-    arrowRotate(".vaccination-arrow");
-    searchBoxContainer.classList.toggle("displayNone");
-    })
-
+searchButton[0].addEventListener('click', ()=>{
+arrowRotate(".vaccination-arrow");
+searchBoxContainer.classList.toggle("displayNone");
+})
 
 
 for(let i = 0; i < trinagleButtons.length; i++) {
@@ -225,7 +241,7 @@ let settelmentsMockData = [
     ["קיסריה","מעל 90%","87.76%","72.34%","167.7","10"]
 ];
     
-let dataFields = document.querySelectorAll(".top-cards-flex .top-card-container");
+const dataFields = document.querySelectorAll(".top-cards-flex .top-card-container");
 for(let i = 0; i < dataFields.length; i++) {
     let dataField =  dataFields[i].querySelectorAll('.data');
     for(let j = 0; j < dataField.length; j++){
@@ -236,14 +252,14 @@ for(let i = 0; i < dataFields.length; i++) {
     }
 }
 
-let createSnameDiv = function(dataTable ,index) {
+const createSnameDiv = function(dataTable ,index) {
     const sName = document.createElement("div");
     sName.innerText = dataTable[index][0];
     sName.classList.add("sname-row");
     return sName;
 }
 
-let createPercentageBar = function(dataTable, index,col) {
+const createPercentageBar = function(dataTable, index,col) {
     const backgroundBar = document.createElement("div");
     backgroundBar.classList.add("percentage-bar");
     if(themeColors.classList.contains("background-light"))
@@ -256,7 +272,7 @@ let createPercentageBar = function(dataTable, index,col) {
     return backgroundBar;
 }
 
-let createWidthBar = function(dataTable, index, col) {
+const createWidthBar = function(dataTable, index, col) {
     let colClass;
     if(themeColors.classList.contains("background-light")){
          colClass  = ["percentage-bar-first-dose-light", "percentage-bar-second-dose-light", "percentage-bar-third-dose-light"];
@@ -274,7 +290,7 @@ let createWidthBar = function(dataTable, index, col) {
     return widthBar;
 }
 
-let createRowData = function(dataTable, index, col) {
+const createRowData = function(dataTable, index, col) {
     const rowData = document.createElement("div");
     rowData.appendChild(createPercentageBar(dataTable, index, col));
     let innerText = document.createElement("span");
@@ -284,14 +300,14 @@ let createRowData = function(dataTable, index, col) {
     return rowData;
 }
 
-let createActivePatients = function(dataTable, index) {
+const createActivePatients = function(dataTable, index) {
     const activePatients = document.createElement("div");
     activePatients.innerText = dataTable[index][4];
     activePatients.classList.add("row-data");   
     return activePatients;
 }
 
-let createScore = function(dataTable, index, scoreIndex) {
+const createScore = function(dataTable, index, scoreIndex) {
     let parsedScore = parseFloat(dataTable[index][scoreIndex]);
     const scoreClass  = ["vaccination-table-first-score", "vaccination-table-second-score", "vaccination-table-third-score", "vaccination-table-fourth-score"];
     const score = document.createElement("div");
@@ -312,7 +328,7 @@ let createScore = function(dataTable, index, scoreIndex) {
     return scoreDiv;
 }
 
-let createTable = function(dataTable, scoreIndex) {
+const createTable = function(dataTable, scoreIndex) {
     let table = document.querySelector(".vaccination-table-rows");
     for(let i = 0; i < dataTable.length; i++){
         let tableRow = document.createElement("div");
@@ -329,7 +345,7 @@ let createTable = function(dataTable, scoreIndex) {
 }
 
 
-let deleteTable = function() {
+const deleteTable = function() {
     let table = document.querySelector(".vaccination-table-rows");
     while(table.firstChild)
         table.removeChild(table.firstChild);
@@ -337,7 +353,7 @@ let deleteTable = function() {
 
 createTable(settelmentsMockData, 5);
 
-let sortByCity = function(asc){
+const sortByCity = function(asc){
     return function(a, b){
         if (asc)
             return a[0].localeCompare(b[0]);
@@ -346,7 +362,7 @@ let sortByCity = function(asc){
     }
 }
 
-let sortByNumber = function(index, asc) {
+const sortByNumber = function(index, asc) {
     return function(a, b) {
         let aNum = a[index];
         let bNum = b[index];
@@ -371,7 +387,7 @@ let sortByNumber = function(index, asc) {
 }
 
 
-let vaccinationButtons = document.querySelectorAll(".vaccination-header button");
+const vaccinationButtons = document.querySelectorAll(".vaccination-header button");
 vaccinationButtons[0].addEventListener('click', ()=>{
     let table = document.querySelector(".vaccination-table-rows");
     let asc = vaccinationButtons[0].querySelector('span').classList.contains("flip-triangle");
@@ -394,8 +410,8 @@ for(let i = 1; i < vaccinationButtons.length; i++){
     })
 }
 
-let searchBox = document.querySelector(".searchbox");
-let VaccinationInput = document.querySelector(".searchbox-top input");
+const searchBox = document.querySelector(".searchbox");
+const VaccinationInput = document.querySelector(".searchbox-top input");
 VaccinationInput.addEventListener('input', ()=>{
     let searchResultArr = [];        
     for(let j = 0; j < settelmentsMockData.length; j++){
@@ -411,7 +427,7 @@ VaccinationInput.addEventListener('input', ()=>{
 })
 
 
-let createList = function(arr) {
+const createList = function(arr) {
     searchResults.classList.toggle("search-result-hover-light");
     for(let i = 0; i < arr.length; i++) {
         let listMember = document.createElement("li");
@@ -427,7 +443,7 @@ let createList = function(arr) {
     }
 }
 
-let clearList = function() {
+const clearList = function() {
     while(searchResults.firstChild)
         searchResults.removeChild(searchResults.firstChild);
 }
@@ -481,7 +497,7 @@ let ramzorMockData = [
 ];
 
 
-let createRamzorTable = function(dataTable, scoreIndex) {
+const createRamzorTable = function(dataTable, scoreIndex) {
     let table = document.querySelector(".ramzor-table-rows");
     for(let i = 0; i < dataTable.length; i++){
         let tableRow = document.createElement("div");
@@ -496,7 +512,7 @@ let createRamzorTable = function(dataTable, scoreIndex) {
     }
 }
 
-let createRamzorRowData = function(dataTable, index, col) {
+const createRamzorRowData = function(dataTable, index, col) {
     const rowData = document.createElement("div");
     let innerText = document.createElement("span");
     
@@ -513,7 +529,7 @@ let createRamzorRowData = function(dataTable, index, col) {
     return rowData;
 }
 
-let deleteRamzorTable = function() {
+const deleteRamzorTable = function() {
     let table = document.querySelector(".ramzor-table-rows");
     while(table.firstChild)
         table.removeChild(table.firstChild);
@@ -521,7 +537,7 @@ let deleteRamzorTable = function() {
 
 createRamzorTable(ramzorMockData, 1);
 
-let ramzorButtons = document.querySelectorAll(".ramzor-header button");
+const ramzorButtons = document.querySelectorAll(".ramzor-header button");
 
 ramzorButtons[0].addEventListener('click', ()=>{
     let table = document.querySelector(".ramzor-table-rows");
@@ -580,7 +596,7 @@ ramzorSearchBox.addEventListener('input', ()=>{
     ///////////////////////
 })
 
-let applyMockFilter = function(filterArray, mockArray) {
+const applyMockFilter = function(filterArray, mockArray) {
     let filteredMockData = [];
     for(let i = 0; i < filterArray.length; i++) {
         for(let j = 0; j < mockArray.length; j++){
@@ -592,12 +608,12 @@ let applyMockFilter = function(filterArray, mockArray) {
 }
 
 
-let ramzorClearList = function() {
+const ramzorClearList = function() {
     while(ramzorSearchResults.firstChild)
         ramzorSearchResults.removeChild(ramzorSearchResults.firstChild);
 }
 
-let ramzorCreateList = function(arr) {
+const ramzorCreateList = function(arr) {
     for(let i = 0; i < arr.length; i++) {
         let listMember = document.createElement("li");
         listMember.addEventListener('click', ()=> {
